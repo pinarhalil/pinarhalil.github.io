@@ -49,7 +49,7 @@ const memories = [
 Neyse gittik, ben adamlardan rica ettim biz de oynayalım diye. Sonra oynadık, sen adamın sana göstermesine fırsat vermeden ilk atışında deliksiz atmıştın. Gerçekten şaşırdım ve sana olan saygım arttı. 
 Yetenekli bir insan olduğunu orada anlamıştım. Birlikte güzel videolar çektik, çekişmeli geçmişti. Ben gerçekten çok eğlenmiştim. Bir daha nasip olmadı ama ilk defa seninle bir aktivite yapmıştık. 
 Her zaman aklımda güzel bir anı olarak kalacak.`,  
-    image: "images/ilk-bulusma.png"
+    image: "images/ilk-bulusma.PNG"
   }
 ];
 
