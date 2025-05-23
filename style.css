@@ -1,0 +1,156 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #5316c4, #ffffff);
+    overflow-x: hidden; /* yatayda engelle, dikey kalsın */
+  overflow-y: auto;   /* dikey kaydırma aktif */
+  margin: 0;
+  padding: 0;
+  color: white;
+  box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.1);
+
+}
+
+canvas#fireworks {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.intro {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 80px 30px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.name {
+  font-size: 3em;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 20px #fff;
+  margin-bottom: 30px;
+}
+
+.message {
+  font-size: 1.2em;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+}
+
+button {
+  display: block;
+  margin: 40px auto;
+  padding: 12px 24px;
+  font-size: 1em;
+  border: none;
+  border-radius: 12px;
+  background-color: #852af5;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ffffff;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #a55cfe;
+}
+
+.name {
+  font-family: 'Great Vibes', cursive;
+  font-style: italic;
+  color: #7b16f7;
+  font-size: 3em;
+  text-align: center;
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow:
+      0 0 8px #b388eb,
+      0 0 15px #9f7ade,
+      0 0 20px #bb99ff,
+      0 0 30px #d1b3ff;
+  }
+  50% {
+    text-shadow:
+      0 0 12px #d1b3ff,
+      0 0 20px #bb99ff,
+      0 0 25px #b388eb,
+      0 0 35px #9f7ade;
+  }
+}
+.message {
+  font-family: 'Quicksand', sans-serif;
+  font-style: italic;
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: #ffffff;
+  text-align: center;
+  white-space: pre-line; /* satır geçişlerini korur */
+  text-shadow:
+    0 0 6px #a17be0,
+    0 0 10px #b388eb,
+    0 0 15px #9f7ade;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#section2 {
+  text-align: center;
+  padding: 50px 20px;
+  font-family: 'Quicksand', sans-serif;
+  color: #4a0072;
+  animation: fadeIn 1.5s ease;
+}
+
+.memory-image {
+  max-width: 90%;
+  height: auto;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.memory-image {
+  width: 100%;
+  max-width: 400px;  /* Bu en fazla 500px olacak demektir */
+  height: auto;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.memory-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2em;
+  color: #7b16f7;
+  text-shadow: 0 0 8px #d1b3ff;
+  margin-bottom: 20px;
+}
+
+.memory-text {
+  font-family: 'Kalam', cursive;
+  font-size: 1.2em;
+  color: #ffffff;
+  line-height: 1.8;
+  white-space: pre-line;
+  text-align: center;
+  text-shadow:
+    0 0 6px #a17be0,
+    0 0 10px #b388eb;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sevgili Pınar</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <canvas id="fireworks"></canvas>
+
+  <div class="intro">
+    <h1 class="name"> Sevgili  Pınar </h1>
+    <!-- İlk Bölüm -->
+<div id="section1">
+  <div class="message" id="birthdayMessage"></div>
+  <button onclick="goToNext()">Devam Et Ponçik💜🤍</button>
+</div>
+
+<!-- İkinci Bölüm -->
+<div id="section2" style="display: none;">
+  <h2>Birlikte Geçirdiğimiz Anlar 📸</h2>
+  <p>Buraya birlikte çekildiğiniz fotoğrafları, videoları ya da anılarınızı ekleyeceğiz.</p>
+</div>
+
+
+
+<div id="memoriesSection" style="display: none;">
+  <img id="memoryImage" class="memory-image" src="" alt="Anı Fotoğrafı" />
+  <h2 id="memoryTitle" class="memory-title"></h2>
+  <p id="memoryText" class="memory-text"></p>
+  <button onclick="showNextMemory()">Bir Sonraki Anı</button>
+</div>
+
+
+
+   
+<script src="script.js"></script>
+
+</body>
+</html>
