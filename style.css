@@ -205,5 +205,18 @@ button:hover {
   margin: 10px;
   border-radius: 12px;
 }
+#startScreen {
+  transition: opacity 1s ease;
+}
 
-
+#startScreen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+#game {
+  display: block;
+  margin: 20px auto;
+  background: linear-gradient(to bottom, #b19cd9, #6a0dad);
+  border-radius: 15px;
+  box-shadow: 0 0 20px #9b59b6;
+}

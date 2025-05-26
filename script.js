@@ -1,9 +1,16 @@
 // script.js
-
-window.onload = function () {
-  // Yazı animasyonu başlat
+// 🎵 Ses ve animasyon başlatıcı (mobil uyumlu)
+document.getElementById("startBtn").addEventListener("click", () => {
+  const audio = document.getElementById("birthdaySound");
+  if (audio) {
+    audio.volume = 0.1;
+    audio.play().catch(e => console.warn("Ses çalamadı:", e));
+  }
+  document.getElementById("startScreen").style.display = "none";
   typeWriter();
-};
+});
+
+
 
 const message = `Bitanecik knkeytomun bugün  doğum günü...
 Belki her gün seni ne kadar çok sevdiğimi söylüyorum ama bugün sana sadece "seni seviyorum" değil, "iyi ki doğdun" da demek istiyorum.
@@ -32,33 +39,46 @@ function typeWriter() {
     setTimeout(typeWriter, 0);
   }
 }
-
-// Bölüm gösterme fonksiyonu, sadece isteneni gösterip diğerlerini gizler
-function showSection(section) {
-  // Tüm bölümler burada
-  const sections = ['memoriesSection', 'gamesSection', 'section1', 'menuSection'];
+function showSection(sectionId) {
+  const sections = [
+    "startScreen",
+    "section1",
+    "menuSection",
+    "mainMenu",
+    "gamesMenuSection",
+    "flappyGameSection",
+    "memoriesSection"
+  ];
 
   sections.forEach(id => {
     const el = document.getElementById(id);
-    if (!el) return;
-    el.style.display = (id === section) ? 'block' : 'none';
+    if (el) {
+      el.style.display = (id === sectionId) ? "block" : "none";
+    }
   });
 
-  // Eğer memoriesSection gösterildiyse anıyı başlat
-  if (section === 'memoriesSection') {
-    memoryIndex = 0; // anılarda başa dön
+  if (sectionId === 'memoriesSection') {
+    memoryIndex = 0;
     showNextMemory();
-    document.getElementById('memoryRating').style.display = 'block';
+    document.getElementById("memoryRating").style.display = "block";
   } else {
-    document.getElementById('memoryRating').style.display = 'none';
+    document.getElementById("memoryRating").style.display = "none";
   }
+
+
+  if (sectionId === 'flappyGameSection') {
+    if (typeof initFlappyPinar === "function") {
+      initFlappyPinar(); // dışarıdan gelen fonksiyon
+    }
+  }
+
+
 }
 
-// İlk bölümden sonra menüyü göster
 function goToNext() {
-  document.getElementById('section1').style.display = 'none';
-  document.getElementById('menuSection').style.display = 'block';
+  showSection("menuSection"); // 👈 Hedef bu
 }
+
 
 
 const memories = [
@@ -115,7 +135,7 @@ const myRatings = [];
 const pinarRatings = [];
 const lowScoreWarnings = [
   "Ne yani anımız 10/10 değil miydi 🥹🥹",
-  "Knk bence 10/10'du ama sen bilirsin 💜",
+  "Knk bence 10/10'du ama sen bilirsin 🤍💜",
   "Paşaya bak hele anımızı beğenmiyor 😊",
   "Tekrar puan ver istersenn 🥰",
   "İçinden deme şimdi 10 vermek zorunda mıyımm😊😊"
@@ -237,7 +257,7 @@ function showNextMemory() {
   memoryIndex++;
 }
  
- // 🎉 Konfeti animasyonu
+// 🎉 Konfeti animasyonu
 (function () {
   const colors = ['#9b59b6', '#8e44ad', '#d2b4de', '#ffffff', '#f8c8dc', '#a3c4f3'];
   const numConfetti = 80;
@@ -319,23 +339,19 @@ function showNextMemory() {
   });
 })();
 
-
+// 💖 Zarif 3D Kalpler
 function createHeart() {
   const heart = document.createElement('div');
   heart.classList.add('heart');
-
   const colors = ['heart-purple', 'heart-white'];
   const colorClass = colors[Math.floor(Math.random() * colors.length)];
   heart.classList.add(colorClass);
-
   const size = Math.random() * 15 + 20;
   heart.style.width = size + 'px';
   heart.style.height = size + 'px';
-
   heart.style.left = Math.random() * window.innerWidth + 'px';
   heart.style.bottom = '-30px';
   heart.style.opacity = (Math.random() * 0.5 + 0.5).toFixed(2);
-
   document.body.appendChild(heart);
 
   let posY = -30;
@@ -359,40 +375,256 @@ function createHeart() {
       requestAnimationFrame(animate);
     }
   }
-
   animate();
 }
-
-setInterval(createHeart, 350);
-
+setInterval(createHeart, 400);
 
 
-window.addEventListener("load", () => {
-  const audio = document.getElementById("birthdaySound");
 
-  if (!audio) {
-    console.error("Ses elementi bulunamadı!");
-    return;
+
+
+
+
+
+function initFlappyPinar() {
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
+
+  // PNG ve ses yükle
+  const birdImage = new Image();
+  birdImage.src = "images/pinar.png";
+
+  const flapSound = new Audio("audio/ponçik.mp3");
+  const fallSound = new Audio("audio/yaa.mp3");
+  const score15Sound = new Audio("audio/cog.mp3");
+
+  const bird = {
+    x: 50,
+    y: 150,
+    radius: 25,
+    gravity: 0.12,
+    lift: -4,
+    velocity: 0,
+    maxVelocity: 3
+  };
+
+  const pipes = [];
+  const pipeWidth = 50;
+  const pipeGap = 220;
+  let frameCount = 0;
+  let score = 0;
+  let gameOver = false;
+  let startScreen = true;
+
+  function resetGame() {
+    bird.y = 150;
+    bird.velocity = 0;
+    pipes.length = 0;
+    frameCount = 0;
+    score = 0;
+    gameOver = false;
   }
 
-  audio.volume = 0.1;
+  function update() {
+    bird.velocity += bird.gravity;
+    if (bird.velocity > bird.maxVelocity) bird.velocity = bird.maxVelocity;
+    bird.y += bird.velocity;
 
-  audio.play().then(() => {
-    setTimeout(() => {
-      audio.pause();
-      audio.currentTime = 0;
-    }, 15000);
-  }).catch(() => {
-    const startAudioOnInteraction = () => {
-      audio.play();
-      setTimeout(() => {
-        audio.pause();
-        audio.currentTime = 0;
-      }, 15000);
-      window.removeEventListener("click", startAudioOnInteraction);
-    };
-    window.addEventListener("click", startAudioOnInteraction);
-  });
-});
+    if (bird.y + bird.radius > canvas.height) {
+      bird.y = canvas.height - bird.radius;
+      if(!gameOver) {
+        fallSound.currentTime = 0;
+        fallSound.play();
+      }
+      gameOver = true;
+    }
+    if (bird.y - bird.radius < 0) {
+      bird.y = bird.radius;
+      bird.velocity = 0;
+    }
 
+    if (frameCount % 140 === 0) {
+      const topHeight = Math.random() * (canvas.height - pipeGap - 120) + 60;
+      pipes.push({
+        x: canvas.width,
+        top: topHeight,
+        bottom: topHeight + pipeGap,
+        width: pipeWidth,
+      });
+    }
 
+    pipes.forEach((pipe, i) => {
+      pipe.x -= 1.2;
+      if (
+        bird.x + bird.radius > pipe.x &&
+        bird.x - bird.radius < pipe.x + pipe.width &&
+        (bird.y - bird.radius < pipe.top || bird.y + bird.radius > pipe.bottom)
+      ) {
+        if(!gameOver) {
+          fallSound.currentTime = 0;
+          fallSound.play();
+        }
+        gameOver = true;
+      }
+      if (pipe.x + pipe.width < 0) {
+        pipes.splice(i, 1);
+        score++;
+      }
+    });
+
+    frameCount++;
+  }
+
+  function draw3DPipe(x, top, bottom, width) {
+    const radius = 12;
+    const pipeColor = '#6a0dad';
+    const edgeColor = '#ffffff';
+
+    // Üst boru
+    ctx.fillStyle = pipeColor;
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, top - radius);
+    ctx.quadraticCurveTo(x + width / 2, top, x + width, top - radius);
+    ctx.lineTo(x + width, 0);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = edgeColor;
+    ctx.beginPath();
+    ctx.ellipse(x + width / 2, top - radius, width / 2, radius, 0, Math.PI, 0, true);
+    ctx.fill();
+
+    ctx.fillStyle = pipeColor;
+    ctx.beginPath();
+    ctx.ellipse(x + width / 2, top - radius, width / 2 - 4, radius - 4, 0, Math.PI, 0, true);
+    ctx.fill();
+
+    // Alt boru
+    ctx.fillStyle = pipeColor;
+    ctx.beginPath();
+    ctx.moveTo(x, bottom + radius);
+    ctx.quadraticCurveTo(x + width / 2, bottom, x + width, bottom + radius);
+    ctx.lineTo(x + width, canvas.height);
+    ctx.lineTo(x, canvas.height);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = edgeColor;
+    ctx.beginPath();
+    ctx.ellipse(x + width / 2, bottom + radius, width / 2, radius, 0, 0, Math.PI, true);
+    ctx.fill();
+
+    ctx.fillStyle = pipeColor;
+    ctx.beginPath();
+    ctx.ellipse(x + width / 2, bottom + radius, width / 2 - 4, radius - 4, 0, 0, Math.PI, true);
+    ctx.fill();
+  }
+
+  function drawBird() {
+    if (birdImage.complete && birdImage.naturalWidth !== 0) {
+      const {x, y} = bird;
+      const size = 50;
+      ctx.drawImage(birdImage, x - size / 2, y - size / 2, size, size);
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#70c5ce';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    pipes.forEach(pipe => {
+      draw3DPipe(pipe.x, pipe.top, pipe.bottom, pipe.width);
+    });
+
+    drawBird();
+    document.getElementById('score').innerText = 'Skor: ' + score;
+  }
+
+  function drawStartScreen() {
+    ctx.fillStyle = '#70c5ce';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'white';
+    ctx.font = '64px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Flappy Pınar', canvas.width / 2, canvas.height / 2 - 70);
+    ctx.font = '28px sans-serif';
+    ctx.fillText('Flappy Pınar Oyununa hoşgeldin, hedefin 10 skoru geçmek olsun, bol şans knkytoo', canvas.width / 2, canvas.height / 2 + 20);
+  }
+
+  function drawGameOver() {
+    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'white';
+    ctx.font = '48px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Beceremedin gibi be knk', canvas.width / 2, canvas.height / 2 - 20);
+    ctx.font = '24px sans-serif';
+    ctx.fillText('Skorun: ' + score, canvas.width / 2, canvas.height / 2 + 20);
+    ctx.fillText('Yeniden başlatmak için tıkla', canvas.width / 2, canvas.height / 2 + 60);
+  }
+
+  function gameLoop() {
+    if (startScreen) {
+      drawStartScreen();
+      return;
+    }
+    if (gameOver) {
+      drawGameOver();
+      return;
+    }
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+  }
+
+  function onKeyDown(e) {
+    if ((e.code === 'Space' || e.code === 'ArrowUp') && !startScreen && !gameOver) {
+      bird.velocity = bird.lift;
+      if(score > 2) {
+        score15Sound.currentTime = 0;
+        score15Sound.play();
+      } else {
+        flapSound.currentTime = 0;
+        flapSound.play();
+      }
+      e.preventDefault();
+    }
+  }
+
+  function onMouseDown() {
+    if (startScreen) {
+      startScreen = false;
+      resetGame();
+      gameLoop();
+    } else if (gameOver) {
+      resetGame();
+      gameLoop();
+    } else {
+      bird.velocity = bird.lift;
+      if(score > 10) {
+        score15Sound.currentTime = 0;
+        score15Sound.play();
+      } else {
+        flapSound.currentTime = 0;
+        flapSound.play();
+      }
+    }
+  }
+
+  // Event listenerları ekle
+  window.addEventListener('keydown', onKeyDown);
+  window.addEventListener('mousedown', onMouseDown);
+
+  // birdImage yüklendiğinde oyunu başlat
+  birdImage.onload = () => {
+    gameLoop();
+  };
+
+  // Geriye event listenerları kaldırmak için bir fonksiyon da dönebiliriz, gerekirse
+  return () => {
+    window.removeEventListener('keydown', onKeyDown);
+    window.removeEventListener('mousedown', onMouseDown);
+  };
+}
