@@ -13,12 +13,65 @@ body, html {
 
 }
 
-canvas#fireworks {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
+
+#heart-container {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; /* Tıklamaları geç */
+  overflow: visible;
+  z-index: 9999;
+  user-select: none;
 }
+
+.heart {
+  position: fixed;
+  width: 25px;
+  height: 25px;
+  transform: rotate(-45deg);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.8;
+  z-index: 9999;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -12.5px;
+  left: 0;
+}
+
+.heart::after {
+  top: 0;
+  left: 12.5px;
+}
+
+.heart-purple {
+  background-color: #6a0dad;
+}
+
+.heart-purple::before,
+.heart-purple::after {
+  background-color: #6a0dad;
+}
+
+.heart-white {
+  background-color: #fff;
+}
+
+.heart-white::before,
+.heart-white::after {
+  background-color: #fff;
+}
+
+
 
 .intro {
   position: relative;
@@ -90,7 +143,6 @@ button:hover {
 }
 .message {
   font-family: 'Quicksand', sans-serif;
-  font-style: italic;
   font-size: 1.2em;
   line-height: 1.6;
   color: #ffffff;
@@ -116,41 +168,42 @@ button:hover {
   animation: fadeIn 1.5s ease;
 }
 
-.memory-image {
-  max-width: 90%;
-  height: auto;
-  border-radius: 20px;
-  margin-bottom: 25px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
 
-.memory-image {
-  width: 100%;
-  max-width: 400px;  /* Bu en fazla 500px olacak demektir */
-  height: auto;
-  border-radius: 20px;
+
+.memory-video, .memory-image {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 15px;
   margin-bottom: 25px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   display: block;
   margin-left: auto;
   margin-right: auto;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
 }
+/* Başlıklar için daha zarif ve büyük stil */
 .memory-title {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2em;
-  color: #7b16f7;
-  text-shadow: 0 0 8px #d1b3ff;
-  margin-bottom: 20px;
+  font-family: 'Parisienne', cursive;
+  font-size: 2.5rem;
+  text-align: center;
+  color: #8526f8;
+  margin-top: 20px;
 }
 
+/* Paragraflar için daha sade ama romantik bir yazı */
 .memory-text {
-  font-family: 'Kalam', cursive;
-  font-size: 1.2em;
-  color: #ffffff;
-  line-height: 1.8;
-  white-space: pre-line;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
   text-align: center;
-  text-shadow:
-    0 0 6px #a17be0,
-    0 0 10px #b388eb;
+  color: #ffffff;
+  margin: 15px 20px;
+  line-height: 1.6;
 }
+.media-container img,
+.media-container video {
+  max-width: 100%;
+  max-height: 300px;
+  margin: 10px;
+  border-radius: 12px;
+}
+
+

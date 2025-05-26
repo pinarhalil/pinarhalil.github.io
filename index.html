@@ -6,39 +6,81 @@
   <title>Sevgili Pınar</title>
   <link rel="stylesheet" href="style.css">
   
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+
 
 </head>
 <body>
-  <canvas id="fireworks"></canvas>
+
+
+ 
 
   <div class="intro">
     <h1 class="name"> Sevgili  Pınar </h1>
     <!-- İlk Bölüm -->
 <div id="section1">
   <div class="message" id="birthdayMessage"></div>
-  <button onclick="goToNext()">Devam Et Ponçik💜🤍</button>
+  <button onclick="goToNext()">Devam Edelim Ponçik💜🤍</button>
 </div>
 
-<!-- İkinci Bölüm -->
-<div id="section2" style="display: none;">
-  <h2>Birlikte Geçirdiğimiz Anlar 📸</h2>
-  <p>Buraya birlikte çekildiğiniz fotoğrafları, videoları ya da anılarınızı ekleyeceğiz.</p>
+<!-- Menü bölümü, section1'den sonra -->
+<div id="menuSection" style="display:none;">
+  <h2>Seçimini yap Ponçik 💜🤍</h2>
+ <button onclick="showSection('memoriesSection')">Anılar</button>
+
+  <button onclick="showSection('gamesSection')">Oyun</button>
+
 </div>
 
+
+
+
+<div id="gamesSection" style="display:none;">
+  <h2>Eğlenceli Oyunlar 🎮</h2>
+
+
+</div>
+
+
+
+
+
+
+<div id="mediaContainer" class="media-container"></div>
 
 
 <div id="memoriesSection" style="display: none;">
-  <img id="memoryImage" class="memory-image" src="" alt="Anı Fotoğrafı" />
-  <h2 id="memoryTitle" class="memory-title"></h2>
+
+  
+  <h3 id="memoryTitle" class="memory-title"></h3>
   <p id="memoryText" class="memory-text"></p>
-  <button onclick="showNextMemory()">Bir Sonraki Anı</button>
+  <button id="nextMemoryBtn" onclick="showNextMemory()">Başka Bir Anı</button>
+
 </div>
 
 
 
-   
+<div id="memoryRating" style="display:none; margin-top:10px;">
+  <div id="myRatingDisplay" style="font-weight:bold; margin-bottom: 8px;">
+    Halil’in puanı: 10/10
+  </div>
+  <div>Pınar anılarımızı puanlayalım:</div>
+  <div id="pinarStars" style="font-size: 30px; cursor: pointer; user-select:none;"></div>
+  <div id="ratingInfo" style="margin-top: 10px; color: purple; font-weight: bold;"></div>
+
+</div>
+<div id="heart-container"></div>
+<div class="heart"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+  <audio id="birthdaySound" src="audio/fireworks.mp3" preload="auto"></audio>
+<!-- sonra kendi js dosyan -->
 <script src="script.js"></script>
+
 
 </body>
 </html>
+
+
