@@ -190,12 +190,16 @@ button:hover {
 
 /* Paragraflar için daha sade ama romantik bir yazı */
 .memory-text {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.5rem;
-  text-align: center;
-  color: #ffffff;
-  margin: 15px 20px;
+   font-family: 'Quicksand', sans-serif;
+  font-size: 1.2em;
   line-height: 1.6;
+  color: #ffffff;
+  text-align: center;
+  white-space: pre-line; /* satır geçişlerini korur */
+  text-shadow:
+    0 0 6px #a17be0,
+    0 0 10px #b388eb,
+    0 0 15px #9f7ade;
 }
 .media-container img,
 .media-container video {
