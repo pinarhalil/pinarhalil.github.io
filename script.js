@@ -77,7 +77,7 @@ Neyse gittik, ben adamlardan rica ettim biz de oynayalım diye. Sonra oynadık, 
 Yetenekli bir insan olduğunu orada anlamıştım. Birlikte güzel videolar çektik, çekişmeli geçmişti. Ben gerçekten çok eğlenmiştim. Bir daha nasip olmadı ama ilk defa seninle bir aktivite yapmıştık. 
 Her zaman aklımda güzel bir anı olarak kalacak.`,
     media: [
-      { type: "video", src: "videos/ilk-bulusma.mp4" }
+      { type: "video", src: "videos/ilk1.mp4" }
     ]
   },
 
