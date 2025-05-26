@@ -67,7 +67,7 @@ const memories = [
     text: `Bu fotoğraf bizim ilk kez yan yana durduğumuz andı.Sen yine her zamanki gibi knk ama şuan çok bilmem ne bişeyler diyodun ama bilmiyordun ki senin içinde olduğun her bir an her bir fotoğraf her bir detay mükemmel(sonradan farkettin diye umuyorumm)🤍💜
   Tarih:21 Şubat 2024`,
     media: [
-      { type: "image", src: "images/ilk-fotografimiz.JPEG" }
+      { type: "image", src: "images/ilk.jpeg" }
     ]
   },
   {
