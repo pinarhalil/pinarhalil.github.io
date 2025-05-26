@@ -117,12 +117,11 @@ button:hover {
 }
 
 .name {
-  font-family: 'Great Vibes', cursive;
-  font-style: italic;
-  color: #7b16f7;
-  font-size: 3em;
-  text-align: center;
-  animation: glow 3s ease-in-out infinite;
+  font-size: 1.2em;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
 }
 
 @keyframes glow {
