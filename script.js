@@ -346,6 +346,7 @@ function createHeart() {
   const colors = ['heart-purple', 'heart-white'];
   const colorClass = colors[Math.floor(Math.random() * colors.length)];
   heart.classList.add(colorClass);
+
   const size = Math.random() * 15 + 20;
   heart.style.width = size + 'px';
   heart.style.height = size + 'px';
@@ -361,23 +362,35 @@ function createHeart() {
   let swayAngle = Math.random() * Math.PI * 2;
   const swaySpeed = 0.02 + Math.random() * 0.02;
 
+  let animationId;
+
   function animate() {
     posY += speed;
     swayAngle += swaySpeed;
     const swayX = Math.sin(swayAngle) * swayAmplitude;
     heart.style.bottom = posY + 'px';
     heart.style.left = posX + swayX + 'px';
-    heart.style.opacity -= 0.002;
+    heart.style.opacity = parseFloat(heart.style.opacity) - 0.002;
 
-    if (posY > window.innerHeight + 30 || heart.style.opacity <= 0) {
+    if (posY > window.innerHeight + 30 || parseFloat(heart.style.opacity) <= 0) {
       heart.remove();
     } else {
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     }
   }
-  animate();
+
+  // İlk animasyon başlatılıyor ve animationId yakalanıyor
+  animationId = requestAnimationFrame(animate);
+
+  // Kalbi 15 saniye sonra kaldır ve animasyonu durdur
+
 }
-setInterval(createHeart, 400);
+const heartInterval = setInterval(createHeart, 300);
+
+// 15 saniye sonra hem kalp üretimini hem animasyonları durdur
+setTimeout(() => {
+  clearInterval(heartInterval); // yeni kalpler durur
+}, 15000);
 
 
 
