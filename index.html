@@ -2,10 +2,12 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
   <title>Sevgili Pınar</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="data:,">
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
 
  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
@@ -14,9 +16,9 @@
 </head>
 <body>
 <!-- 🎬 Başlangıç Ekranı (mobil ses uyumlu) -->
-<div id="startScreen" style="position: fixed; z-index: 99999; background: rgba(0,0,0,0.9); color: white; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+<div id="startScreens" style="position: fixed; z-index: 99999; background: rgba(0,0,0,0.9); color: white; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
   <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.5em; margin-bottom: 20px;">Hazır mısın Pınar? 🤍💜</h2>
-  <button id="startBtn" style="padding: 12px 24px; font-size: 1.2em; background: #a066c9; color: white; border: none; border-radius: 10px; box-shadow: 0 0 10px #fff; cursor: pointer;">
+  <button id="startsBtn" style="padding: 12px 24px; font-size: 1.2em; background: #a066c9; color: white; border: none; border-radius: 10px; box-shadow: 0 0 10px #fff; cursor: pointer;">
     Kutlamalar Başlasınn 🎉🎉
   </button>
 </div>
@@ -46,17 +48,58 @@
 <div id="gamesMenuSection" style="display:none;">
   <h2>Oyunlar 🎮</h2>
   <button onclick="showSection('flappyGameSection')">🎮 Flappy Pınar</button>
+  <button onclick="showSection('cornholeGameSection')">🎮 Cornhole Pınar</button>
   <button onclick="showSection('menuSection')">Geri</button>
 </div>
 
-<!-- Flappy Pınar Oyunu -->
-<div id="flappyGameSection" style="display:none; text-align:center;">
-  <h2 style="color: white;">Flappy Pınar 🎈</h2>
+<!-- Flappy Game Bölümü -->
+<div id="flappyGameSection" style="display:none;">
+  <h2>Flappy Pınar 🎈</h2>
   <div id="score">Skor: 0</div>
-  <canvas id="game" width="400" height="600" style="border: 2px solid #000; background: #350080;"></canvas>
-  <br>
-  <button onclick="showSection('gamesMenuSection')">Geri</button>
+  <canvas id="game" width="400" height="600"></canvas>
+    <button onclick="showSection('menuSection')">Geri</button>
 </div>
+
+<!-- Torba Oyunu Bölümü -->
+<div id="cornholeGameSection" style="display: none;">
+  <h2>🎯 Torba Oyunu</h2>
+
+  <!-- Oyun Alanı -->
+  <div id="container" style="display: none;">
+    <canvas id="gameCanvas"></canvas>
+    <div id="powerBarLeft"></div>
+  </div>
+
+  <!-- Skor ve Mesajlar -->
+  <div id="scoreBoard" style="display: none;" aria-live="polite" aria-atomic="true">
+    <div>🎯 Atış: <span id="totalShots">0</span></div>
+    <div>✅ Koyduğun: <span id="scoredShots">0</span></div>
+  </div>
+  <div id="message" style="display: none;" role="alert" aria-live="assertive"></div>
+  <!-- Başlangıç ekranı -->
+  <div id="startScreen" role="dialog" aria-modal="true" aria-labelledby="startTitle" aria-describedby="startDesc">
+    <p id="startDesc">Hoşgeldin knkm! bu oyunu bi yerden hatırlarsın :) benim skorum 5 geçmeye çalış bakalım (yoksa koymuş olurum)Kum torbasını çekerek atmaya çalış biraz zor gelebilir bol şanss...</p>
+    <button id="startBtnCornhole">Başla</button>
+  </div>
+
+  <!-- Kazanma Videosu -->
+  <div id="videoContainerCornhole" style="display: none;" aria-live="polite">
+    <video id="winVideo" src="videos/scor.mp4" preload="auto" style="max-width: 90%; max-height: 80%; border-radius: 12px;"></video>
+  </div>
+
+
+<div id="celebrationVideoContainer" style="display:none;">
+  <video id="celebrationVideo" src="videos/ilka.MP4" preload="auto" style="max-width: 90%; max-height: 80%; border-radius: 12px;" controls></video>
+</div>
+
+
+  <!-- Geri Dön Butonu -->
+  <button onclick="showSection('gamesMenuSection')" style="margin-top: 20px;">🔙 Geri</button>
+</div>
+
+
+
+
 
 
 
@@ -66,6 +109,7 @@
   <h3 id="memoryTitle" class="memory-title"></h3>
   <p id="memoryText" class="memory-text"></p>
   <button id="nextMemoryBtn" onclick="showNextMemory()">Başka Bir Anı</button>
+    <button onclick="showSection('menuSection')">Geri</button>
 
 </div>
 
