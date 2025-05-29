@@ -51,7 +51,8 @@ function showSection(sectionId) {
     "gamesMenuSection",
     "flappyGameSection",
     "cornholeGameSection",
-    "memoriesSection"
+    "memoriesSection",
+      "surpriseSection"  // 🎁 yeni eklenen bölüm
   ];
 
   sections.forEach(id => {
@@ -61,10 +62,20 @@ function showSection(sectionId) {
     }
   });
 
+if (sectionId === "surpriseSection") {
+  const box = document.getElementById("giftBox");
+  const message = document.getElementById("surpriseMessageBox");
+  box.classList.remove("opened");
+  message.style.display = "none";
+  message.innerHTML = "";
+}
+
+
+
   // Anılar bölümü açıldığında anıları ve puanlamayı başlat
   if (sectionId === 'memoriesSection') {
     memoryIndex = 0;
-    showNextMemory();
+    renderMemory();
     document.getElementById("memoryRating").style.display = "block";
   } else {
     document.getElementById("memoryRating").style.display = "none";
@@ -266,24 +277,28 @@ function rateByPinar(score) {
 
 let memoryIndex = 0;
 
+
+
 function showNextMemory() {
-  const nextBtn = document.getElementById("nextMemoryBtn");
-
-  if (memoryIndex >= memories.length) {
-    document.getElementById("memoryTitle").innerText = "";
-    document.getElementById("memoryText").innerText = "";
-    document.getElementById("mediaContainer").innerHTML = "";
-    nextBtn.innerText = "Tüm Anılar Bitti 💜";
-    nextBtn.disabled = true;
-    document.getElementById("memoryRating").style.display = "none";
-    return;
+  if (memoryIndex < memories.length - 1) {
+    memoryIndex++;
+    renderMemory();
   }
+}
 
+function showPreviousMemory() {
+  if (memoryIndex > 0) {
+    memoryIndex--;
+    renderMemory();
+  }
+}
+
+function renderMemory() {
   const memory = memories[memoryIndex];
+  const mediaContainer = document.getElementById("mediaContainer");
   document.getElementById("memoryTitle").innerText = memory.title;
   document.getElementById("memoryText").innerText = memory.text;
 
-  const mediaContainer = document.getElementById("mediaContainer");
   mediaContainer.innerHTML = "";
 
   memory.media.forEach(item => {
@@ -307,11 +322,13 @@ function showNextMemory() {
     }
   });
 
-  document.getElementById("memoryRating").style.display = "block";
+  // ⭐️ Buton kontrolü
+  document.getElementById("prevMemoryBtn").style.display = (memoryIndex === 0) ? "none" : "inline-block";
+  document.getElementById("nextMemoryBtn").style.display = (memoryIndex === memories.length - 1) ? "none" : "inline-block";
+  document.getElementById("endOfMemoriesMessage").style.display = (memoryIndex === memories.length - 1) ? "block" : "none";
+
   createPinarStars();
-  memoryIndex++;
 }
- 
 // 🎉 Konfeti animasyonu
 (function () {
   const colors = ['#9b59b6', '#8e44ad', '#d2b4de', '#ffffff', '#f8c8dc', '#a3c4f3'];
@@ -703,7 +720,7 @@ function drawGameOver() {
     } else {
       update();
       draw();
-      if(score === 10) {
+      if(score > 10) {
         score15Sound.play();
         
       }
@@ -909,7 +926,7 @@ function initCornholeGame() {
           currentBag.scored = true;
           scoredShots++;
           showVideo();
-          messageDiv.textContent = '🏀 Koydunnn!';
+          messageDiv.textContent = '🏀 Koydunnn! Afferim knkma';
         } else {
           messageDiv.textContent = '❌ Kaçtı be knkm, tekrar dene.';
         }
@@ -1146,3 +1163,80 @@ celebrationVideo.addEventListener('ended', () => {
 }
 
 
+
+
+const surpriseMessages = [
+  "Sürprizzzz! 🎁💜\nSenin için hazırladıgım bu özel kutudan sadece kalpler degil, sana olan sevgim de taşiyor...",
+  "Seninle tanıştığım için çok şanslıyım 💌",
+  "Ruh eşimm,bitanemm,canımm,tatlımm,kısaca herşeyimm💜🤍",
+    "Bu kadar mükemmel biri olmak zorunda mıydın",
+  "Ben seni daha çok seviyorum bunu biliyorsun dimi?💜🤍",
+    "Eğer dünya üzerinde bir ponçik varsa, o sensin. Eğer iki varsa, biri sensin diğeri senin yansiman(diğeri de benim belkii)",
+  "Bu kutu da fena degil ama hele senin hazırladıgın kutuu🥹 10/10 du gördüğüm en güzel kutu💜🤍",
+  "Ponçikliğin tanımı: sensin 💜🤍",
+  "Bu kutudan çıkan her kalp, sana olan sevgimden bir parça 💫",
+  "Gözlerini kapat ve dilek tut... Tuttun dimi,Söyle şimdi(içinden diyecek söylersem kabul olmaz:)) 🎈",
+  "Benim için en büyük sürpriz sensin 🥹"
+];
+
+let currentMessageIndex = -1;
+
+function openSurpriseBox() {
+  const box = document.getElementById("giftBox");
+  const message = document.getElementById("surpriseMessage");
+  const heartZone = document.getElementById("giftHeartZone");
+  const nextBtn = document.getElementById("nextSurpriseBtn");
+
+  // Kutuyu aç
+  box.classList.add("opened");
+
+  // Yeni mesajı göster
+  showAnimatedSurpriseMessage();
+
+  // Butonu görünür yap
+  nextBtn.style.display = "inline-block";
+
+  // Kalp animasyonları başlat
+  launchGiftHearts(heartZone);
+}
+
+function showAnimatedSurpriseMessage() {
+  const message = document.getElementById("surpriseMessage");
+  let newIndex;
+
+  // Aynı mesaj üst üste gelmesin
+  do {
+    newIndex = Math.floor(Math.random() * surpriseMessages.length);
+  } while (newIndex === currentMessageIndex);
+  currentMessageIndex = newIndex;
+
+  // Yazıyı animasyonla yaz
+  const text = surpriseMessages[newIndex];
+  message.innerHTML = "";
+  message.style.display = "block";
+  let index = 0;
+
+  const interval = setInterval(() => {
+    message.innerHTML += text.charAt(index);
+    index++;
+    if (index >= text.length) clearInterval(interval);
+  }, 50);
+}
+
+function launchGiftHearts(container) {
+  let heartInterval = setInterval(() => {
+    const giftHeart = document.createElement("div");
+    giftHeart.classList.add("gift-heart");
+    giftHeart.classList.add(Math.random() > 0.5 ? "purple" : "white");
+    giftHeart.style.left = `${Math.random() * 100}vw`;
+    giftHeart.style.bottom = "0";
+    container.appendChild(giftHeart);
+    setTimeout(() => giftHeart.remove(), 3000);
+  }, 150);
+
+  setTimeout(() => clearInterval(heartInterval), 5000);
+}
+document.getElementById("nextSurpriseBtn").addEventListener("click", () => {
+  showAnimatedSurpriseMessage();
+  launchGiftHearts(document.getElementById("giftHeartZone"));
+});

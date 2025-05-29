@@ -415,3 +415,172 @@ button:hover {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
 }
+.gift-box {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 60px auto;
+  perspective: 800px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+.gift-box .box {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #a066c9, #7b4ba3);
+  border-radius: 10px;
+  box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.gift-box .lid {
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(to bottom, #8e44ad, #6c3483);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px 10px 0 0;
+  transform-origin: bottom center;
+  transition: transform 0.6s ease, top 0.6s ease;
+  z-index: 2;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.gift-box.opened .lid {
+  transform: rotateX(-120deg);
+  top: -60px;
+}
+
+.gift-box .ribbon-horizontal,
+.gift-box .ribbon-vertical {
+  position: absolute;
+  background: #ffffff;
+  z-index: 3;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
+}
+
+.gift-box .ribbon-horizontal {
+  width: 100%;
+  height: 20px;
+  top: 90px;
+  left: 0;
+}
+
+.gift-box .ribbon-vertical {
+  width: 20px;
+  height: 100%;
+  top: 0;
+  left: 90px;
+}
+
+.surprise-message {
+  text-align: center;
+  font-size: 1.2em;
+  color: #a066c9;
+  font-weight: bold;
+  margin-top: 20px;
+  font-family: 'Comic Neue', cursive;
+  animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+#giftHeartZone {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.gift-heart {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  transform: rotate(45deg);
+  animation: riseGiftHeart 3s ease-out forwards;
+  z-index: 9999;
+  opacity: 0.8;
+}
+
+.gift-heart::before,
+.gift-heart::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: inherit;
+  border-radius: 50%;
+}
+
+.gift-heart::before {
+  top: -10px;
+  left: 0;
+}
+.gift-heart::after {
+  left: -10px;
+  top: 0;
+}
+
+.gift-heart.purple {
+  background-color: #a066c9;
+}
+.gift-heart.white {
+  background-color: #ffffff;
+}
+
+@keyframes riseGiftHeart {
+  0% {
+    transform: translateY(0) scale(1) rotate(45deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-150vh) scale(1.2) rotate(405deg);
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Estetik mesaj */
+.surprise-message {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2em;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 40px;
+  animation: fadeInScale 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInScale {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

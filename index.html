@@ -36,10 +36,34 @@
 
 <div id="menuSection" style="display:none;">
   <h2>Seçimini yap Ponçik 💜🤍</h2>
-  <button onclick="showSection('memoriesSection')">Anılar</button>
-  <button onclick="showSection('gamesMenuSection')">Oyunlar</button>
+  <button onclick="showSection('memoriesSection')">🎞️Anılar</button>
+  <button onclick="showSection('gamesMenuSection')">⛳Oyunlar</button>
+  <button onclick="showSection('surpriseSection')">🎁 Sürpriz Kutu</button>
+
 </div>
 
+
+<!-- 🎁 Sürpriz Kutu Bölümü -->
+<div id="surpriseSection" style="display:none; text-align:center;">
+  <h2 style="color: white;">Sürpriz Kutu 🎁</h2>
+  <div id="giftBox" class="gift-box" onclick="openSurpriseBox()">
+    <div class="lid"></div>
+    <div class="box"></div>
+    <div class="ribbon-horizontal"></div>
+  <div class="ribbon-vertical"></div>
+  </div>
+<!-- 🎈 Sürpriz kutuya özel kalpler -->
+<div id="giftHeartZone"></div>
+  
+
+<!-- 🌟 Sürpriz kutuya özel mesaj -->
+<div id="surpriseMessage" class="surprise-message" style="display:none;"></div>
+<button id="nextSurpriseBtn" style="display:none; margin-top: 12px; padding: 10px 20px; font-size: 1em; background: #a066c9; color: white; border: none; border-radius: 8px; cursor: pointer;">
+  Başka 💌
+</button>
+
+  <button onclick="showSection('gamesMenuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
+</div>
 
 
 
@@ -49,7 +73,7 @@
   <h2>Oyunlar 🎮</h2>
   <button onclick="showSection('flappyGameSection')">🎮 Flappy Pınar</button>
   <button onclick="showSection('cornholeGameSection')">🎮 Cornhole Pınar</button>
-  <button onclick="showSection('menuSection')">Geri</button>
+  <button onclick="showSection('gamesMenuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
 </div>
 
 <!-- Flappy Game Bölümü -->
@@ -57,7 +81,7 @@
   <h2>Flappy Pınar 🎈</h2>
   <div id="score">Skor: 0</div>
   <canvas id="game" width="400" height="600"></canvas>
-    <button onclick="showSection('menuSection')">Geri</button>
+    <button onclick="showSection('gamesMenuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
 </div>
 
 <!-- Torba Oyunu Bölümü -->
@@ -94,7 +118,7 @@
 
 
   <!-- Geri Dön Butonu -->
-  <button onclick="showSection('gamesMenuSection')" style="margin-top: 20px;">🔙 Geri</button>
+  <button onclick="showSection('gamesMenuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
 </div>
 
 
@@ -102,15 +126,18 @@
 
 
 
-
 <div id="memoriesSection" style="display: none;">
-
   <div id="mediaContainer" class="media-container"></div>
   <h3 id="memoryTitle" class="memory-title"></h3>
   <p id="memoryText" class="memory-text"></p>
-  <button id="nextMemoryBtn" onclick="showNextMemory()">Başka Bir Anı</button>
-    <button onclick="showSection('menuSection')">Geri</button>
+  
+  <div id="memoryButtons">
+    <button id="prevMemoryBtn" onclick="showPreviousMemory()">← Önceki Anı</button>
+    <button id="nextMemoryBtn" onclick="showNextMemory()">Sonraki Anı →</button>
+      <button onclick="showSection('gamesMenuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
+  </div>
 
+  <p id="endOfMemoriesMessage" style="display:none; color: purple; font-weight: bold; margin-top: 10px;"> Tüm anılarımızı gezdik ponçik 💜 Umarım hatırlarken yüzünde bir tebessüm oluşmuştur 🥰</p>
 </div>
 
 
