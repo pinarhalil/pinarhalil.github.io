@@ -64,7 +64,7 @@ function showSection(sectionId) {
 
 if (sectionId === "surpriseSection") {
   const box = document.getElementById("giftBox");
-  const message = document.getElementById("surpriseMessageBox");
+  const message = document.getElementById("surpriseMessage");
   box.classList.remove("opened");
   message.style.display = "none";
   message.innerHTML = "";
@@ -516,8 +516,10 @@ setTimeout(() => {
 
 
 
-
+  let useAlternateSound = false;
 function initFlappyPinar() {
+ 
+
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
 
@@ -563,6 +565,8 @@ backgroundImage.src = "images/sky.jpg";
     frameCount = 0;
     score = 0;
     gameOver = false;
+    useAlternateSound = false;
+
   }
 
   function update() {
@@ -610,7 +614,16 @@ backgroundImage.src = "images/sky.jpg";
         pipes.splice(i, 1);
         score++;
       }
+
+
+     
+
     });
+
+
+        if (score > 10 && !useAlternateSound) {
+  useAlternateSound = true;  // Artık farklı sesi kullan
+}
 
     frameCount++;
   }
@@ -720,28 +733,32 @@ function drawGameOver() {
     } else {
       update();
       draw();
-      if(score > 10) {
-        score15Sound.play();
-        
-      }
+    
     }
     requestAnimationFrame(loop);
   }
 
   // Olay dinleyicileri
   function flap() {
-    if(startScreen) {
-      startScreen = false;
-      resetGame();
-    }
-    if(!gameOver) {
-      bird.velocity = bird.lift;
+    if (startScreen) {
+    startScreen = false;
+    resetGame();
+  }
+
+  if (!gameOver) {
+    bird.velocity = bird.lift;
+    if (useAlternateSound) {
+      score15Sound.currentTime = 0;
+      score15Sound.play();
+    } else {
       flapSound.currentTime = 0;
       flapSound.play();
-    } else {
-      resetGame();
-      startScreen = false;
     }
+  } else {
+    resetGame();
+    startScreen = false;
+  }
+
   }
 
   window.addEventListener('keydown', (e) => {
@@ -760,7 +777,6 @@ function drawGameOver() {
 }
 
 
-
 function initCornholeGame() {
   const canvas = document.getElementById('gameCanvas');
   const ctx = canvas.getContext('2d');
@@ -768,14 +784,17 @@ function initCornholeGame() {
   const messageDiv = document.getElementById('message');
   const totalShotsSpan = document.getElementById('totalShots');
   const scoredShotsSpan = document.getElementById('scoredShots');
-
   const startScreen = document.getElementById('startScreen');
   const startBtn = document.getElementById('startBtnCornhole');
   const videoContainer = document.getElementById('videoContainerCornhole');
   const winVideo = document.getElementById('winVideo');
+  const celebrationVideoContainer = document.getElementById('celebrationVideoContainer');
+  const celebrationVideo = document.getElementById('celebrationVideo');
+  const scoreBoard = document.getElementById('scoreBoard');
 
   let cw, ch;
   let gameStarted = false;
+  let animationFrameId;
 
   let bagRadius = 80;
   let boardX, boardY, boardW, boardH;
@@ -790,7 +809,6 @@ function initCornholeGame() {
 
   let dragging = false;
   let dragOrigin = { x: 0, y: 0 };
-  let dragOffset = { x: 0, y: 0 };
   let dragPos = { x: 0, y: 0 };
 
   const bgImg = new Image();
@@ -870,41 +888,36 @@ function initCornholeGame() {
   }
 
   function drawPowerLine() {
-  if (!dragging) return;
+    if (!dragging) return;
 
-  const dx = dragOrigin.x - dragPos.x;
-  const dy = dragOrigin.y - dragPos.y;
-  const distance = Math.sqrt(dx * dx + dy * dy);
-  const angle = Math.atan2(dy, dx);
+    const dx = dragOrigin.x - dragPos.x;
+    const dy = dragOrigin.y - dragPos.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx);
 
-  // Ok uzunluğu çekişe göre ayarlanır, örnek olarak 0.8 ile çarpıyoruz
-  const length = Math.min(distance * 0.8, 100);
+    const length = Math.min(distance * 0.8, 100);
 
-  const endX = currentBag.x + Math.cos(angle) * length;
-  const endY = currentBag.y + Math.sin(angle) * length;
+    const endX = currentBag.x + Math.cos(angle) * length;
+    const endY = currentBag.y + Math.sin(angle) * length;
 
-  // Gövde çizgisi
-  ctx.strokeStyle = '#0f0';
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.moveTo(currentBag.x, currentBag.y);
-  ctx.lineTo(endX, endY);
-  ctx.stroke();
+    ctx.strokeStyle = '#0f0';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(currentBag.x, currentBag.y);
+    ctx.lineTo(endX, endY);
+    ctx.stroke();
 
-  // Ok ucu çizimi
-  const headLength = 10;
-  const arrowAngle1 = angle + Math.PI / 8;
-  const arrowAngle2 = angle - Math.PI / 8;
+    const headLength = 10;
+    const arrowAngle1 = angle + Math.PI / 8;
+    const arrowAngle2 = angle - Math.PI / 8;
 
-  ctx.beginPath();
-  ctx.moveTo(endX, endY);
-  ctx.lineTo(endX - headLength * Math.cos(arrowAngle1), endY - headLength * Math.sin(arrowAngle1));
-  ctx.moveTo(endX, endY);
-  ctx.lineTo(endX - headLength * Math.cos(arrowAngle2), endY - headLength * Math.sin(arrowAngle2));
-  ctx.stroke();
-}
-
-
+    ctx.beginPath();
+    ctx.moveTo(endX, endY);
+    ctx.lineTo(endX - headLength * Math.cos(arrowAngle1), endY - headLength * Math.sin(arrowAngle1));
+    ctx.moveTo(endX, endY);
+    ctx.lineTo(endX - headLength * Math.cos(arrowAngle2), endY - headLength * Math.sin(arrowAngle2));
+    ctx.stroke();
+  }
 
   function update() {
     if (!gameStarted) return;
@@ -939,17 +952,13 @@ function initCornholeGame() {
         if (totalShots % 3 === 0) bags = [];
 
         if (scoredShots === 5) {
-         
-           gameStarted = false;
-        showCelebrationVideo();
-       resetGame();
-         return;
-          
-       
+          gameStarted = false;
+          showCelebrationVideo();
+          resetGame();
+          return;
         }
-  currentBag = createBag();
+        currentBag = createBag();
         setTimeout(() => {
-          
           messageDiv.textContent = '';
         }, 2000);
       }
@@ -968,10 +977,10 @@ function initCornholeGame() {
   function loop() {
     update();
     draw();
-    requestAnimationFrame(loop);
+    animationFrameId = requestAnimationFrame(loop);
   }
 
- function setPowerBar(ratio) {
+  function setPowerBar(ratio) {
     const clampedRatio = Math.min(Math.max(ratio, 0), 1);
     const height = clampedRatio * 150;
     powerBarLeft.style.height = `${height}px`;
@@ -984,228 +993,167 @@ function initCornholeGame() {
   }
 
   function handleStart(x, y) {
-  if (!gameStarted) return;
+    if (!gameStarted) return;
 
-  const dx = x - currentBag.x;
-  const dy = y - currentBag.y;
+    const dx = x - currentBag.x;
+    const dy = y - currentBag.y;
 
-  const distance = Math.sqrt(dx * dx + dy * dy);
+    const distance = Math.sqrt(dx * dx + dy * dy);
 
-  if (distance < bagRadius + 30 && !currentBag.inMotion) {
-    dragging = true;
+    if (distance < bagRadius + 30 && !currentBag.inMotion) {
+      dragging = true;
 
-    // Başlangıç noktası torbanın biraz sağı ve altı olacak şekilde ayarlanıyor
-    dragOrigin = {
-      x: currentBag.x + bagRadius * 0.2,
-      y: currentBag.y + bagRadius * 0.2
-    };
+      dragOrigin = {
+        x: currentBag.x + bagRadius * 0.2,
+        y: currentBag.y + bagRadius * 0.2
+      };
 
+      dragPos = { x, y };
+    }
+  }
+
+  function handleMove(x, y) {
+    if (!dragging) return;
     dragPos = { x, y };
-  }
-}
-
-
-function handleMove(x, y) {
-  if (!dragging) return;
-  dragPos = { x, y };
-  const dy = dragPos.y - dragOrigin.y;
-  setPowerBar(dy / 100);
-}
-
-function handleEnd() {
-  if (!dragging) return;
-  dragging = false;
-
-  const dx = dragOrigin.x - dragPos.x;
-  const dy = dragOrigin.y - dragPos.y;
-  const dist = Math.sqrt(dx * dx + dy * dy);
-
-  if (dist > 10) {
-    const power = dist * 0.2;
-    currentBag.vx = (dx / dist) * power;
-    currentBag.vy = (dy / dist) * power;
-    currentBag.inMotion = true;
-  } else {
-    currentBag.vx = 0;
-    currentBag.vy = 0;
-    currentBag.inMotion = false;
-  }
-  
-  setPowerBar(0);
-}
-
-
-  // Mouse ve dokunmatik olayları
-    canvas.addEventListener('mousedown', e => {
-      const rect = canvas.getBoundingClientRect();
-      handleStart(e.clientX - rect.left, e.clientY - rect.top);
-    });
-    canvas.addEventListener('mousemove', e => {
-      const rect = canvas.getBoundingClientRect();
-      handleMove(e.clientX - rect.left, e.clientY - rect.top);
-    });
-    window.addEventListener('mouseup', e => {
-      handleEnd();
-    });
-
- canvas.addEventListener('touchstart', e => {
-      e.preventDefault();
-      const rect = canvas.getBoundingClientRect();
-      const touch = e.touches[0];
-      handleStart(touch.clientX - rect.left, touch.clientY - rect.top);
-    }, { passive: false });
-
-    canvas.addEventListener('touchmove', e => {
-      e.preventDefault();
-      const rect = canvas.getBoundingClientRect();
-      const touch = e.touches[0];
-      handleMove(touch.clientX - rect.left, touch.clientY - rect.top);
-    }, { passive: false });
-
-    window.addEventListener('touchend', e => {
-      e.preventDefault();
-      handleEnd();
-    }, { passive: false });
-
-
-
-  function showVideo() {
-    // Kutlama videosu oynuyorsa durdur ve gizle
-  if (!celebrationVideo.paused) {
-    celebrationVideo.pause();
-    celebrationVideo.currentTime = 0;
-    celebrationVideoContainer.style.display = 'none';
+    const dy = dragPos.y - dragOrigin.y;
+    setPowerBar(dy / 100);
   }
 
-  messageDiv.textContent = 'Tebrikler! Knkmmm Aferin sana...';
-  videoContainer.style.display = 'block';
-  winVideo.play();
-  powerBarLeft.style.display = 'none';
-  scoreBoard.style.opacity = 0.3;
-  canvas.style.filter = 'brightness(0.4)';
-}
+  function handleEnd() {
+    if (!dragging) return;
+    dragging = false;
 
-winVideo.addEventListener('ended', () => {
-  videoContainer.style.display = 'none';
-  powerBarLeft.style.display = 'block';
-  scoreBoard.style.opacity = 1;
-  canvas.style.filter = 'brightness(1)';
-  messageDiv.textContent = '';
-  // Burada yeni torbayı yarat veya oyunu devam ettir
-  currentBag = createBag();
-  gameStarted = true;
-});
+    const dx = dragOrigin.x - dragPos.x;
+    const dy = dragOrigin.y - dragPos.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
 
+    if (dist > 10) {
+      const power = dist * 0.2;
+      currentBag.vx = (dx / dist) * power;
+      currentBag.vy = (dy / dist) * power;
+      currentBag.inMotion = true;
+    } else {
+      currentBag.vx = 0;
+      currentBag.vy = 0;
+      currentBag.inMotion = false;
+    }
 
-function showCelebrationVideo() {
-  if (!winVideo.paused) {
-    winVideo.pause();
-    winVideo.currentTime = 0;
-    videoContainer.style.display = 'none';
+    setPowerBar(0);
   }
 
-  messageDiv.textContent = 'Harika! 5 başarılı atış yaptın, koydunn süpersin! 🎉';
-  celebrationVideoContainer.style.display = 'block';
-  celebrationVideo.play();
-  powerBarLeft.style.display = 'none';
-  scoreBoard.style.opacity = 0.3;
-  canvas.style.filter = 'brightness(0.4)';
-}
-
-celebrationVideo.addEventListener('ended', () => {
-  celebrationVideoContainer.style.display = 'none';
-  powerBarLeft.style.display = 'block';
-  scoreBoard.style.opacity = 1;
-  canvas.style.filter = 'brightness(1)';
-  messageDiv.textContent = '';
-  // Burada da oyunu devam ettir
-  currentBag = createBag();
-  gameStarted = true;
+  // Mouse ve dokunmatik olaylar
+  canvas.addEventListener('mousedown', e => {
+    const rect = canvas.getBoundingClientRect();
+    handleStart(e.clientX - rect.left, e.clientY - rect.top);
+  });
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    handleMove(e.clientX - rect.left, e.clientY - rect.top);
+  });
+  window.addEventListener('mouseup', e => {
+    handleEnd();
   });
 
+  canvas.addEventListener('touchstart', e => {
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const touch = e.touches[0];
+    handleStart(touch.clientX - rect.left, touch.clientY - rect.top);
+  }, { passive: false });
 
+  canvas.addEventListener('touchmove', e => {
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const touch = e.touches[0];
+    handleMove(touch.clientX - rect.left, touch.clientY - rect.top);
+  }, { passive: false });
 
+  canvas.addEventListener('touchend', e => {
+    e.preventDefault();
+    handleEnd();
+  });
+
+  // Oyun durumunu sıfırla
   function resetGame() {
     totalShots = 0;
     scoredShots = 0;
-    totalShotsSpan.textContent = totalShots;
-    scoredShotsSpan.textContent = scoredShots;
     bags = [];
-    currentBag = createBag();
+    totalShotsSpan.textContent = '0';
+    scoredShotsSpan.textContent = '0';
     messageDiv.textContent = '';
-    powerBarLeft.style.display = 'block';
-    gameStarted = true;
+    currentBag = createBag();
   }
 
-  startBtn.addEventListener('click', startGame);
-  startBtn.addEventListener('touchstart', e => {
-    e.preventDefault();
+  // Oyun başlangıcı fonksiyonu
+  function startGame() {
+    gameStarted = true;
+    resetGame();
+    startScreen.style.display = 'none';
+    videoContainer.style.display = 'none';
+    celebrationVideoContainer.style.display = 'none';
+    scoreBoard.style.opacity = 1;
+    document.getElementById('gameCanvas').style.display = 'block';
+    powerBarLeft.style.display = 'block';
+
+   
+
+    loop();
+  }
+
+  startBtn.addEventListener('click', () => {
     startGame();
   });
 
-  function startGame() {
-    startScreen.style.display = 'none';
-    document.getElementById('scoreBoard').style.pointerEvents = 'auto';
-    powerBarLeft.style.pointerEvents = 'auto';
-    powerBarLeft.style.display = 'block';
-    resetGame();
-    loop();
-    
-  }
-
-  window.addEventListener('resize', () => {
-    resize();
-  });
+  window.addEventListener('resize', resize);
 
   resize();
 
+  // Buton ekleme fonksiyonu
 
+  // Kutlama videosu göster
+  function showCelebrationVideo() {
+    celebrationVideoContainer.style.display = 'block';
+    celebrationVideo.play();
+    celebrationVideo.onended = () => {
+      celebrationVideoContainer.style.display = 'none';
+    };
+  }
+
+  // Başarı videosu göster
+  function showVideo() {
+    videoContainer.style.display = 'block';
+    winVideo.play();
+    winVideo.onended = () => {
+      videoContainer.style.display = 'none';
+    };
+  }
 }
-
 
 
 
 const surpriseMessages = [
-  "Sürprizzzz! 🎁💜\nSenin için hazırladıgım bu özel kutudan sadece kalpler degil, sana olan sevgim de taşiyor...",
-  "Seninle tanıştığım için çok şanslıyım 💌iyi ki varsın ponçikk",
-  "Ruh eşimm,bitanemm,canımm,tatlımm,kısaca herşeyimm💜🤍",
-    "Bu kadar mükemmel biri olmak zorunda mıydın knkm",
-  "Ben seni daha çok seviyorum bunu biliyorsun dimi?💜🤍",
-    "Eğer dünya üzerinde bir ponçik varsa, o sensin. Eğer iki varsa, biri sensin diğeri senin yansiman(diğeri de benim belkii)",
-  "Bu kutu da fena degil ama hele senin hazırladıgın kutuu🥹 10/10 du gördüğüm en güzel kutu💜🤍",
+  "Sürprizzzz! 🎁💜 Senin için hazırladığım bu özel kutudan sadece kalpler değil, sana olan sevgim de taşıyor...",
+  "Seninle tanıştığım için çok şanslıyım 💌 İyi ki varsın ponçikk 💜🤍",
+  "Ruh eşim, bitanem, canım, tatlım... Kısaca her şeyim 💜🤍",
+  "Bu kadar mükemmel biri olmak zorunda mıydın knkm? 😍",
+  "Ben seni daha çok seviyorum... Bunu biliyorsun dimi? 💜🤍",
+  "Eğer dünyada bir ponçik varsa, o sensin. İki varsa biri sensin, diğeri senin yansıman (diğeri de benim belki 🤭)",
+  "Bu kutu da fena değil ama senin hazırladığın kutu 🥹 10/10, gördüğüm en güzel kutuydu 💜🤍",
   "Ponçikliğin tanımı: sensin 💜🤍",
   "Bu kutudan çıkan her kalp, sana olan sevgimden bir parça 💫",
-   "Yavru pandacığımı çokkk seviyorumm💫",
-   "Sıkıldın mıı,(Böyle diyince gelen bayılma perileri:D)",
-  "Gözlerini kapat ve dilek tut... Tuttun dimi,Söyle şimdi(içinden diyecek söylersem kabul olmaz:)) 🎈",
-  "Benim için en büyük sürpriz sensin 🥹"
+  "Yavru pandacığımı çoook seviyorum 💫",
+  "Sıkıldın mıı 😏 (Böyle diyince gelen bayılma perileri 😵‍💫)",
+  "Gözlerini kapat ve dilek tut... Tuttun mu? Söyle şimdi (içinden ama  söylersem kabul olmaz🤫) 🎈",
+  "Benim için en büyük sürpriz sensin 🥹💝"
 ];
 
+
 let currentMessageIndex = -1;
-
+let typingInterval; // Globalde tanımla
 function openSurpriseBox() {
-  const box = document.getElementById("giftBox");
-  const message = document.getElementById("surpriseMessage");
-  const heartZone = document.getElementById("giftHeartZone");
-  const nextBtn = document.getElementById("nextSurpriseBtn");
-
-  // Kutuyu aç
-  box.classList.add("opened");
-
-  // Yeni mesajı göster
-  showAnimatedSurpriseMessage();
-
-  // Butonu görünür yap
-  nextBtn.style.display = "inline-block";
-
-  // Kalp animasyonları başlat
-  launchGiftHearts(heartZone);
-}
-
-function showAnimatedSurpriseMessage() {
   const message = document.getElementById("surpriseMessage");
   let newIndex;
-
+  launchGiftHearts(document.getElementById("giftHeartZone"));
   // Aynı mesaj üst üste gelmesin
   do {
     newIndex = Math.floor(Math.random() * surpriseMessages.length);
@@ -1216,14 +1164,71 @@ function showAnimatedSurpriseMessage() {
   const text = surpriseMessages[newIndex];
   message.innerHTML = "";
   message.style.display = "block";
-  let index = 0;
 
-  const interval = setInterval(() => {
+  // Önceki yazı efektini durdur
+  clearInterval(typingInterval);
+
+  let index = 0;
+  typingInterval = setInterval(() => {
     message.innerHTML += text.charAt(index);
     index++;
-    if (index >= text.length) clearInterval(interval);
+    if (index >= text.length) {
+      clearInterval(typingInterval);
+    }
   }, 50);
+
+const nextBtn = document.getElementById("nextSurpriseBtn");
+nextBtn.style.display = "inline-block";
+
+document.getElementById("nextSurpriseBtn").addEventListener("click", () => {
+  openSurpriseBox();
+ 
+});
+
 }
+
+
+function typeWriterEffect(container, text, speed = 40, callback = null) {
+  container.innerHTML = "";
+  container.style.display = "block";
+
+  const segments = text.split(/(<br>)/g); // <br> ile ayır
+  let index = 0;
+
+  function write() {
+    if (index < segments.length) {
+      if (segments[index] === "<br>") {
+        container.innerHTML += "<br>";
+      } else {
+        let subIndex = 0;
+        const segment = segments[index];
+        const typeChar = () => {
+          if (subIndex < segment.length) {
+            container.innerHTML += segment.charAt(subIndex);
+            subIndex++;
+            setTimeout(typeChar, speed);
+          } else {
+            index++;
+            write(); // sonraki segmente geç
+          }
+        };
+        typeChar();
+        return;
+      }
+      index++;
+      write();
+    } else if (callback) {
+      callback(); // yazı bittiğinde callback çalışsın (opsiyonel)
+    }
+  }
+
+  write();
+}
+
+
+
+
+
 
 function launchGiftHearts(container) {
   let heartInterval = setInterval(() => {
@@ -1238,7 +1243,4 @@ function launchGiftHearts(container) {
 
   setTimeout(() => clearInterval(heartInterval), 5000);
 }
-document.getElementById("nextSurpriseBtn").addEventListener("click", () => {
-  showAnimatedSurpriseMessage();
-  launchGiftHearts(document.getElementById("giftHeartZone"));
-});
+

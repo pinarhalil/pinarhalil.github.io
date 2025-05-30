@@ -87,12 +87,14 @@
 <!-- Torba Oyunu Bölümü -->
 <div id="cornholeGameSection" style="display: none;">
   <h2>🎯 Torba Oyunu</h2>
+  
 
   <!-- Oyun Alanı -->
   <div id="container" style="display: none;">
     <canvas id="gameCanvas"></canvas>
     <div id="powerBarLeft"></div>
   </div>
+
 
   <!-- Skor ve Mesajlar -->
   <div id="scoreBoard" style="display: none;" aria-live="polite" aria-atomic="true">
@@ -116,9 +118,10 @@
   <video id="celebrationVideo" src="videos/ilka.mp4" preload="auto" style="max-width: 90%; max-height: 80%; border-radius: 12px;" controls></video>
 </div>
 
+    <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
 
-  <!-- Geri Dön Butonu -->
-  <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
+
+
 </div>
 
 
