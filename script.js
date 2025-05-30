@@ -1104,7 +1104,7 @@ function showCelebrationVideo() {
     videoContainer.style.display = 'none';
   }
 
-  messageDiv.textContent = 'Harika! 5 başarılı atış yaptın, süpersin! 🎉';
+  messageDiv.textContent = 'Harika! 5 başarılı atış yaptın, koydunn süpersin! 🎉';
   celebrationVideoContainer.style.display = 'block';
   celebrationVideo.play();
   powerBarLeft.style.display = 'none';
@@ -1167,14 +1167,16 @@ celebrationVideo.addEventListener('ended', () => {
 
 const surpriseMessages = [
   "Sürprizzzz! 🎁💜\nSenin için hazırladıgım bu özel kutudan sadece kalpler degil, sana olan sevgim de taşiyor...",
-  "Seninle tanıştığım için çok şanslıyım 💌",
+  "Seninle tanıştığım için çok şanslıyım 💌iyi ki varsın ponçikk",
   "Ruh eşimm,bitanemm,canımm,tatlımm,kısaca herşeyimm💜🤍",
-    "Bu kadar mükemmel biri olmak zorunda mıydın",
+    "Bu kadar mükemmel biri olmak zorunda mıydın knkm",
   "Ben seni daha çok seviyorum bunu biliyorsun dimi?💜🤍",
     "Eğer dünya üzerinde bir ponçik varsa, o sensin. Eğer iki varsa, biri sensin diğeri senin yansiman(diğeri de benim belkii)",
   "Bu kutu da fena degil ama hele senin hazırladıgın kutuu🥹 10/10 du gördüğüm en güzel kutu💜🤍",
   "Ponçikliğin tanımı: sensin 💜🤍",
   "Bu kutudan çıkan her kalp, sana olan sevgimden bir parça 💫",
+   "Yavru pandacığımı çokkk seviyorumm💫",
+   "Sıkıldın mıı,(Böyle diyince gelen bayılma perileri:D)",
   "Gözlerini kapat ve dilek tut... Tuttun dimi,Söyle şimdi(içinden diyecek söylersem kabul olmaz:)) 🎈",
   "Benim için en büyük sürpriz sensin 🥹"
 ];
