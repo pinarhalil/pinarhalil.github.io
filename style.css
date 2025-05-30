@@ -609,3 +609,168 @@ button:hover {
 #backBtn:hover {
   background-color: #5941a9;
 }
+
+
+/* 🎯 Altıncı His Oyunu Stilleri - Sadece oyun aktifken geçerli */
+/* 🎯 Altıncı His Oyunu Stilleri - Sadece oyun aktifken geçerli */
+#sixthSenseGame {
+  background: linear-gradient(to bottom right, #f5e1ff, #d0f0ff);
+  font-family: 'Comic Neue', cursive;
+  text-align: center;
+  color: #4b0082;
+  padding: 16px;
+  
+}
+
+#sixthSenseGameSections .h2 {
+  color: #00ffc8;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+#parag{
+  
+      font-family: 'Comic Neue', cursive;
+      text-align: center;
+      color: #4b0082;
+      margin: 0;
+      padding: 16px;
+      overflow-x: hidden;
+      position: relative;
+ font-size: 20px;
+      margin-bottom: 20px;
+      font-weight: bold;
+}
+#sixthSenseGamSections p {
+ font-size: 3em;
+  font-weight: bold;
+  color: rgba(245, 24, 24, 0.8);
+  text-shadow: 0 0 20px #a71e1e;
+  margin-bottom: 30px;
+}
+
+#sixthSenseGame #pandaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+#sixthSenseGame .card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  perspective: 1000px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(75, 0, 130, 0.4);
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #4b0082;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #bdbdbd;
+  transition: background 0.3s ease;
+}
+
+#sixthSenseGame .card:hover {
+  background: #9a80b9;
+  color: white;
+  box-shadow: 0 0 15px #6f42c1;
+}
+
+#sixthSenseGame .card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+  border-radius: 12px;
+}
+
+#sixthSenseGame .flipped .card-inner {
+  transform: rotateY(180deg);
+  cursor: default;
+}
+
+#sixthSenseGame .card-front,
+#sixthSenseGame .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#sixthSenseGame .card-back {
+  transform: rotateY(180deg);
+  background: white;
+  padding: 4px;
+}
+
+#sixthSenseGame .card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+#sixthSenseGame #result,
+#sixthSenseGame #specialMessage {
+  font-weight: bold;
+  margin-top: 20px;
+  min-height: 1.5em;
+}
+
+#sixthSenseGame #restartButton {
+  margin-top: 16px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #6f42c1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: none;
+}
+
+#sixthSenseGame #scoreboard {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  font-weight: 900;
+}
+
+#sixthSenseGame #timer {
+  margin-top: 16px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #cff900;
+}
+
+/* Konfeti */
+#sixthSenseGame .confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: #6f42c1;
+  top: 0;
+  left: 50%;
+  pointer-events: none;
+  animation: confetti-fall 3s linear 1;
+  border-radius: 50%;
+  z-index: 9999;
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(600px) rotate(360deg); opacity: 0; }
+}

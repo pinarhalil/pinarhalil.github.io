@@ -38,6 +38,7 @@
   <h2>Seçimini yap Ponçik 💜🤍</h2>
   <button onclick="showSection('memoriesSection')">🎞️Anılar</button>
   <button onclick="showSection('gamesMenuSection')">⛳Oyunlar</button>
+  
   <button onclick="showSection('surpriseSection')">🎁 Sürpriz Kutu</button>
 
 </div>
@@ -71,8 +72,9 @@
 <!-- Oyun Menüsü -->
 <div id="gamesMenuSection" style="display:none;">
   <h2>Oyunlar 🎮</h2>
-  <button onclick="showSection('flappyGameSection')">🎮 Flappy Pınar</button>
-  <button onclick="showSection('cornholeGameSection')">🎮 Cornhole Pınar</button>
+  <button onclick="showSection('flappyGameSection')">🐦 Flappy Pınar</button>
+  <button onclick="showSection('cornholeGameSection')">🕳️ Cornhole Pınar</button>
+ <button onclick="showSection('sixthSenseGameSection')">🐼 Altıncı His</button>
   <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
 </div>
 
@@ -92,6 +94,7 @@
   <!-- Oyun Alanı -->
   <div id="container" style="display: none;">
     <canvas id="gameCanvas"></canvas>
+    
     <div id="powerBarLeft"></div>
   </div>
 
@@ -106,22 +109,47 @@
   <div id="startScreen" role="dialog" aria-modal="true" aria-labelledby="startTitle" aria-describedby="startDesc">
     <p id="startDesc">Hoşgeldin knkm! bu oyunu bi yerden hatırlarsın :) benim skorum 5 geçmeye çalış bakalım (yoksa koymuş olurum)Kum torbasını çekerek atmaya çalış biraz zor gelebilir bol şanss...</p>
     <button id="startBtnCornhole">Başla</button>
+    
+  </div>  <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button></div>
   </div>
 
   <!-- Kazanma Videosu -->
-  <div id="videoContainerCornhole" style="display: none;" aria-live="polite">
-    <video id="winVideo" src="videos/scor.mp4" preload="auto" style="max-width: 90%; max-height: 80%; border-radius: 12px;"></video>
-  </div>
-
-
-<div id="celebrationVideoContainer" style="display:none;">
-  <video id="celebrationVideo" src="videos/ilka.mp4" preload="auto" style="max-width: 90%; max-height: 80%; border-radius: 12px;" controls></video>
+ <div id="videoContainerCornhole" style="display:none;">
+  <video id="winVideo" src="videos/scor.mp4" muted playsinline></video>
 </div>
 
-    <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
+<div id="celebrationVideoContainer" style="display:none;">
+ <video id="celebrationVideo" src="videos/ilka.mp4"playsinline  style="max-width: 90%; max-height: 80%; border-radius: 12px;" ></video>
+
+
+</div>
 
 
 
+<!-- Altıncı His Oyunu -->
+<div id="sixthSenseGameSection" style="display:none;">
+  <h2 style="color: #4b0082; text-align: center;" >Altıncı His Oyunu 🐼✨</h2>
+  <p id="parag">Hoşgeldin ponçikk 💜🤍 Kapalı kartlardan birini seç! İçlerinden biri Gerçek Panda 🐼</p>
+
+  <div id="timer" style="text-align: center; font-size: 25px; color: 4b0082;">Süre: 15</div>
+
+  <div id="sixthSenseGame">
+    <div id="pandaGrid"></div>
+    <div id="result"></div>
+    <div id="specialMessage"></div>
+    <div id="scoreboard">
+      <div>Halil : <span id="scoreCorrect">0</span></div>
+      <div>Pandacıklar: <span id="scoreWrong">0</span></div>
+    </div>
+    <button id="restartButton">↻ Yeniden Başla</button>
+  </div>
+
+  <audio id="correctSound" src="sounds/correct.mp3"></audio>
+  <audio id="wrongSound" src="sounds/wrong.mp3"></audio>
+  <audio id="timeoutSound" src="sounds/timeout.mp3"></audio>
+
+  <br />
+  <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
 </div>
 
 

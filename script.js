@@ -52,7 +52,9 @@ function showSection(sectionId) {
     "flappyGameSection",
     "cornholeGameSection",
     "memoriesSection",
+      "sixthSenseGameSection",
       "surpriseSection"  // 🎁 yeni eklenen bölüm
+      
   ];
 
   sections.forEach(id => {
@@ -61,6 +63,13 @@ function showSection(sectionId) {
       el.style.display = (id === sectionId) ? "block" : "none";
     }
   });
+
+
+  if (sectionId === 'sixthSenseGameSection') {
+    if (typeof startSixthSenseGame === "function") {
+     startSixthSenseGame();
+    }
+  }
 
 if (sectionId === "surpriseSection") {
   const box = document.getElementById("giftBox");
@@ -735,8 +744,15 @@ function drawGameOver() {
       draw();
     
     }
-    requestAnimationFrame(loop);
+    animationFrameId = requestAnimationFrame(loop);
   }
+
+  function stopLoop() {
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
+}
 
   // Olay dinleyicileri
   function flap() {
@@ -775,8 +791,6 @@ function drawGameOver() {
     loop();
   }
 }
-
-
 function initCornholeGame() {
   const canvas = document.getElementById('gameCanvas');
   const ctx = canvas.getContext('2d');
@@ -938,8 +952,8 @@ function initCornholeGame() {
         if (dist < hole.radius - 2) {
           currentBag.scored = true;
           scoredShots++;
-          showVideo();
           messageDiv.textContent = '🏀 Koydunnn! Afferim knkma';
+          showVideo();
         } else {
           messageDiv.textContent = '❌ Kaçtı be knkm, tekrar dene.';
         }
@@ -953,8 +967,8 @@ function initCornholeGame() {
 
         if (scoredShots === 5) {
           gameStarted = false;
+          // Kutlama videosu göster ve oyun bitti
           showCelebrationVideo();
-          resetGame();
           return;
         }
         currentBag = createBag();
@@ -975,9 +989,20 @@ function initCornholeGame() {
   }
 
   function loop() {
+    if (!gameStarted) {
+      stopLoop();
+      return;
+    }
     update();
     draw();
     animationFrameId = requestAnimationFrame(loop);
+  }
+
+  function stopLoop() {
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    }
   }
 
   function setPowerBar(ratio) {
@@ -1027,53 +1052,76 @@ function initCornholeGame() {
     const dy = dragOrigin.y - dragPos.y;
     const dist = Math.sqrt(dx * dx + dy * dy);
 
-    if (dist > 10) {
-      const power = dist * 0.2;
-      currentBag.vx = (dx / dist) * power;
-      currentBag.vy = (dy / dist) * power;
-      currentBag.inMotion = true;
-    } else {
-      currentBag.vx = 0;
-      currentBag.vy = 0;
-      currentBag.inMotion = false;
+    if (dist < 30) {
+      messageDiv.textContent = 'Fırlatmak için daha güçlü çek!';
+      setTimeout(() => {
+        messageDiv.textContent = '';
+      }, 1500);
+      setPowerBar(0);
+      return;
     }
+
+    const angle = Math.atan2(dy, dx);
+    const power = Math.min(dist * 0.07, 15);
+
+    currentBag.vx = power * Math.cos(angle);
+    currentBag.vy = power * Math.sin(angle);
+    currentBag.inMotion = true;
 
     setPowerBar(0);
   }
 
-  // Mouse ve dokunmatik olaylar
-  canvas.addEventListener('mousedown', e => {
-    const rect = canvas.getBoundingClientRect();
-    handleStart(e.clientX - rect.left, e.clientY - rect.top);
-  });
-  canvas.addEventListener('mousemove', e => {
-    const rect = canvas.getBoundingClientRect();
-    handleMove(e.clientX - rect.left, e.clientY - rect.top);
-  });
-  window.addEventListener('mouseup', e => {
-    handleEnd();
-  });
+  // Video oynatma fonksiyonları
+  function showVideo() {
+    videoContainer.style.display = 'block';
 
-  canvas.addEventListener('touchstart', e => {
-    e.preventDefault();
-    const rect = canvas.getBoundingClientRect();
-    const touch = e.touches[0];
-    handleStart(touch.clientX - rect.left, touch.clientY - rect.top);
-  }, { passive: false });
+    winVideo.pause();
+    winVideo.currentTime = 0;
+    winVideo.muted = false;
+    winVideo.volume = 1;
+    winVideo.play();
 
-  canvas.addEventListener('touchmove', e => {
-    e.preventDefault();
-    const rect = canvas.getBoundingClientRect();
-    const touch = e.touches[0];
-    handleMove(touch.clientX - rect.left, touch.clientY - rect.top);
-  }, { passive: false });
+    stopLoop();
 
-  canvas.addEventListener('touchend', e => {
-    e.preventDefault();
-    handleEnd();
-  });
+    winVideo.onended = () => {
+      videoContainer.style.display = 'none';
+      winVideo.pause();
+      winVideo.currentTime = 0;
 
-  // Oyun durumunu sıfırla
+      if (scoredShots >= 5) {
+        gameStarted = false;
+        showCelebrationVideo();
+      } else {
+        gameStarted = true;
+        loop();
+      }
+    };
+  }
+
+  function showCelebrationVideo() {
+    celebrationVideoContainer.style.display = 'block';
+
+    celebrationVideo.pause();
+    celebrationVideo.currentTime = 0;
+    celebrationVideo.muted = false;
+    celebrationVideo.volume = 1;
+    celebrationVideo.play();
+
+    stopLoop();
+
+    celebrationVideo.onended = () => {
+      celebrationVideo.pause();
+      celebrationVideo.currentTime = 0;
+      celebrationVideoContainer.style.display = 'none';
+
+      resetGame();
+      startScreen.style.display = 'block';
+      powerBarLeft.style.height = '0';
+      messageDiv.textContent = '';
+      scoreBoard.textContent = `Toplam Atış: 0 - Koyduğun: 0`;
+    };
+  }
+
   function resetGame() {
     totalShots = 0;
     scoredShots = 0;
@@ -1082,52 +1130,68 @@ function initCornholeGame() {
     scoredShotsSpan.textContent = '0';
     messageDiv.textContent = '';
     currentBag = createBag();
+
+    winVideo.pause();
+    winVideo.currentTime = 0;
+    celebrationVideo.pause();
+    celebrationVideo.currentTime = 0;
   }
 
-  // Oyun başlangıcı fonksiyonu
-  function startGame() {
-    gameStarted = true;
-    resetGame();
-    startScreen.style.display = 'none';
-    videoContainer.style.display = 'none';
-    celebrationVideoContainer.style.display = 'none';
-    scoreBoard.style.opacity = 1;
-    document.getElementById('gameCanvas').style.display = 'block';
-    powerBarLeft.style.display = 'block';
-
-   
-
-    loop();
-  }
-
+  // Başlatma
   startBtn.addEventListener('click', () => {
-    startGame();
+    startScreen.style.display = 'none';
+    resetGame();
+    gameStarted = true;
+    loop();
   });
 
-  window.addEventListener('resize', resize);
+  // Mouse ve touch eventleri
+  canvas.addEventListener('mousedown', e => {
+    if (!gameStarted) return;
+    const rect = canvas.getBoundingClientRect();
+    handleStart(e.clientX - rect.left, e.clientY - rect.top);
+  });
+  canvas.addEventListener('mousemove', e => {
+    if (!gameStarted) return;
+    const rect = canvas.getBoundingClientRect();
+    handleMove(e.clientX - rect.left, e.clientY - rect.top);
+  });
+  canvas.addEventListener('mouseup', e => {
+    if (!gameStarted) return;
+    handleEnd();
+  });
 
+  canvas.addEventListener('touchstart', e => {
+    if (!gameStarted) return;
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const touch = e.touches[0];
+    handleStart(touch.clientX - rect.left, touch.clientY - rect.top);
+  }, { passive: false });
+  canvas.addEventListener('touchmove', e => {
+    if (!gameStarted) return;
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const touch = e.touches[0];
+    handleMove(touch.clientX - rect.left, touch.clientY - rect.top);
+  }, { passive: false });
+  canvas.addEventListener('touchend', e => {
+    if (!gameStarted) return;
+    e.preventDefault();
+    handleEnd();
+  });
+
+  window.addEventListener('resize', () => {
+    resize();
+    draw();
+  });
+
+  // İlk ayar
   resize();
-
-  // Buton ekleme fonksiyonu
-
-  // Kutlama videosu göster
-  function showCelebrationVideo() {
-    celebrationVideoContainer.style.display = 'block';
-    celebrationVideo.play();
-    celebrationVideo.onended = () => {
-      celebrationVideoContainer.style.display = 'none';
-    };
-  }
-
-  // Başarı videosu göster
-  function showVideo() {
-    videoContainer.style.display = 'block';
-    winVideo.play();
-    winVideo.onended = () => {
-      videoContainer.style.display = 'none';
-    };
-  }
+  draw();
 }
+
+
 
 
 
@@ -1244,3 +1308,173 @@ function launchGiftHearts(container) {
   setTimeout(() => clearInterval(heartInterval), 5000);
 }
 
+function startSixthSenseGame() {
+  const pandaGrid = document.getElementById('pandaGrid');
+  const result = document.getElementById('result');
+  const specialMessage = document.getElementById('specialMessage');
+  const restartButton = document.getElementById('restartButton');
+  const scoreCorrectElem = document.getElementById('scoreCorrect');
+  const scoreWrongElem = document.getElementById('scoreWrong');
+  const timerElem = document.getElementById('timer');
+  const body = document.body;
+
+  const correctSound = document.getElementById('correctSound');
+  const wrongSound = document.getElementById('wrongSound');
+  const timeoutSound = document.getElementById('timeoutSound');
+
+  const pandaImages = [
+    "panda1.png", "panda2.webp", "panda3.png", "panda4.png",
+    "panda5.png", "panda6.png", "panda7.png", "panda8.png"
+  ];
+  const halilImage = "halil.jpg";
+  const letters = ["P","I","N","A","R","B","E","S","T"];
+
+  let allImages = [];
+  let selected = false;
+  let countdown;
+  let timeLeft = 15;
+
+  let scoreCorrect = 0;
+  let scoreWrong = 0;
+
+  function createGame() {
+    pandaGrid.innerHTML = "";
+    result.textContent = "";
+    specialMessage.textContent = "";
+    restartButton.style.display = "none";
+    selected = false;
+    timeLeft = 15;
+    timerElem.textContent = "Süre: " + timeLeft;
+    timerElem.style.color = '#6f42c1';
+    body.style.background = "linear-gradient(to bottom right, #f5e1ff, #d0f0ff)";
+
+    // Sesleri sıfırla
+    correctSound.pause();
+    correctSound.currentTime = 0;
+    wrongSound.pause();
+    wrongSound.currentTime = 0;
+    timeoutSound.pause();
+    timeoutSound.currentTime = 0;
+    timeoutSound.loop = false;
+
+    clearInterval(countdown);
+
+    // Halil’i rastgele yerleştir
+    const randomIndex = Math.floor(Math.random() * 9);
+    allImages = [...pandaImages];
+    allImages.splice(randomIndex, 0, halilImage);
+
+    allImages.forEach((src, index) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      const cardInner = document.createElement("div");
+      cardInner.className = "card-inner";
+
+      const front = document.createElement("div");
+      front.className = "card-front";
+      front.textContent = letters[index];
+
+      const back = document.createElement("div");
+      back.className = "card-back";
+      const img = document.createElement("img");
+      img.src = `img/${src}`;
+      img.alt = "Panda";
+      back.appendChild(img);
+
+      cardInner.appendChild(front);
+      cardInner.appendChild(back);
+      card.appendChild(cardInner);
+
+      card.addEventListener("click", () => {
+        if (selected) return;
+        selected = true;
+        clearInterval(countdown);
+        timeoutSound.pause();
+        timeoutSound.currentTime = 0;
+
+        document.querySelectorAll('.card').forEach(c => c.classList.add("flipped"));
+
+        if (src === halilImage) {
+          scoreCorrect++;
+          scoreCorrectElem.textContent = scoreCorrect;
+          result.textContent = "🎉 Afferim sana be Altıncı hissin seni yanıltmadı Halil’e götürdü!";
+          result.style.color = "#28a745";
+          specialMessage.textContent = "6. hislerin kuvvetli olduğunu biliyordum knkmm 🎊🎊🎊";
+          correctSound.play();
+          launchConfetti();
+          body.style.background = "linear-gradient(to bottom right, #d4edda, #a3c293)";
+        } else {
+          scoreWrong++;
+          scoreWrongElem.textContent = scoreWrong;
+          result.textContent = "🙈 Hadi ordannn!!! Tamam ben de pandayım ama :D Tekrar dene!";
+          result.style.color = "#dc3545";
+          specialMessage.textContent = "";
+          wrongSound.play();
+          body.style.background = "linear-gradient(to bottom right, #f8d7da, #f0a8a8)";
+        }
+
+        restartButton.style.display = "inline-block";
+      });
+
+      pandaGrid.appendChild(card);
+    });
+
+    startTimer();
+  }
+
+  function startTimer() {
+    timeLeft = 15;
+    timerElem.textContent = "Süre: " + timeLeft;
+    timerElem.style.color = '#6f42c1';
+
+    countdown = setInterval(() => {
+      timeLeft--;
+      if (timeLeft < 0) timeLeft = 0;
+      timerElem.textContent = "Süre: " + timeLeft;
+
+      if(timeLeft <= 5) {
+        timerElem.style.color = '#dc3545';
+      }
+
+      if(timeLeft <= 0) {
+        clearInterval(countdown);
+        timeoutSound.pause();
+        timeoutSound.currentTime = 0;
+
+        if (!selected) {
+          selected = true;
+          result.textContent = "⏰ Süren doldu! Tekrar dene ama acele et.";
+          result.style.color = '#dc3545';
+          specialMessage.textContent = "";
+          restartButton.style.display = "inline-block";
+
+          wrongSound.play();
+
+          document.querySelectorAll('.card').forEach(c => c.classList.add("flipped"));
+          body.style.background = "linear-gradient(to bottom right, #f8d7da, #f0a8a8)";
+        }
+      }
+    }, 1000);
+  }
+
+  function launchConfetti() {
+    const confettiCount = 100;
+    for (let i = 0; i < confettiCount; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+      confetti.style.animationDuration = 3000 + Math.random() * 2000 + 'ms';
+      confetti.style.animationDelay = Math.random() * 1000 + 'ms';
+      document.body.appendChild(confetti);
+
+      confetti.addEventListener('animationend', () => {
+        confetti.remove();
+      });
+    }
+  }
+
+  restartButton.addEventListener("click", createGame);
+
+  createGame();
+}
