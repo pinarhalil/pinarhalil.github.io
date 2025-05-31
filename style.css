@@ -212,15 +212,18 @@ button:hover {
 
 
 
-
 #startScreen {
-  transition: opacity 1s ease;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-#startScreen.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
 
   canvas {
       width: 100%;
@@ -408,7 +411,7 @@ button:hover {
 }
 
 
-#celebrationVideoContainer{
+/* #celebrationVideoContainer{
   position: absolute;
   top: 0;
   left: 0;
@@ -419,7 +422,35 @@ button:hover {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
+}*/
+
+#videoContainerCornhole,
+#celebrationVideoContainer {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
 }
+
+#videoContainerCornhole video,
+#celebrationVideoContainer video {
+  width: 90%;
+  height: auto;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+  object-fit: contain;
+}
+
+
+
+
 .gift-box {
   position: relative;
   width: 200px;
@@ -773,4 +804,65 @@ button:hover {
 @keyframes confetti-fall {
   0% { transform: translateY(0) rotate(0deg); opacity: 1; }
   100% { transform: translateY(600px) rotate(360deg); opacity: 0; }
+}
+#memoriesSection {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+#memoriesSection .memory-title,
+#memoriesSection .memory-text,
+#memoriesSection button {
+  display: block;
+  margin: 0 auto 20px;
+  max-width: 90%;
+}
+
+#memoriesSection .media-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+#memoriesSection .media-container img,
+#memoriesSection .media-container video {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+#pinarStars {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#pinarStars span {
+  cursor: pointer;
+  font-size: 30px;
+  transition: transform 0.2s ease;
+}
+
+#pinarStars span:hover {
+  transform: scale(1.3);
+}
+#ratingInfo {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+}
+#memoryRating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#myRatingDisplay {
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
 }

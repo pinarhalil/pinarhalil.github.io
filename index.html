@@ -113,13 +113,31 @@
   </div>  <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button></div>
   </div>
 
-  <!-- Kazanma Videosu -->
- <div id="videoContainerCornhole" style="display:none;">
-  <video id="winVideo" src="videos/scor.mp4" muted playsinline></video>
+<!-- Skor Videosu -->
+<div id="videoContainerCornhole" style="display: none;">
+  <video
+    id="winVideo"
+    src="videos/scor.mp4"
+    preload="auto"
+    playsinline
+    muted
+    style="width: 100%; height: 100%; object-fit: contain;"
+  ></video>
 </div>
 
-<div id="celebrationVideoContainer" style="display:none;">
- <video id="celebrationVideo" src="videos/ilka.mp4"playsinline  style="max-width: 90%; max-height: 80%; border-radius: 12px;" ></video>
+<!-- Kutlama Videosu -->
+<div id="celebrationVideoContainer" style="display: none;">
+  <video
+    id="celebrationVideo"
+    src="videos/ilka.mp4"
+    preload="auto"
+    playsinline
+    muted
+    style="width: 100%; height: 100%; object-fit: contain;"
+  ></video>
+</div>
+
+
 
 
 </div>
@@ -129,7 +147,7 @@
 <!-- Altıncı His Oyunu -->
 <div id="sixthSenseGameSection" style="display:none;">
   <h2 style="color: #4b0082; text-align: center;" >Altıncı His Oyunu 🐼✨</h2>
-  <p id="parag">Hoşgeldin ponçikk 💜🤍 Kapalı kartlardan birini seç! İçlerinden biri Gerçek Panda 🐼</p>
+  <p id="parag">Hoşgeldin ponçikk 💜🤍6.Hissine güvendiğini biliyorum Kapalı kartlardan birini seç! İçlerinden biri Gerçek Panda 🐼</p>
 
   <div id="timer" style="text-align: center; font-size: 25px; color: 4b0082;">Süre: 15</div>
 
@@ -149,10 +167,10 @@
   <audio id="timeoutSound" src="sounds/timeout.mp3"></audio>
 
   <br />
-  <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
+ <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
+ 
+
 </div>
-
-
 
 
 
@@ -161,27 +179,29 @@
   <div id="mediaContainer" class="media-container"></div>
   <h3 id="memoryTitle" class="memory-title"></h3>
   <p id="memoryText" class="memory-text"></p>
-  
+
+  <!-- PUANLAMA BURAYA ALINDI -->
+  <div id="memoryRating" style="display: none; margin-top: 10px;">
+    <div id="myRatingDisplay" style="font-weight: bold; margin-bottom: 8px;">
+      Halil’in puanı: 10/10
+    </div>
+    <div style="text-align: center;">Pınar anılarımızı puanlayalım:</div>
+    <div id="pinarStars" style="font-size: 30px; cursor: pointer; user-select: none;"></div>
+    <div id="ratingInfo" style="margin-top: 10px; color: purple; font-weight: bold;"></div>
+  </div>
+  <!-- PUANLAMA BÖLÜMÜ BİTTİ -->
+
   <div id="memoryButtons">
     <button id="prevMemoryBtn" onclick="showPreviousMemory()">← Önceki Anı</button>
     <button id="nextMemoryBtn" onclick="showNextMemory()">Sonraki Anı →</button>
-      <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
+    <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
   </div>
 
-  <p id="endOfMemoriesMessage" style="display:none; color: purple; font-weight: bold; margin-top: 10px;"> Tüm anılarımızı gezdik ponçik 💜 Umarım hatırlarken yüzünde bir tebessüm oluşmuştur 🥰</p>
+  <p id="endOfMemoriesMessage" style="display: none; color: purple; font-weight: bold; margin-top: 10px;">
+    Tüm anılarımızı gezdik ponçik 💜 Umarım hatırlarken yüzünde bir tebessüm oluşmuştur 🥰
+  </p>
 </div>
 
-
-
-<div id="memoryRating" style="display:none; margin-top:10px;">
-  <div id="myRatingDisplay" style="font-weight:bold; margin-bottom: 8px;">
-    Halil’in puanı: 10/10
-  </div>
-  <div>Pınar anılarımızı puanlayalım:</div>
-  <div id="pinarStars" style="font-size: 30px; cursor: pointer; user-select:none;"></div>
-  <div id="ratingInfo" style="margin-top: 10px; color: purple; font-weight: bold;"></div>
-
-</div>
 <div id="heart-container"></div>
 <div class="heart"></div>
 

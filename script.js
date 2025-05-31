@@ -1062,7 +1062,7 @@ function initCornholeGame() {
     }
 
     const angle = Math.atan2(dy, dx);
-    const power = Math.min(dist * 0.07, 15);
+    const power = Math.min(dist * 0.14, 20);
 
     currentBag.vx = power * Math.cos(angle);
     currentBag.vy = power * Math.sin(angle);
@@ -1088,9 +1088,11 @@ function initCornholeGame() {
       winVideo.pause();
       winVideo.currentTime = 0;
 
-      if (scoredShots >= 5) {
+      if (scoredShots >= 2) {
         gameStarted = false;
         showCelebrationVideo();
+        gameStarted = true;
+    
       } else {
         gameStarted = true;
         loop();
@@ -1118,7 +1120,7 @@ function initCornholeGame() {
       startScreen.style.display = 'block';
       powerBarLeft.style.height = '0';
       messageDiv.textContent = '';
-      scoreBoard.textContent = `Toplam Atış: 0 - Koyduğun: 0`;
+      scoreBoard.textContent = `🎯 Atış: 0 - ✅Koyduğun: 0`;
     };
   }
 
@@ -1190,6 +1192,9 @@ function initCornholeGame() {
   resize();
   draw();
 }
+
+
+
 
 
 
