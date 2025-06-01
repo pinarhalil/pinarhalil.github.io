@@ -36,9 +36,10 @@
 
 <div id="menuSection" style="display:none;">
   <h2>Seçimini yap Ponçik 💜🤍</h2>
-  <button onclick="showSection('memoriesSection')">🎞️Anılar</button>
+  <button onclick="showSection('memoriesSection')">🎞️Anılarımız</button>
   <button onclick="showSection('gamesMenuSection')">⛳Oyunlar</button>
-  
+  <button onclick="window.location.href='muzz.html'">🎶 Müzik Sayfamız</button>
+
   <button onclick="showSection('surpriseSection')">🎁 Sürpriz Kutu</button>
 
 </div>
@@ -72,15 +73,18 @@
 <!-- Oyun Menüsü -->
 <div id="gamesMenuSection" style="display:none;">
   <h2>Oyunlar 🎮</h2>
+    <div class="game-grid">
   <button onclick="showSection('flappyGameSection')">🐦 Flappy Pınar</button>
   <button onclick="showSection('cornholeGameSection')">🕳️ Cornhole Pınar</button>
  <button onclick="showSection('sixthSenseGameSection')">🐼 Altıncı His</button>
   <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
+  </div>
 </div>
 
 <!-- Flappy Game Bölümü -->
 <div id="flappyGameSection" style="display:none;">
   <h2>Flappy Pınar 🎈</h2>
+  <p>Hoşgeldin Ponçik💜🤍 Senin için bir oyun yaptım umarım beğenirsin</p>
   <div id="score">Skor: 0</div>
   <canvas id="game" width="400" height="600"></canvas>
     <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
@@ -182,12 +186,12 @@
 
   <!-- PUANLAMA BURAYA ALINDI -->
   <div id="memoryRating" style="display: none; margin-top: 10px;">
-    <div id="myRatingDisplay" style="font-weight: bold; margin-bottom: 8px;">
+    <div id="myRatingDisplay" style="   margin-bottom: 8px; color: #4d10a8;">
       Halil’in puanı: 10/10
     </div>
-    <div style="text-align: center;">Pınar anılarımızı puanlayalım:</div>
+    <div style="text-align: center; color:  #4d10a8;">Pınar anılarımızı puanlayalım:</div>
     <div id="pinarStars" style="font-size: 30px; cursor: pointer; user-select: none;"></div>
-    <div id="ratingInfo" style="margin-top: 10px; color: purple; font-weight: bold;"></div>
+    <div id="ratingInfo" style="margin-top: 10px; color: rgb(255, 255, 255); font-weight: bold;"></div>
   </div>
   <!-- PUANLAMA BÖLÜMÜ BİTTİ -->
 
@@ -197,7 +201,7 @@
     <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
   </div>
 
-  <p id="endOfMemoriesMessage" style="display: none; color: purple; font-weight: bold; margin-top: 10px;">
+  <p id="endOfMemoriesMessage" style="display: none; color: rgb(255, 249, 255); font-weight: bold; margin-top: 10px;">
     Tüm anılarımızı gezdik ponçik 💜 Umarım hatırlarken yüzünde bir tebessüm oluşmuştur 🥰
   </p>
 </div>

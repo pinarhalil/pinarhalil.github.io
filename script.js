@@ -78,8 +78,10 @@ if (sectionId === "surpriseSection") {
   message.style.display = "none";
   message.innerHTML = "";
 }
-
-
+ // Tema sıfırlama sadece ana menüye dönülürken yapılacak
+  if (sectionId === "menuSection") {
+    document.body.style.background = "linear-gradient(to bottom right, #fff, #5316c4)";
+  }
 
   // Anılar bölümü açıldığında anıları ve puanlamayı başlat
   if (sectionId === 'memoriesSection') {
@@ -1207,6 +1209,9 @@ const surpriseMessages = [
   "Bu kadar mükemmel biri olmak zorunda mıydın knkm? 😍",
   "Ben seni daha çok seviyorum... Bunu biliyorsun dimi? 💜🤍",
   "Eğer dünyada bir ponçik varsa, o sensin. İki varsa biri sensin, diğeri senin yansıman (diğeri de benim belki 🤭)",
+    "Dünyanın enn mükemmel günü bugün çünkü bugün biricik Pınar'ımın doğum günü ",
+     "Doğum gününü beklediğim kadar hiçbişeyi beklemedim sanırım(bir de buluşurken seni:)) ",
+        "Sürpriz diyince aklıma gelen tek şey sensin 💜🤍",
   "Bu kutu da fena değil ama senin hazırladığın kutu 🥹 10/10, gördüğüm en güzel kutuydu 💜🤍",
   "Ponçikliğin tanımı: sensin 💜🤍",
   "Bu kutudan çıkan her kalp, sana olan sevgimden bir parça 💫",
@@ -1483,3 +1488,11 @@ function startSixthSenseGame() {
 
   createGame();
 }
+window.addEventListener("DOMContentLoaded", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("menu") === "true") {
+    showSection("menuSection");
+    document.getElementById("startScreens").style.display = "none";
+    document.getElementById("section1").style.display = "none";
+  }
+});
