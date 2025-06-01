@@ -967,12 +967,7 @@ function initCornholeGame() {
         bags.push(currentBag);
         if (totalShots % 3 === 0) bags = [];
 
-        if (scoredShots === 5) {
-          gameStarted = false;
-          // Kutlama videosu göster ve oyun bitti
-          showCelebrationVideo();
-          return;
-        }
+
         currentBag = createBag();
         setTimeout(() => {
           messageDiv.textContent = '';
@@ -1090,7 +1085,7 @@ function initCornholeGame() {
       winVideo.pause();
       winVideo.currentTime = 0;
 
-      if (scoredShots >= 2) {
+      if (scoredShots >= 5) {
         gameStarted = false;
         showCelebrationVideo();
         gameStarted = true;
