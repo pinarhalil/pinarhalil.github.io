@@ -1759,7 +1759,7 @@ const videoList = [
         "videos/soru.MOV",
 ];
 
-
+let heartsLaunched = false;  // dışarda bir yerde, global scope'ta
 function openSurpriseBox() {
     const openSound = document.getElementById("boxOpenSound");
   const message = document.getElementById("surpriseMessage");
@@ -1774,13 +1774,17 @@ const surpriseVideo = document.getElementById("surpriseVideo");
 
 
 
-  launchGiftHearts(document.getElementById("giftHeartZone"));
+  // Kalpler sadece ilk açılışta
+  if (!heartsLaunched) {
+    launchGiftHearts(document.getElementById("giftHeartZone"));
+    heartsLaunched = true;
+  }
+
   // Aynı mesaj üst üste gelmesin
   do {
     newIndex = Math.floor(Math.random() * surpriseMessages.length);
   } while (newIndex === currentMessageIndex);
   currentMessageIndex = newIndex;
-
 
 
   // 🎥 Rastgele video seç ve oynat
