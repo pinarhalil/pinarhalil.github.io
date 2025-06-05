@@ -81,7 +81,7 @@ if (sectionId === "surpriseSection") {
 }
  // Tema sıfırlama sadece ana menüye dönülürken yapılacak
   if (sectionId === "menuSection") {
-    document.body.style.background = "linear-gradient(to bottom right, #c1c1c1, #571dcc)";
+    document.body.style.background = "linear-gradient(to bottom right, #fefefe, #571dcc)";
   }
 
   // Anılar bölümü açıldığında anıları ve puanlamayı başlat
