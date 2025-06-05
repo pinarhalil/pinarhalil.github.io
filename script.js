@@ -81,7 +81,7 @@ if (sectionId === "surpriseSection") {
 }
  // Tema sıfırlama sadece ana menüye dönülürken yapılacak
   if (sectionId === "menuSection") {
-    document.body.style.background = "linear-gradient(to bottom right, #f7e0e0, #2c086e)";
+    document.body.style.background = "linear-gradient(to bottom right, #ded9d9, #50259f)";
   }
 
   // Anılar bölümü açıldığında anıları ve puanlamayı başlat
@@ -165,7 +165,7 @@ const memories = [
     text: `Bu fotoğraf bizim ilk kez yan yana durduğumuz anmış .İkimizde ilerde ne kadar mükemmel iki arkadaş olacağımzdan haberisiz.Sen yine her zamanki gibi knk ama şuan çok bilmem ne bişeyler diyodun ama bilmiyordun ki senin içinde olduğun her bir an her bir fotoğraf her bir detay mükemmel(sonradan farkettin diye umuyorumm)🤍💜
   Tarih:21 Şubat 2024`,
     media: [
-      { type: "image", src: "images/ilk.jpeg" }
+      { type: "image", src: "images/ilk.JPEG" }
     ]
   },
 
@@ -175,9 +175,9 @@ const memories = [
     text: ` Bugün seninle kapanışta olduğumuz bi gündü youtubedan toz duman şarkısını açmıştık birlikte eşlik edip muhabbet ediyoduk  birlikte kapanış olduğumuz için 
     çok mutluydum benim açımdan eğlenceli bir gündü(Sıla kankamız da var videoda seversin knk:)).Tarih:11 Mart 2024`,
     media: [
-        { type: "image", src: "images/kpns.jpeg" },
-        { type: "image", src: "images/kpns2.jpeg" },
-        { type: "video", src: "videos/kapanis.mp4" }
+        { type: "image", src: "images/kpns.JPEG" },
+        { type: "image", src: "images/kpns2.JPEG" },
+        { type: "video", src: "videos/kapanis.MP4" }
     ]
   },
 
@@ -200,9 +200,9 @@ const memories = [
     title: "Paşa'da İftar Sonrası ",
     text: `Bugün seninle iftar sonrası paşa'da oturmuştuk erkan bey falanda gelmişti hatırlarsın güzeldi hep beraberdik(sen pek istemesende)snapchatten fotoğraflar videolar çekmiştik içinde ilk kez birlikte araba kullandığımız videomuz da vardı o açıdan anlamlı bir gündü,güzeldi.Tarih:4 Nisan 2024  `,
     media: [
-      { type: "image", src: "images/snp1.jpeg" },
-        { type: "video", src: "videos/snp2.mp4" },
-       { type: "video", src: "videos/snp3.mp4" }
+      { type: "image", src: "images/snp1.JPEG" },
+        { type: "video", src: "videos/snp2.MP4" },
+       { type: "video", src: "videos/snp3.MP4" }
       ]  
   },
 
@@ -211,7 +211,7 @@ const memories = [
     title: "Sana Aldığım İlk Hediye",
     text: `Bugün seninle çalkantılı olduğumuz dönemlerde gelişen olaylar sonucu sana hediye almaya karar vermiştim almak için gerçekten baya bir uğraşmıştım neyse aldım ettim sana verme kısmını da biraz sürpriz olsun istemiştim her şeyin başladığı günlerden biri de bu olabilirdi hediyeme beklediğimden daha büyük tepki vermiştin mutlu olduğunu çok hissettim çok tatlıydın o günden sonra Pınar mutlu olmayı çok hakeden biri diyerek her fırsatta olmasa da elimden geldiğince mutlu etmeye çalıştımmm umarım bunu okurken de muıtlu olmuşssundur benn öyleyim.Tarih:8 Nisan 2024`,
     media: [
-      { type: "video", src: "videos/lelas.mp4" }
+      { type: "video", src: "videos/lelas.MP4" }
     ]
   },
 
@@ -222,8 +222,8 @@ const memories = [
     text: `Bugün sana zeka sorusu sormuştum cevabı bilmediğin halde ve yanlış cevap verdiğin halde hala açıklamaya çalışman senin kaybettiğini kabullenmediğini kanıtladığın anlardan biri oldu diye düşünüyorum ponçik akşamında da alilerle oturuyoduk 1 saatliğine bize katılmıştın .eğlenceli bir andı Tarih:13 Nisan 2024 `,
     media: [
 
-        { type: "image", src: "images/pso1.jpeg" },
-      { type: "video", src: "videos/pso2.mp4" }
+        { type: "image", src: "images/pso1.JPEG" },
+      { type: "video", src: "videos/pso2.MP4" }
     ]
   },
 
@@ -232,10 +232,10 @@ const memories = [
     text: `Bugün  seninle paşafırnında otururken seninle küsersem nasıl barışırım diye konuşma yapmışız barışmam falan demişim ama küsersek seninle küs kalamayacağım için direkt barışırım akşamına da boks maçı yapmıştık sağlam yumruk atmıştın knk heralde içinde beslediğin kinden midir nedir bende ardından dönüyorum eve şarkısıyla edit yapmıştım gülmüştük :) Tarih:17 Nisan 2024 `,
     media: [
 
-        { type: "image", src: "images/boks.jpeg" },
-            { type: "image", src: "images/boks3.jpeg" },
-      { type: "video", src: "videos/boks1.mp4" },
-       { type: "video", src: "videos/boks4.mp4" }
+        { type: "image", src: "images/boks.JPEG" },
+            { type: "image", src: "images/boks3.JPEG" },
+      { type: "video", src: "videos/boks1.MP4" },
+       { type: "video", src: "videos/boks4.MP4" }
     ]
   },
 
@@ -246,8 +246,8 @@ const memories = [
     text: `Bugün paşada   esralarla birlikte oturmuş çay içmiştik  baya bi  fotoğraflar çekildik ben fotoğraf çekilirken sana sarılmadan duramamıştım sonra siz hikaye atmıştınız beni kırpıp :):) şaka şaka  umrumda bile olmadı şakasını geçtik sadece bu da böyle bir anıydı Tarih:24 Nisan 2024`,
     media: [
 
-      { type: "image", src: "images/frn1.jpeg" },
-      { type: "image", src: "images/frn2.jpeg" },
+      { type: "image", src: "images/frn1.JPEG" },
+      { type: "image", src: "images/frn2.JPEG" },
   
 
     ]
@@ -260,7 +260,7 @@ Neyse gittik, ben adamlardan rica ettim biz de oynayalım diye. Sonra oynadık, 
 Yetenekli bir insan olduğunu orada anlamıştım. Birlikte güzel videolar çektik, çekişmeli geçmişti. Ben gerçekten çok eğlenmiştim. Bir daha nasip olmadı ama ilk defa seninle bir aktivite yapmıştık. 
 Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     media: [
-      { type: "video", src: "videos/ilka.mp4" }
+      { type: "video", src: "videos/ilka.MP4" }
     ]
   },
 
@@ -270,7 +270,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     title: "İtopyada Tır Kullanma İşi",
     text: `Bugün sana küçük bir sürprizim var demiştim kadın reyonu vitrine yakın olan masada molaya çıkmamızı beklemiştik ve molada itopya'ya gittik sen ilk defa direksiyona dokunmuştun araba kullanmaya çok istediğini o zaman hissetmiştim ve sana söz vermiştim ben araba alacağım ve sana kullandıracağım diye o zamanlar pek inanarak söylememiştim belki ama bazen belki de iyi şeyleri çağırmak gerekir Allah nasip etti şükürler olsun senin orda ısrarla hiç frene basmayışın beni tedirgin etmişti ama herşeyin bir ilki vardır o da ilkti ve her geçen gün daha iyi olmaya devam ettin ponçikk güzel bir anıydı bana kalırsa.Tarih:12 Mayıs 2024`,
     media: [
-      { type: "video", src: "videos/itop.mp4" }
+      { type: "video", src: "videos/itop.MP4" }
     ]
   },
 
@@ -280,10 +280,10 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün seninle ilk defa dışarda buluşmuştuk Simge konseri şans eseri senin önüne düşmüştü ve bir anda karar verip gittik hayret yolu kaçırmadan nasıl gidebildik hala hayret ediyorum Simge konseri başından sonuna kadar mükemmeldi ortamı olsun o puf koltuk olsun simge olsun şarkıları olsun mü kem melldi bağıra bağıra şarkı söyleyip stres atmıştık gerçektende güzel bir gündü sen çok ponçiktin seninle dışarda çok eğleneceğimizi orda anlamış olabilirim :).Tarih:17 Mayıs 2024`,
     media: [
 
-       { type: "image", src: "images/simge1.jpeg" },
-       { type: "image", src: "images/simge4.jpeg" },
-       { type: "image", src: "images/simge2.jpeg" },
-       { type: "video", src: "videos/simge3.mp4" }
+       { type: "image", src: "images/simge1.JPEG" },
+       { type: "image", src: "images/simge4.JPEG" },
+       { type: "image", src: "images/simge2.JPEG" },
+       { type: "video", src: "videos/simge3.MP4" }
     ]
   },
 
@@ -292,10 +292,10 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün paşada Alinin zorunluu Dg'sinin kutlamıştık  kenan falan da gelmişti senin dışındaki tüm doğum günlerinin boş olduğunu farkettim şu anda anıyla alakalı aman aman bişey hatırlayamadım neyse aliye de dgko diyelim ama asıl olay seninkindee.Tarih:20 Mayıs 2024`,
     media: [
 
-       { type: "image", src: "images/adg1.jpeg" },
-       { type: "image", src: "images/adg2.jpeg" },
+       { type: "image", src: "images/adg1.JPEG" },
+       { type: "image", src: "images/adg2.JPEG" },
       
-       { type: "video", src: "videos/adg3.mp4" }
+       { type: "video", src: "videos/adg3.MP4" }
     ]
   },
 
@@ -306,10 +306,10 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün  senin doğumm günündüü off bi türlü gelmek bilmemişti çok fazla üzerine düşünmüştüm kurgulamıştım acaba nasıl olacak  diye içim içimi yiyodu saatler 23.50 civarlarında çok heyecanlanmıştım acaba editime nasıl tepki verecek diye başından sonuna kadar inanılmaz bir gündü her şey yolunda gitmişti sen hediyelerini çok beğenmiştin özellikle dövme muhabbetine çiçekler de sana çok yakışmıştı bana göre geçirdiğimiz en güzel günlerden biri iyi ki doğmuştunn seni çok seviyorum.Tarih:🤍💜6 HAZİRANNN🤍💜2024`,
     media: [
 
-       { type: "image", src: "images/pdg1.jpeg" },
-       { type: "image", src: "images/pdg2.jpeg" },
-        { type: "video", src: "videos/pdg3.mp4" },
-       { type: "video", src: "videos/pdg4.mp4" }
+       { type: "image", src: "images/pdg1.JPEG" },
+       { type: "image", src: "images/pdg2.JPEG" },
+        { type: "video", src: "videos/pdg3.MP4" },
+       { type: "video", src: "videos/pdg4.MP4" }
     ]
   },
 
@@ -319,8 +319,8 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün seninle ilk spora gittiğimiz gün beraber spor yapmıştık sağlam basmıştık senin bacakların çok ağırmıştı yorulmuştuk eğlenceli bir gündü diye düşünüyorum sence?.Tarih:10 Haziran 2024`,
     media: [
 
-       { type: "image", src: "images/mac1.jpeg" },
-       { type: "image", src: "images/mac2.jpeg" },
+       { type: "image", src: "images/mac1.JPEG" },
+       { type: "image", src: "images/mac2.JPEG" },
       
       
     ]
@@ -333,7 +333,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     media: [
 
       
-       { type: "video", src: "videos/tri.mp4" },
+       { type: "video", src: "videos/tri.MP4" },
       
       
     ]
@@ -345,8 +345,8 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün  aklımda nedense çok güzel kalmış arife günümüz dolu dolu geçmişti sanırım cemonun da dgydi maske yapmıştık ve videolar çekmiştik molada vaktimiz kısıtlı olsa da bi şekilde eğlenmesini biliyorduk seninle geçen tatlı bir anımız daha .Tarih:15 Haziran 2024`,
     media: [
 
-       { type: "image", src: "images/mask.jpeg" },
-       { type: "video", src: "videos/mask2.mp4" },
+       { type: "image", src: "images/mask.JPEG" },
+       { type: "video", src: "videos/mask2.MP4" },
       
       
     ]
@@ -360,8 +360,8 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bayramları pek sevmem bilirsin ama bu bayram shiftimiz seninle denk gelmişti veli dayının scooterını sürmüştük benim metroporttaki izin günlerimi araştırmıştık yiğit best de vardı triplere giriyodu seninle çok uzun süre vakit geçirmiştik knkm aklımda çok güzel kalan bir gün dahaa:) .Tarih:18 Haziran 2024`,
     media: [
 
-       { type: "image", src: "images/bayram1.jpeg" },
-       { type: "image", src: "images/bayram2.jpeg" },
+       { type: "image", src: "images/bayram1.JPEG" },
+       { type: "image", src: "images/bayram2.JPEG" },
       
       
     ]
@@ -377,8 +377,8 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     media: [
 
    
-       { type: "video", src: "videos/gergin1.mp4" },
-       { type: "video", src: "videos/gergin2.mp4" }
+       { type: "video", src: "videos/gergin1.MP4" },
+       { type: "video", src: "videos/gergin2.MP4" }
       
       
     ]
@@ -391,8 +391,8 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün senle yine macfit kovaladığımız bir gündü benim yıllık iznimde buluşmuştukk seni çokk özlemiştimm güzelce sporumuz yaptık takıldık dönüşte karnımız acıktı ve burger yiyelime gittik sonra martıya binip sorunsuz bi şekilde ht20 ye ulaştık(paralel evrende)böyle miydi ya o güne ait bazı bilgileri net hatırlayamıyorum muhtemelen böyleydi neyseki sonraki günümüz de güzeldi ya oysho dan tayt alma işi senin çıkışta beni görüp şoka girmen falan komik bir gündü ponçikk  Tarih:10 Temmuz 2024`,
     media: [
 
-        { type: "image", src: "images/mp1.jpeg" },
-   { type: "image", src: "images/mp2.jpeg" },
+        { type: "image", src: "images/mp1.JPEG" },
+   { type: "image", src: "images/mp2.JPEG" },
       
     ]
   },
@@ -404,7 +404,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün seninle bana kıyafet bakmaya gitmiştik otobüs bekliyoduk sen hemen atladın bu bakırköye gidiyo yiaa diye sonra bakırköyün öbür ucuna giderken farkettin tekrar inip marmara foruma gittik yolda ben sana geri dönelim mi dediğimde sen de tamam gidelim dediğinde gerçekten çok şaşırmıştım bu kadar iyi bi insan olamaz diye geçirmiiştim içimden bana karşı çok hoşgörülü biri olduğunu ve bana ne yaparasam yapayım aynı şekilde davranıcanı hissetmiştim ve o günden sonra senin yanında daha rahat olmaya başladım çünkü sen beni hiçbir türlü yargılamıyodun hep pozitif kalıyodunn ponçiksin yaa o gün köfteci yusufa gitmiştik seversinn yarım ekmekleri yoktu sana normal ekmeklerinden kesmişlerdii geçirdiğimiz en kötü gün diyip duruyodum masummuşum daha ne kötü günler gördük :)))  Tarih:7 Ağustos 2024`,
     media: [
 
-        { type: "image", src: "images/mf1.jpeg" },
+        { type: "image", src: "images/mf1.JPEG" },
  
       
     ]
@@ -419,8 +419,8 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün senle yine macfit kovaladığımız bir gündü seni 5 dk beklettim diye triplere girmiştin yolu kaçırıp karşıya geçmiştik ve iki kere boğaz manzarasına maruz kalmıştık saat geçtiği için ve barış knkmız kod atmadığı için girememiştik neyse ki knkn olaya el atıp kendi salonuna götürdü orda da güzel bir idman atmıştık çıkışta da pilav yedik o gün bana top1 listesinde sen varsın demiştin unuttum sanma :) Tarih:21 Ağustos 2024`,
     media: [
 
-        { type: "image", src: "images/fs1.jpeg" },
-   { type: "image", src: "images/fs2.jpeg" }
+        { type: "image", src: "images/fs1.JPEG" },
+   { type: "image", src: "images/fs2.JPEG" }
       
     ]
   },
@@ -431,7 +431,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün senle temizliğe sardırdığımız bir gündü babamlar mağazaya gelmişti araba bakma muhabbetleri vardı senle her yeri bir güzel temizlemiştik terapi gibiydi keşke o ana tekrar dönsek bence ikimizde çok mutluyduk Tarih:6 Kasım 2024`,
     media: [
  
-   { type: "video", src: "videos/temizlik.mp4" },
+   { type: "video", src: "videos/temizlik.MP4" },
       
     ]
   },
@@ -443,10 +443,10 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün senle aqua florya'ya gitmiştik sana araba aldığımız söylememiştim sürpriz yapmak istedim zar zor ailemden arabayı kaçırıp avmye geldik çokk acemiydim seni bekliyodum sende çıkmış gidiyodun döndürdüm falan çok saçmaydı sonra arabayı gördün kiraladım sanmıştım benim olduğunu söyleyince çok sevinmiştikk birlikte aqua florya ya gittik sana verdiğim bir söz vardı karaokeye kendi arabamızla gideceğiz diye ve o dönem hep gitmek istiyooduk ama ben verdiğim sözden dolayı erteleyip duruyordumm Allah'a şükür arabamızı aldık birlikte gittik şarkılar söyledik eğlendik şarkı videolarmız müzik sayfamızda var oraya da geçersin anılar bölümümüz bitince acele etmee :) senin için kocaman bir site yaptım hepsine bakmak için vaktin olacak seni çokk seviyorum iyi ki birlikte böyle bir gün yaşadıkk ve ertesi gün bana çok güzel bir sürpriz hazırlamıştın çok mutlu olmuştum teşekkür ederim tekrardan çok güzeldii Tarih:21 Kasım 2024`,
     media: [
  
-   { type: "image", src: "images/florya.jpeg" },
-    { type: "image", src: "images/florya1.jpeg" },
-     { type: "image", src: "images/florya2.jpeg" },
-      { type: "image", src: "images/florya3.jpeg" },
+   { type: "image", src: "images/florya.JPEG" },
+    { type: "image", src: "images/florya1.JPEG" },
+     { type: "image", src: "images/florya2.JPEG" },
+      { type: "image", src: "images/florya3.JPEG" },
       
     ]
   },
@@ -456,8 +456,8 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün seninle  ben garajda çalışıyoken zar zor buluşmuştuk mağazadan uzak kaldığım için seni çokkk özlemiştim buluşunca çok mutlu olmuştum hava aşşırı soğuktu belturda kahve içmiştik garson çok garipti ılık suyla kahve getirdi ben söylenince sen triplere girdin :):) çarpışan arabalara bindik zevkliydi 10da 10 bir gündü benim için teşekkür ederimm :)Tarih:1 Şubat 2025`,
     media: [
  
-   { type: "image", src: "images/avcılar.jpeg" },
-    { type: "image", src: "images/avcılar2.jpeg" },
+   { type: "image", src: "images/avcılar.JPEG" },
+    { type: "image", src: "images/avcılar2.JPEG" },
 
       
     ]
@@ -469,8 +469,8 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün sana tüm beceriksizliğimle yapmaya karar verdiğim pandacık kartını takdim etmiştim görünce çokkk mutlu oldunn o kadar sevineceğini bilsem daha önce yapardım uğraştırmıştı beenim gibi biri için zordu ama sonunda senin mutluluğun her şeyden öneemlii çok ponçiktiniz :)  )Tarih: 6 Şubat 2025`,
     media: [
  
-   { type: "image", src: "images/card.jpeg" },
-    { type: "video", src: "videos/card1.mp4" },
+   { type: "image", src: "images/card.JPEG" },
+    { type: "video", src: "videos/card1.MP4" },
 
       
     ]
@@ -483,8 +483,8 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugünler benim biraz zor atlattığım günlerdi hasta olmuştum tabi iyileşmiş halim burda ama yine de belli ediyodu burak zorunlu tatlı aldırmıştı ben senle yemeyi tercih etmiştim çok güzeldi eğlenceliyidi zatenn seninle olan her şey çok güzel ve eğlencelii ponçikkk<3  )Tarih: 13-14 Şubat 2025`,
     media: [
  
-   { type: "image", src: "images/tatlı.jpeg" },
-    { type: "image", src: "images/tatlı1.jpeg" },
+   { type: "image", src: "images/tatlı.JPEG" },
+    { type: "image", src: "images/tatlı1.JPEG" },
 
       
     ]
@@ -499,9 +499,9 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün senile ilk maçımıza gittik (son değil) daha önce yaşamadığım duyguları yaşadığım bir gündü  atmosfer gerçekten değişik hissettirdi sen gidiyosun diye gitmiştim iyi ki de gitmişiz çok eğlendik diğer knkalarımız ve burak olmasaydı da olurdu ama neyse diyoruz ve en kısa zamanda başka bir maça gidiyoruz :)Tarih: 16 Şubat 2025`,
     media: [
  
-   { type: "image", src: "images/fb.jpeg" },
-    { type: "image", src: "images/fb1.jpeg" },
- { type: "image", src: "images/fb2.jpeg" },
+   { type: "image", src: "images/fb.JPEG" },
+    { type: "image", src: "images/fb1.JPEG" },
+ { type: "image", src: "images/fb2.JPEG" },
       
     ]
   },
@@ -514,8 +514,8 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugünlerde kar yağıyodu ben de sana kar ile ilgili bir resim yapmayı düşünüyodum karlar'ın son dönemlerine gelinmişti sana resim yapamicam diye çok korkmuştum cuma'dan gelmiştim karlar erimişti hep arabaların üstünde tek tük vardı neyse bi tane buldum ve sana knkk bizim burda kar tutmuşş dedim sen tabi anlamadın ama sonra görünce çok mutlu olduğunu hissettim ve devamında hep karlar ile ilgili bişeyler yaptık çok eğlenceliydi ve bana kağıttan messi forması yapmıştın ilk gördüğümde şok oldum çok şaşırmıştım gerçekten beğendiğim bir çalışmaydı teşekkür ederimm 10 da 10 Tarih: 21 Şubat 2025`,
     media: [
  
-   { type: "image", src: "images/kar1.jpeg" },
-    { type: "video", src: "videos/kar2.mp4" },
+   { type: "image", src: "images/kar1.JPEG" },
+    { type: "video", src: "videos/kar2.MP4" },
  
       
     ]
@@ -526,7 +526,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün de sen ben ali takılmaya gitmiştik giderken park yeri sorunu mu dersin dönüşte yol kaçırmalar silsilesi mi dersinn her şey vardı lanet olsun :)  bir de benim yolda aşırı sıkışıp hamama  girme muhabbetim vardı güzel bi gündü  Tarih: 27 Şubat 2025`,
     media: [
  
-   { type: "image", src: "images/bk1.jpeg" },
+   { type: "image", src: "images/bk1.JPEG" },
     
  
       
@@ -541,16 +541,16 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Off son yıllarda geçirdiğim enn güzel ay , sürekli mağaza dışı desteğe gitmem gerekiyordu ama biz yine bir yolunu bulup buluşmayı başarıyordukk ramazan ayı başlı başına çok güzeldi ilk iftarımızda ben depositeden gelmiştim kuleli durağında sana sarılınca seni gerçekten özlediğimi hissetmiştim benim bakırköy dürümcüsüne gitmiştikk  yer bulamadık ama bi şekilde hallettik o gün çok keyif aldığımız için tekrar tekrar buluşmak istedik neredeyse her fırsatta buluşuyoduk sen evde iftar yapamaaz olmuştun bu ayda çok fazla şey yaşadık  olaylı iftarlarr benim mdr ydrlik yavru pandacıkcıkımız p ledi ile şov yapma mor kalpli kartımız bakırköydeki iftarlarımız ve en güzeli mavi sofradaki iftarımız o güne ayrı parantez açıcam ve bu ayı da seninle bir sonraki buluşmamızda uzun uzun sohbetini edelim çünkü benim yazamayacağım kadar ve sitenin alamayacağı kadar çok ve harika anılarımız var inşallah bundan sonraki her ayımız böyle mutlu geçer ponçikkk 🤍💜<3 Tarih: 1-30 Mart 2025`,
     media: [
  
-   { type: "image", src: "images/vb1.jpeg" },
-     { type: "image", src: "images/vb2.jpeg" },
-      { type: "image", src: "images/vb3.jpeg" },
-       { type: "image", src: "images/vb4.jpeg" },
-        { type: "image", src: "images/vb5.jpeg" },
-         { type: "image", src: "images/vb6.jpeg" },
-          { type: "image", src: "images/vb7.jpeg" },
-           { type: "image", src: "images/vb8.jpeg" },
-            { type: "image", src: "images/vb9.jpeg" },
-             { type: "image", src: "images/vb10.jpeg" }
+   { type: "image", src: "images/vb1.JPEG" },
+     { type: "image", src: "images/vb2.JPEG" },
+      { type: "image", src: "images/vb3.JPEG" },
+       { type: "image", src: "images/vb4.JPEG" },
+        { type: "image", src: "images/vb5.JPEG" },
+         { type: "image", src: "images/vb6.JPEG" },
+          { type: "image", src: "images/vb7.JPEG" },
+           { type: "image", src: "images/vb8.JPEG" },
+            { type: "image", src: "images/vb9.JPEG" },
+             { type: "image", src: "images/vb10.JPEG" }
  
 
  
@@ -563,9 +563,9 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün seninle izin günümüz aynıyı ve sizin orda geçirmeye karar vermiştikk sizin kapının önüne geldim zorlu yokuşları aşarak :) caminin orda beklerken aynadan seni görünce çok mutlu olmuştum Tarih: 19 Mart 2025`,
     media: [
  
-   { type: "image", src: "images/mavi1.jpeg" },
-   { type: "image", src: "images/mavi2.jpeg" },
-    { type: "video", src: "videos/mavi3.mp4" },
+   { type: "image", src: "images/mavi1.JPEG" },
+   { type: "image", src: "images/mavi2.JPEG" },
+    { type: "video", src: "videos/mavi3.MP4" },
  
       
     ]
@@ -580,11 +580,11 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün işyerindeki son günümdüü benim için buruk bir anı geçirdiğimiz en duygusal gün olabilir önceki günün akşamı sana edit yaparken de duygulanmıştım yaşadığımız her şey gözlerimin önünden geçmişti off şu an düşününce bizim yaşadığımız şeylerin bi eşi benzeri yok çünkü senin de bildiğin gibi aynı yerde çalışan insanlar genelde iyi geçinemez kuyu kazmaya çalışırlar ama bizim ilişkimiz o kadar farklıydı ki en başında sonuna kadar birbirimize en ufak saygısızlık yapmadık neredeyse her zaman mutlu ,keyifliydik seninle birlikte çalışmak benim en büyük şanslarımdan biri o gün seninle pizza siparişi vermeye çalışmıştık son günümüzde de tartışmadan trip atmadan geçirememiştik ama arkada siparişi iptal etmeye çalışırken o kadar tatlıydın ki seni yiyecektim son günümüzün benim için özel bir anlamı da vardı binbir zorlukla saklamaya çalıştığım H harfinin sana teslim edilme günüydü onun olayı yaparken bunu sana işten çıktığım gün vericem dememdi ama o gün geldiğinde vermenin bu kadar zor olacağını tahmin edemedim senden ayrılırken çokk zorlandım daha önce hissetmediğim duygular hissettim ama bizim ilişkimizin mağazayla sınırlı olmadığını biliyodum o günümüz de böyle güzel ve duygusal geçmişti <3 Tarih: 30 Mart 2025`,
     media: [
  
-   { type: "image", src: "images/son1.jpeg" },
+   { type: "image", src: "images/son1.JPEG" },
    
-   { type: "image", src: "images/son2.jpeg" },
-    { type: "video", src: "videos/son.mp4" },
-     { type: "video", src: "videos/sonn.mp4" },
+   { type: "image", src: "images/son2.JPEG" },
+    { type: "video", src: "videos/son.MP4" },
+     { type: "video", src: "videos/sonn.MP4" },
  
       
     ]
@@ -597,9 +597,9 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün  askere gitmeden önceki sonn buluşmamızdı senden bir ay uzak kalacağım için içimin buruk olduğu bir gündü son kez bakırköye gitmiştik hediyeni vermen için sakin bir yer aradık ve bankımzı bulduk o bank artık bizim oldu ve özenle hazırladığın her bir detayı mükemmel düşündüğün ince ince işlediğin anı defterimizi benimle  buluşturdun inanılmazz mutlu olmuştum aldığım en güzel hediye olabilir ama diğer hediyelerine haksızlık etmek istemiyorum senin elinden çıkan her şey benim için çok değerli her şey için çokk teşekkür ederimm 🤍💜 Tarih: 3 Nisan 2025`,
     media: [
  
-   { type: "image", src: "images/asker1.jpeg" },
-      { type: "image", src: "images/asker2.jpeg" },
-   { type: "image", src: "images/asker3.jpeg" },
+   { type: "image", src: "images/asker1.JPEG" },
+      { type: "image", src: "images/asker2.JPEG" },
+   { type: "image", src: "images/asker3.JPEG" },
  
  
       
@@ -615,10 +615,10 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Ve sonunda askere gitme vaktim gelmişti sen beğenmesende bedelli olarak askerliğimi tamamladım askerlik dönemi çok garipti ya gitmeyen bilemez gerçekten askerlikte bazen çok eğlendim bazen çok zorlandım öyle böyle geçti askerliğin en güzel yanı akşamları seninle telefonlaşmak olmuştu birkaç günde bi arasan daa:) askerde sana sürprizler hazırlamaya çalışmıştım künyeni son gün son saate kadar alamamıştım çok korktum bir aksilik çıkacak diye neyseki yine her şey olması gerektiği gibi oldu askerde sni çokk özlemiştim buluşunca sarılmak için sabırsızlanıyordum of neyseki kavuşabildik şükürler olsunn🤍💜 Tarih: 5-30 Nisan 2025`,
     media: [
  
-   { type: "image", src: "images/as.jpeg" },
+   { type: "image", src: "images/as.JPEG" },
    
-   { type: "image", src: "images/ask2.jpeg" },
-    { type: "video", src: "videos/as3.mp4" },
+   { type: "image", src: "images/ask2.JPEG" },
+    { type: "video", src: "videos/as3.MP4" },
          
     ]
   },
@@ -629,7 +629,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün benim için çok özel bir tarih çünkü hem terhis olduğum hem de doğduğum gündü o günü kendi kafamda biraz farklı tasarlamıştım sen bi anda bizim oraya gelmiştin şaşırmıştımm ilk kavuşma anımız istediğimiz gibi olmadı ama sonra telafisini ettik bana çok güzel hediyeler hazırlamıştın saatimi çok beğendim elime olmadı ama sonradan hallettik şimdi takmaya kıyamıyorum senin emametinn pandacığı annem özellikle çok sevdi benim de sana hediyelerim vardı bagaja gitme yapıp duruyodum hediye silsilesi yaşanmıştı çokk güzeldii gerçekten o güne geri dönmek isterim yine çok ponçik bir gündü teşekkür ederim emeklerin için🤍💜 Tarih: 1 Mayıs 2025`,
     media: [
   
-    { type: "video", src: "videos/dgm.mp4" },
+    { type: "video", src: "videos/dgm.MP4" },
          
     ]
   },
@@ -639,7 +639,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün seninle buluşma ayarlamıştık ama hava durumundan haberimiz yoktu çok yağmur bastırmıştı lanet olsunn zar zor gezebildikk magnolya ve trileçe yemiştik dönüşte yolumuzu kaybettirdiNN beşiktaşın öbür ucuna gittik yağmurda senle yürümek çok güzeldi romantikti seninle yapılan herhanngi bir şey bile çok güzel biliyosunn biraz yorulduk ama unutulmaz bir gün olduğu kessin🤍💜 Tarih: 10 Mayıs 2025`,
     media: [
   
-      { type: "image", src: "images/bt.jpeg" },
+      { type: "image", src: "images/bt.JPEG" },
          
     ]
   },
@@ -653,13 +653,13 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugünn seninle dolu dolu geçireceğimiz ilk günümüzdü erken saatte buluşup adalar gitmeye çalışmıştık yine yolu kaçırdığımız bir gündü sen yolda başladın yok eser abi beni aramış yok maça gitmişim falan senin yüzünden yanlış durakta indik eser best ile de karşılaştık sen hemen dedin oo abim napıyon falan nası bi insansın yaa :)) neyse bi türlü gittik vardığımızda biraz geç olmuş olsa da seninle vapur yolculuğu çok güzeldii adalar çok renkliydi o günkü beyaz kombinin sana aşşırı yakışmıştı çok ponçiktin her yerinde fotoğraf çekmek istedik tepeye gitmeye  karar verdik tepeye giden yollarda gezdik tozduk yukarıya tırmanmaya çalışmak çok zordu dinlene dinlene çıktık yolda durup seninle şarkılar söyledik ve nihayetinde tepeye ulaştık manzarası inanılmazdı birlikte yemek yedik manzarasını izledik akşam olmaya başladı ve günbatımı için harika bir yer bulduk ilk kez günbatımını izlemiştik çok güzel anlardı ve dönüş vakti geldi dönüş yolunda bi türlü otobüs gelmemişti çok geç kalıcamızı düşünmüştük neyse vapur seferi başladı seninle olduğu için çok güzeldi ama bitmek bilmemişti indiğimizde de çok geç olmuştu eve baya geç gitmiştin ama benim için her şeyiyle 10da 10 bir gündü iyiki gittik diyorum ve bidahaki için sabırsızlanıyorum adalar'da beraber yaşama hayalleri kurduk inşallah ilerde gerçekleştirebiliriz seninle hep beraber olmak hayal gibi bişey olurdu seni çokk sevdiğimi biliyosun dimi🤍💜 Tarih: 15 Mayıs  2025`,
     media: [
  
-   { type: "image", src: "images/ada.jpeg" },
-    { type: "image", src: "images/ada1.jpeg" },
-   { type: "image", src: "images/ada2.jpeg" },
-    { type: "image", src: "images/ada3.jpeg" },
-     { type: "image", src: "images/ada4.jpeg" },
-      { type: "image", src: "images/ada6.jpeg" },
-    { type: "video", src: "videos/ada5.mp4" },
+   { type: "image", src: "images/ada.JPEG" },
+    { type: "image", src: "images/ada1.JPEG" },
+   { type: "image", src: "images/ada2.JPEG" },
+    { type: "image", src: "images/ada3.JPEG" },
+     { type: "image", src: "images/ada4.JPEG" },
+      { type: "image", src: "images/ada6.JPEG" },
+    { type: "video", src: "videos/ada5.MP4" },
          
     ]
   },
@@ -670,7 +670,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün seninle florya'ya gitmiştik çok sakin ve güzel bir gündü saçlarım için ponçik ellerinle karışım hazırlamıştın eline sağlıkk çokk teşekkür ederim bi'tanesinn  ben de sana kas şov yapmıştım şov denmez aslında form check ti  birkaç ay sonraki ile karşılaştırmak için arkamızdaki çift bi türlü kalkmamıştı kavga çıkacaktı :) dönüşte marmaray'da karşına oturmuştum dışardan çok tatlı görünüyodunn iyi ki bu ponçikle beraberim of ne kadar şanslı bir insanım demiştim buguüne kadar yapmış olduğun her şey için ayrı ayrı çok teşekkür ederim bu kadar inanılmaz biri olduğun ve iyi insanların hala var olduğunu kanıtladığın için ayrıca teşekkür ediyorumm🤍💜 Tarih: 22 Mayıs 2025`,
     media: [
   
-      { type: "image", src: "images/florys.jpeg" },
+      { type: "image", src: "images/florys.JPEG" },
          
     ]
   },
@@ -680,8 +680,8 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün seninle  yineee yol kaçırdığımız ve istemeden moda ya gittiğimiz bir gündü yolu bilerek kaçırdığımızı idda etseN de oraya gitmek değildi amacımız ama gittiğimiz sahil çokk güzeldii yolda sana küçük bir işyeri açma ve küçük bir köpekcik alma hayalleri kurduk bankta otururken sen bo ve sonunda farklı bir harf olan bi kelime söylemiştin neyse es geçiyoruz yemek yicez ayağına zurnacıya götürttün bizi yine yok kaana soriyim falann neyse yine geri dönüşümüz geç oldu ve sen gerçekten yorulmuştun seninle geçirdiğimiz mükemmel günlerden biri daha yaşanmıştı 🤍💜 Tarih: 29 Mayıs 2025`,
     media: [
   
-      { type: "image", src: "images/moda1.jpeg" },
-            { type: "video", src: "videos/moda.mp4" },
+      { type: "image", src: "images/moda1.JPEG" },
+            { type: "video", src: "videos/moda.MP4" },
     ]
   },
 
@@ -693,7 +693,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Off daha nice nice anılarımız var ama ben bu kadarını sığdırabildim eminim çok fazla atladığım anımız vardır çünkü anılarımız buraya kaydedemeyeğim kadar çok ve anlamlı.Şimdi bakıyorum da ne kadar şey yaşamışız be knkm her biri birbirinden güzel sevgi dolu eğlenceli komik sürpriz yani gerçekten şu anda anlatamiyacağım duygular yaşıyorum bugun senin doğum günün bu siteyi hazırlarken tüm tanışma hayatımız gözlerimin önünden geçiyor seninle tanıştığım için bu kadar özel şeyler yaşadığımız için kendimi çok şanslı hissediyorum benim için yaptığın en ufak bişey bile çok özel zaten senden bişey yapmanı beklemediğimi biliyosun sevgi bu tarz şeylerle ölçülemez bizim sevgi tanımımız herkesinkinden farklı bi'tanecik ponçiğimm seni çokk seviyorumm   🤍💜 Tarih: 26 Ocak-∞ `,
     media: [
   
-      { type: "image", src: "images/bff.jpeg" },
+      { type: "image", src: "images/bff.JPEG" },
             
     ]
   },
@@ -704,7 +704,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Knkm  netflix kullandığına göre artık   yeni bi dizi başlamış ismi My Ponçik(Ponçiğim) hikayesi çok sürükleyici aynı iş yerinde çalışmaya başlayan iki arkadaş arasında geçiyor ama her bir bölümü her bir saniyesi çok anlamlı eğlenceli komik kısaca mükemmel izlemeni öneririm 🤍💜Seni herkesten ve her şeyden çokk seviyorum biliyosunn Tarih: 26 Ocak-∞ `,
     media: [
   
-      { type: "video", src: "videos/netff.mp4" },
+      { type: "video", src: "videos/netff.MP4" },
             
     ]
   },
@@ -1748,15 +1748,15 @@ let typingInterval; // Globalde tanımla
 
 
 const videoList = [
-  "videos/esevgilim.mp4",
-  "videos/yakıyor.mp4",
-  "videos/netff.mp4",
-  "videos/us.mp4",
-    "videos/end.mp4",
-      "videos/bruno.mp4",
-        "videos/bruno.mp4",
-      "videos/next.mp4",
-        "videos/soru.mp4",
+  "videos/esevgilim.MP4",
+  "videos/yakıyor.MP4",
+  "videos/netff.MP4",
+  "videos/us.MP4",
+    "videos/end.MP4",
+      "videos/bruno.MP4",
+        "videos/bruno.MP4",
+      "videos/next.MP4",
+        "videos/soru.MP4",
 ];
 
 
