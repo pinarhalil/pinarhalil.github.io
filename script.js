@@ -177,7 +177,7 @@ const memories = [
     media: [
         { type: "image", src: "images/kpns.JPEG" },
         { type: "image", src: "images/kpns2.JPEG" },
-        { type: "video", src: "videos/kapanis.MP4" }
+        { type: "video", src: "videos/kapanis.mp4" }
     ]
   },
 
@@ -270,7 +270,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     title: "İtopyada Tır Kullanma İşi",
     text: `Bugün sana küçük bir sürprizim var demiştim kadın reyonu vitrine yakın olan masada molaya çıkmamızı beklemiştik ve molada itopya'ya gittik sen ilk defa direksiyona dokunmuştun araba kullanmaya çok istediğini o zaman hissetmiştim ve sana söz vermiştim ben araba alacağım ve sana kullandıracağım diye o zamanlar pek inanarak söylememiştim belki ama bazen belki de iyi şeyleri çağırmak gerekir Allah nasip etti şükürler olsun senin orda ısrarla hiç frene basmayışın beni tedirgin etmişti ama herşeyin bir ilki vardır o da ilkti ve her geçen gün daha iyi olmaya devam ettin ponçikk güzel bir anıydı bana kalırsa.Tarih:12 Mayıs 2024`,
     media: [
-      { type: "video", src: "videos/itop.MP4" }
+      { type: "video", src: "videos/itop.mp4" }
     ]
   },
 
@@ -283,7 +283,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
        { type: "image", src: "images/simge1.JPEG" },
        { type: "image", src: "images/simge4.JPEG" },
        { type: "image", src: "images/simge2.JPEG" },
-       { type: "video", src: "videos/simge3.MP4" }
+       { type: "video", src: "videos/simge3.mp4" }
     ]
   },
 
@@ -308,8 +308,8 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
 
        { type: "image", src: "images/pdg1.JPEG" },
        { type: "image", src: "images/pdg2.JPEG" },
-        { type: "video", src: "videos/pdg3.MP4" },
-       { type: "video", src: "videos/pdg4.MP4" }
+        { type: "video", src: "videos/pdg3.mp4" },
+       { type: "video", src: "videos/pdg4.mp4" }
     ]
   },
 
@@ -333,7 +333,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     media: [
 
       
-       { type: "video", src: "videos/tri.MP4" },
+       { type: "video", src: "videos/tri.mp4" },
       
       
     ]
@@ -378,7 +378,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
 
    
        { type: "video", src: "videos/gergin1.MP4" },
-       { type: "video", src: "videos/gergin2.MP4" }
+       { type: "video", src: "videos/gergin2.mp4" }
       
       
     ]
@@ -431,7 +431,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Bugün senle temizliğe sardırdığımız bir gündü babamlar mağazaya gelmişti araba bakma muhabbetleri vardı senle her yeri bir güzel temizlemiştik terapi gibiydi keşke o ana tekrar dönsek bence ikimizde çok mutluyduk Tarih:6 Kasım 2024`,
     media: [
  
-   { type: "video", src: "videos/temizlik.MP4" },
+   { type: "video", src: "videos/temizlik.mp4" },
       
     ]
   },
@@ -515,7 +515,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     media: [
  
    { type: "image", src: "images/kar1.JPEG" },
-    { type: "video", src: "videos/kar2.MP4" },
+    { type: "video", src: "videos/kar2.mp4" },
  
       
     ]
@@ -704,7 +704,7 @@ Her zaman aklımda güzel bir anı olarak kalacak.Tarih 28 Nisan 2024`,
     text: `Knkm  netflix kullandığına göre artık   yeni bi dizi başlamış ismi My Ponçik(Ponçiğim) hikayesi çok sürükleyici aynı iş yerinde çalışmaya başlayan iki arkadaş arasında geçiyor ama her bir bölümü her bir saniyesi çok anlamlı eğlenceli komik kısaca mükemmel izlemeni öneririm 🤍💜Seni herkesten ve her şeyden çokk seviyorum biliyosunn Tarih: 26 Ocak-∞ `,
     media: [
   
-      { type: "video", src: "videos/netff.MP4" },
+      { type: "video", src: "videos/netff.mp4" },
             
     ]
   },
