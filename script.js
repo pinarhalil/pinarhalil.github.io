@@ -766,7 +766,7 @@ function createPinarStars() {
     star.innerHTML = "☆";
     star.style.margin = "0 3px";
     star.style.color = "gold";
-    star.style.fontSize = "30px";
+    star.style.fontSize = "20px";
     star.style.cursor = "pointer";
     star.dataset.value = i;
 
