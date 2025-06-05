@@ -39,7 +39,7 @@
   <button onclick="showSection('memoriesSection')">🎞️Anılarımız</button>
   <button onclick="showSection('gamesMenuSection')">⛳Oyunlar</button>
   <button onclick="window.location.href='muzz.html'">🎶 Müzik Sayfamız</button>
-<button onclick="window.location.href='mektup.html'">🎶 Pınar'a Mektuplarım💜🤍</button>
+<button onclick="window.location.href='mektup.html'">✉️ Pınar'a Mektuplarım💜🤍</button>
   <button onclick="showSection('surpriseSection')">🎁 Sürpriz Kutu</button>
 
 </div>
@@ -48,6 +48,7 @@
 <!-- 🎁 Sürpriz Kutu Bölümü -->
 <div id="surpriseSection" style="display:none; text-align:center;">
   <h2 style="color: white;">Sürpriz Kutu 🎁</h2>
+  <p>Hoşgeldinn ponçik bu sayfamızda rastgele sürpriz mesajlar ve Editler yer alıyor Hepsine baktığından emiin oll </p>
   <div id="giftBox" class="gift-box" onclick="openSurpriseBox()">
     <div class="lid"></div>
     <div class="box"></div>
@@ -64,6 +65,13 @@
   Başka 💌
 </button>
 
+
+
+<audio id="boxOpenSound" src="sounds/pandora.mp3" preload="auto"></audio>
+
+<div id="surpriseVideoContainer" style="display: none; margin-top: 20px;">
+  <video id="surpriseVideo" width="300" controls></video>
+</div>
   <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
 </div>
 
@@ -84,7 +92,7 @@
 <!-- Flappy Game Bölümü -->
 <div id="flappyGameSection" style="display:none;">
   <h2>Flappy Pınar 🎈</h2>
-  <p>Hoşgeldin Ponçik💜🤍 Senin için bir oyun yaptım umarım beğenirsin</p>
+  <p>Hoşgeldin Ponçik💜🤍 Senin için bir oyun yaptım ismi Flappy Pınar her tıkladığında zıplıyorsun engellere çarpma 10 skoru geçmeye çalış hadi bakalım umarım beğenirsin</p>
   <div id="score">Skor: 0</div>
   <canvas id="game" width="400" height="600"></canvas>
     <button onclick="showSection('menuSection')" style="margin-top: 20px;">🔙 Ana Menü</button>
@@ -202,7 +210,7 @@
   </div>
 
   <p id="endOfMemoriesMessage" style="display: none; color: rgb(255, 249, 255); font-weight: bold; margin-top: 10px;">
-    Tüm anılarımızı gezdik ponçik 💜 Umarım hatırlarken yüzünde bir tebessüm oluşmuştur 🥰
+    Tüm anılarımızı gezdik ponçik 💜 Umarım hatırlarken yüzünde bir tebessüm oluşmuştur şimdi ana menüye dön ve sürprizlerimize devam edelimm🥰
   </p>
 </div>
 

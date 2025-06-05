@@ -3,7 +3,7 @@ body, html {
   padding: 0;
   min-height: 100vh;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom right, #fff, #5316c4);
+  background: linear-gradient(to bottom right, #f7e0e0, #2c086e);
     overflow-x: hidden; /* yatayda engelle, dikey kalsın */
   overflow-y: auto;   /* dikey kaydırma aktif */
   margin: 0;
@@ -101,31 +101,29 @@ body, html {
 }
 
 button {
-  display: inline-block;
-  padding: 14px 30px;
-  margin: 20px 10px;
-  font-size: 1.1rem;
+display: inline-block;
+  padding: 10px 24px;
+  margin: 10px;
+  font-size: 1rem;
   font-family: 'Comic Neue', cursive;
-  color: #fff;
-  background: linear-gradient(135deg, #a066c9, #6006cd);
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(160, 102, 201, 0.4);
+  color: #f8f6ff;
+  background: linear-gradient(145deg, #7c3aed, #5b21b6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(92, 53, 160, 0.3);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  z-index: 10;
 }
 
 button:hover {
-  background: linear-gradient(135deg, #b17de6, #985fc0);
-  box-shadow: 0 6px 15px rgba(160, 102, 201, 0.6);
+ background: linear-gradient(145deg, #9f67f2, #6f2fcb);
   transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(92, 53, 160, 0.4);
 }
 
 button:active {
-  transform: scale(0.96);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+transform: scale(0.97);
 }
 
 
@@ -205,11 +203,18 @@ button:active {
 /* Paragraflar için daha sade ama romantik bir yazı */
 .memory-text {
   
-  font-size: 1.5rem;
+   font-size: 1.5rem;
   text-align: center;
-  color: #ffffff;
-  margin: 15px 20px;
-  line-height: 1.6;
+  color: #fdf6f0; /* Yumuşak kırık beyaz */
+  margin: 20px;
+  line-height: 1.7;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  background: rgba(255, 255, 255, 0.05); /* Hafif transparan arka plan */
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
 }
 .media-container img,
 .media-container video {
@@ -825,6 +830,7 @@ button:active {
   display: block;
   margin: 0 auto 20px;
   max-width: 90%;
+  
 }
 
 #memoriesSection .media-container {
