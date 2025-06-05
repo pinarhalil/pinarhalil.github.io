@@ -1751,12 +1751,12 @@ const videoList = [
   "videos/esevgilim.MP4",
   "videos/yakiyor.mp4",
   "videos/netff.mp4",
-  "videos/us.mov",
+  "videos/us.MOV",
     "videos/end.MOV",
       "videos/bruno.MOV",
        
       "videos/next.MOV",
-        "videos/soru.mov",
+        "videos/soru.MOV",
 ];
 
 
