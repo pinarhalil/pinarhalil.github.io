@@ -1,0 +1,903 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #fefefe, #571dcc);
+    overflow-x: hidden; /* yatayda engelle, dikey kalsın */
+  overflow-y: auto;   /* dikey kaydırma aktif */
+  margin: 0;
+  padding: 0;
+  color: white;
+  box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.1);
+    scroll-behavior: smooth;
+
+}
+
+
+
+#heart-container {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; /* Tıklamaları geç */
+  overflow: visible;
+  z-index: 9999;
+  user-select: none;
+}
+
+.heart {
+  position: fixed;
+  width: 25px;
+  height: 25px;
+  transform: rotate(-45deg);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.8;
+  z-index: 9999;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -12.5px;
+  left: 0;
+}
+
+.heart::after {
+  top: 0;
+  left: 12.5px;
+}
+
+.heart-purple {
+  background-color: #6a0dad;
+}
+
+.heart-purple::before,
+.heart-purple::after {
+  background-color: #6a0dad;
+}
+
+.heart-white {
+  background-color: #fff;
+}
+
+.heart-white::before,
+.heart-white::after {
+  background-color: #fff;
+}
+
+
+
+.intro {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 80px 30px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.name {
+  font-size: 3em;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 20px #fff;
+  margin-bottom: 30px;
+}
+
+.message{
+  font-size: 1.2em;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+}
+
+button {
+display: inline-block;
+  padding: 10px 24px;
+  margin: 10px;
+  font-size: 1rem;
+  font-family: 'Comic Neue', cursive;
+  color: #f8f6ff;
+  background: linear-gradient(145deg, #7c3aed, #5b21b6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(92, 53, 160, 0.3);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+ background: linear-gradient(145deg, #9f67f2, #6f2fcb);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(92, 53, 160, 0.4);
+}
+
+button:active {
+transform: scale(0.97);
+}
+
+
+.name {
+  font-family: 'Great Vibes', cursive;
+  font-style: italic;
+  color: #7b16f7;
+  font-size: 3em;
+  text-align: center;
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow:
+      0 0 8px #b388eb,
+      0 0 15px #9f7ade,
+      0 0 20px #bb99ff,
+      0 0 30px #d1b3ff;
+  }
+  50% {
+    text-shadow:
+      0 0 12px #d1b3ff,
+      0 0 20px #bb99ff,
+      0 0 25px #b388eb,
+      0 0 35px #9f7ade;
+  }
+}
+.message {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: #ffffff;
+  text-align: center;
+  white-space: pre-line; /* satır geçişlerini korur */
+  text-shadow:
+    0 0 6px #a17be0,
+    0 0 10px #b388eb,
+    0 0 15px #9f7ade;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#section2 {
+  text-align: center;
+  padding: 50px 20px;
+  font-family: 'Quicksand', sans-serif;
+  color: #4a0072;
+  animation: fadeIn 1.5s ease;
+}
+
+
+
+.memory-video, .memory-image {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+/* Başlıklar için daha zarif ve büyük stil */
+.memory-title {
+  
+  font-size: 2.5rem;
+  text-align: center;
+  color: #8526f8;
+  margin-top: 20px;
+}
+
+/* Paragraflar için daha sade ama romantik bir yazı */
+.memory-text {
+  
+   font-size: 1.5rem;
+  text-align: center;
+  color: #fdf6f0; /* Yumuşak kırık beyaz */
+  margin: 20px;
+  line-height: 1.7;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  background: rgba(255, 255, 255, 0.05); /* Hafif transparan arka plan */
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+}
+.media-container img,
+.media-container video {
+  max-width: 100%;
+  max-height: 300px;
+  margin: 10px;
+  border-radius: 12px;
+}
+
+
+
+#startScreen {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+  canvas {
+      width: 100%;
+      height: auto;
+      touch-action: none;
+      background-color: #000;
+      display: block;
+      cursor: grab;
+    }
+    canvas:active {
+      cursor: grabbing;
+    }
+
+
+    #score {
+  color: #ffffff; /* Altın sarısı renk */
+  font-size: 48px;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px #000;
+  letter-spacing: 3px;
+}
+
+/* Cornhole oyun alanı kapsayıcısı */
+#container {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  position: relative;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* Oyun kanvası */
+#gameCanvas {
+  width: 100%;
+  height: auto;
+  border: 2px solid white;
+  background-color: #b3e5fc;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Güç çubuğu */
+#powerBarLeft {
+  position: absolute;
+  left: 10px;
+  bottom: 20px;
+  width: 20px;
+  height: 150px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px #fff;
+}
+
+/* Skor ve atış göstergesi */
+#scoreBoard {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 10px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  font-size: 1.3rem;
+  color: #ffeb3b;
+  text-shadow: 0 0 6px #ffaa00;
+  user-select: none;
+  padding: 5px 15px;
+}
+
+#scoreBoard > div {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 18px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px #ffeb3baa;
+  min-width: 130px;
+  text-align: center;
+}
+
+
+#startScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 30, 0.85); /* Koyu ve hafif transparan arka plan */
+  padding: 30px 20px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  box-shadow: 0 0 30px #00ffccaa;
+  z-index: 4;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  color: #aaf0d1;
+  text-align: center;
+  user-select: none;
+}
+
+/* Metin stili */
+#startScreen p#startDesc {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #d0f7e3;
+  text-shadow: 0 0 8px #00ffcccc;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+/* Buton stili */
+#startBtnCornhole {
+  background: linear-gradient(135deg, #00ffc8, #005f6a);
+  border: none;
+  padding: 14px 40px;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 12px #00ffc8aa;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+#startBtnCornhole:hover,
+#startBtnCornhole:focus {
+  background: linear-gradient(135deg, #00ffdb, #007a87);
+  box-shadow: 0 0 25px #00ffdbaa;
+  outline: none;
+}
+
+/* Responsive küçük ekranlarda metni biraz küçült */
+@media (max-width: 400px) {
+  #startScreen p#startDesc {
+    font-size: 1rem;
+    max-width: 90%;
+  }
+  
+  #startBtnCornhole {
+    font-size: 1.1rem;
+    padding: 12px 30px;
+  }
+}
+
+#videoContainerCornhole{
+   pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Mesaj kutusunu oyun üstüne ve skorlarla hizalı yapalım */
+#message {
+  position: relative;   /* veya absolute, ihtiyaca göre */
+  margin: 0 auto 15px auto;
+  max-width: 600px;
+  color: #ffeb3b;
+  font-weight: bold;
+  font-size: 1.2rem;
+  font-family: 'Comic Neue', cursive;
+  text-align: center;
+  text-shadow: 0 0 8px #ffaa00;
+  padding: 10px 20px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 12px;
+  box-shadow: 0 0 15px #ffeb3baa;
+  /* Oyun alanının üstünde görünmesi için margin veya position ayarla */
+}
+
+/* Eğer skor kutusunun hemen üstünde olacaksa, ikisini birlikte sarmalayan kapsayıcıya da stil verilebilir */
+#topBar {
+  max-width: 600px;
+  margin: 0 auto 20px;
+}
+
+
+/* #celebrationVideoContainer{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}*/
+
+#videoContainerCornhole,
+#celebrationVideoContainer {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+}
+
+#videoContainerCornhole video,
+#celebrationVideoContainer video {
+  width: 90%;
+  height: auto;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+  object-fit: contain;
+}
+
+
+
+
+.gift-box {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 60px auto;
+  perspective: 800px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+.gift-box .box {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #a066c9, #7b4ba3);
+  border-radius: 10px;
+  box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.gift-box .lid {
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(to bottom, #8e44ad, #6c3483);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px 10px 0 0;
+  transform-origin: bottom center;
+  transition: transform 0.6s ease, top 0.6s ease;
+  z-index: 2;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.gift-box.opened .lid {
+  transform: rotateX(-120deg);
+  top: -60px;
+}
+
+.gift-box .ribbon-horizontal,
+.gift-box .ribbon-vertical {
+  position: absolute;
+  background: #ffffff;
+  z-index: 3;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
+}
+
+.gift-box .ribbon-horizontal {
+  width: 100%;
+  height: 20px;
+  top: 90px;
+  left: 0;
+}
+
+.gift-box .ribbon-vertical {
+  width: 20px;
+  height: 100%;
+  top: 0;
+  left: 90px;
+}
+
+.surprise-message {
+  text-align: center;
+  font-size: 1.2em;
+  color: #a066c9;
+  font-weight: bold;
+  margin-top: 20px;
+  font-family: 'Comic Neue', cursive;
+  animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+#giftHeartZone {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.gift-heart {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  transform: rotate(45deg);
+  animation: riseGiftHeart 3s ease-out forwards;
+  z-index: 9997;
+  opacity: 0.8;
+}
+
+.gift-heart::before,
+.gift-heart::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: inherit;
+  border-radius: 50%;
+}
+
+.gift-heart::before {
+  top: -10px;
+  left: 0;
+}
+.gift-heart::after {
+  left: -10px;
+  top: 0;
+}
+
+.gift-heart.purple {
+  background-color: #a066c9;
+}
+.gift-heart.white {
+  background-color: #ffffff;
+}
+
+@keyframes riseGiftHeart {
+  0% {
+    transform: translateY(0) scale(1) rotate(45deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-150vh) scale(1.2) rotate(405deg);
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Estetik mesaj */
+.surprise-message {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2em;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 40px;
+  animation: fadeInScale 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInScale {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+#backToMenuBtn {
+  position: fixed;
+  bottom: 40px;       /* Sayfanın altından 40px yukarıda */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;      /* Üstte görünmesi için yüksek z-index */
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #6a5acd; /* Mor tonunda güzel bir renk */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+#backBtn:hover {
+  background-color: #5941a9;
+}
+
+
+/* 🎯 Altıncı His Oyunu Stilleri - Sadece oyun aktifken geçerli */
+/* 🎯 Altıncı His Oyunu Stilleri - Sadece oyun aktifken geçerli */
+#sixthSenseGame {
+  background: linear-gradient(to bottom right, #f5e1ff, #d0f0ff);
+  font-family: 'Comic Neue', cursive;
+  text-align: center;
+  color: #4b0082;
+  padding: 16px;
+  
+}
+
+#sixthSenseGameSections .h2 {
+  color: #00ffc8;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+#parag{
+  
+      font-family: 'Comic Neue', cursive;
+      text-align: center;
+      color: #4b0082;
+      margin: 0;
+      padding: 16px;
+      overflow-x: hidden;
+      position: relative;
+ font-size: 20px;
+      margin-bottom: 20px;
+      font-weight: bold;
+}
+#sixthSenseGamSections p {
+ font-size: 3em;
+  font-weight: bold;
+  color: rgba(245, 24, 24, 0.8);
+  text-shadow: 0 0 20px #a71e1e;
+  margin-bottom: 30px;
+}
+
+#sixthSenseGame #pandaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+#sixthSenseGame .card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  perspective: 1000px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(75, 0, 130, 0.4);
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #4b0082;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #bdbdbd;
+  transition: background 0.3s ease;
+}
+
+#sixthSenseGame .card:hover {
+  background: #9a80b9;
+  color: white;
+  box-shadow: 0 0 15px #6f42c1;
+}
+
+#sixthSenseGame .card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+  border-radius: 12px;
+}
+
+#sixthSenseGame .flipped .card-inner {
+  transform: rotateY(180deg);
+  cursor: default;
+}
+
+#sixthSenseGame .card-front,
+#sixthSenseGame .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#sixthSenseGame .card-back {
+  transform: rotateY(180deg);
+  background: white;
+  padding: 4px;
+}
+
+#sixthSenseGame .card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+#sixthSenseGame #result,
+#sixthSenseGame #specialMessage {
+  font-weight: bold;
+  margin-top: 20px;
+  min-height: 1.5em;
+}
+
+#sixthSenseGame #restartButton {
+  margin-top: 16px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #6f42c1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: none;
+}
+
+#sixthSenseGame #scoreboard {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  font-weight: 900;
+}
+
+#sixthSenseGame #timer {
+  margin-top: 16px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #cff900;
+}
+
+/* Konfeti */
+#sixthSenseGame .confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: #6f42c1;
+  top: 0;
+  left: 50%;
+  pointer-events: none;
+  animation: confetti-fall 3s linear 1;
+  border-radius: 50%;
+  z-index: 9999;
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(600px) rotate(360deg); opacity: 0; }
+}
+#memoriesSection {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+#memoriesSection .memory-title,
+#memoriesSection .memory-text,
+#memoriesSection button {
+  display: block;
+  margin: 0 auto 20px;
+  max-width: 90%;
+  
+}
+
+#memoriesSection .media-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+#memoriesSection .media-container img,
+#memoriesSection .media-container video {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+#pinarStars {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#pinarStars span {
+  cursor: pointer;
+  font-size: 30px;
+  transition: transform 0.2s ease;
+}
+
+#pinarStars span:hover {
+  transform: scale(1.3);
+}
+#ratingInfo {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+}
+#memoryRating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#myRatingDisplay {
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+/* Oyunlar menüsündeki butonları grid'e yerleştir */
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  justify-items: center;
+}
+
+/* Düğmeleri grid uyumlu daha estetik hale getir */
+#gamesMenuSection h2 {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-top: 30px;
+  text-shadow: 0 0 8px #a066c9;
+}
