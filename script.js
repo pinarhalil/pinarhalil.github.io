@@ -1720,8 +1720,6 @@ function initCornholeGame() {
 
 
 
-
-
 const surpriseMessages = [
   "Sürprizzzz! 🎁💜 Senin için hazırladığım bu özel kutudan sadece kalpler değil, sana olan sevgim de taşıyor...",
   "Seninle tanıştığım için çok şanslıyım 💌 İyi ki varsın ponçikk 💜🤍",
@@ -1729,141 +1727,110 @@ const surpriseMessages = [
   "Bu kadar mükemmel biri olmak zorunda mıydın knkm? 😍",
   "Ben seni daha çok seviyorum... Bunu biliyorsun dimi? 💜🤍",
   "Eğer dünyada bir ponçik varsa, o sensin. İki varsa biri sensin, diğeri senin yansıman (diğeri de benim belki 🤭)",
-    "Dünyanın enn mükemmel günü bugün çünkü bugün biricik Pınar'ımın doğum günü ",
-     "Doğum gününü beklediğim kadar hiçbişeyi beklemedim sanırım(bir de buluşurken seni:)) ",
-        "Sürpriz diyince aklıma gelen tek şey sensin 💜🤍",
+  "Dünyanın enn mükemmel günü bugün çünkü bugün biricik Pınar'ımın doğum günü ",
+  "Doğum gününü beklediğim kadar hiçbişeyi beklemedim sanırım (bir de buluşurken seni:))",
+  "Sürpriz diyince aklıma gelen tek şey sensin 💜🤍",
   "Bu kutu da fena değil ama senin hazırladığın kutu 🥹 10/10, gördüğüm en güzel kutuydu 💜🤍",
   "Ponçikliğin tanımı: sensin 💜🤍",
   "Bu kutudan çıkan her kalp, sana olan sevgimden bir parça 💫",
   "Yavru pandacığımı çoook seviyorum 💫",
   "Sıkıldın mıı 😏 (Böyle diyince gelen bayılma perileri 😵‍💫)",
-  "Gözlerini kapat ve dilek tut... Tuttun mu? Söyle şimdi (içinden deme şimdi ama  söylersem kabul olmaz🤫) 🎈",
+  "Gözlerini kapat ve dilek tut... Tuttun mu? Söyle şimdi (içinden deme şimdi ama söylersem kabul olmaz🤫) 🎈",
   "Benim için en büyük sürpriz sensin 🥹💝"
 ];
-
-
-let currentMessageIndex = -1;
-let typingInterval; // Globalde tanımla
-
-
 
 const videoList = [
   "videos/esevgilim.MP4",
   "videos/yakiyor.mp4",
   "videos/netff.mp4",
   "videos/us.MOV",
-    "videos/end.MOV",
-      "videos/bruno.MOV",
-       "videos/sensin.MOV",
-      "videos/next.MOV",
-        "videos/soru.MOV",
+  "videos/end.MOV",
+  "videos/bruno.MOV",
+  "videos/sensin.MOV",
+  "videos/next.MOV",
+  "videos/soru.MOV"
 ];
 
-let heartsLaunched = false;  // dışarda bir yerde, global scope'ta
+let currentMessageIndex = -1;
+let typingInterval;
+let shuffledVideos = [];
+let currentVideoIndex = 0;
+let heartsLaunched = false;
+
+// Başta videoları karıştır
+shuffleVideos();
+
+function shuffleVideos() {
+  shuffledVideos = [...videoList].sort(() => Math.random() - 0.5);
+  currentVideoIndex = 0;
+}
+
 function openSurpriseBox() {
-    const openSound = document.getElementById("boxOpenSound");
+  const openSound = document.getElementById("boxOpenSound");
   const message = document.getElementById("surpriseMessage");
   const videoContainer = document.getElementById("surpriseVideoContainer");
-const surpriseVideo = document.getElementById("surpriseVideo");
-  let newIndex;
-
+  const surpriseVideo = document.getElementById("surpriseVideo");
+  const giftHeartZone = document.getElementById("giftHeartZone");
+  const nextBtn = document.getElementById("nextSurpriseBtn");
 
   // 🔊 Ses çal
   openSound.currentTime = 0;
   openSound.play();
 
-
-
-  // Kalpler sadece ilk açılışta
+  // 🎈 Kalpler sadece ilk seferde
   if (!heartsLaunched) {
-    launchGiftHearts(document.getElementById("giftHeartZone"));
+    launchGiftHearts(giftHeartZone);
     heartsLaunched = true;
   }
 
-  // Aynı mesaj üst üste gelmesin
+  // 🔁 Aynı mesaj tekrar etmesin
+  let newMessageIndex;
   do {
-    newIndex = Math.floor(Math.random() * surpriseMessages.length);
-  } while (newIndex === currentMessageIndex);
-  currentMessageIndex = newIndex;
+    newMessageIndex = Math.floor(Math.random() * surpriseMessages.length);
+  } while (newMessageIndex === currentMessageIndex);
+  currentMessageIndex = newMessageIndex;
 
+  const text = surpriseMessages[newMessageIndex];
 
-  // 🎥 Rastgele video seç ve oynat
-  const randomVideo = videoList[Math.floor(Math.random() * videoList.length)];
-  surpriseVideo.src = randomVideo;
+  // ✍️ Yazıyı efektle yaz
+  clearInterval(typingInterval);
+  typeWriterEffect(message, text, 40);
+
+  // 🎥 Video sırayla oynat
+  if (currentVideoIndex >= shuffledVideos.length) {
+    shuffleVideos(); // tüm videolar gösterildiyse yeniden karıştır
+  }
+  const videoToPlay = shuffledVideos[currentVideoIndex];
+  currentVideoIndex++;
+
+  surpriseVideo.src = videoToPlay;
   videoContainer.style.display = "block";
   surpriseVideo.load();
 
+  // 🎁 "Sonraki Sürpriz" butonunu göster
+  nextBtn.style.display = "inline-block";
 
-
-
-
-  // Yazıyı animasyonla yaz
-  const text = surpriseMessages[newIndex];
-  message.innerHTML = "";
-  message.style.display = "block";
-
-  // Önceki yazı efektini durdur
-  clearInterval(typingInterval);
-
-  let index = 0;
-  typingInterval = setInterval(() => {
-    message.innerHTML += text.charAt(index);
-    index++;
-    if (index >= text.length) {
-      clearInterval(typingInterval);
-    }
-  }, 50);
-
-const nextBtn = document.getElementById("nextSurpriseBtn");
-nextBtn.style.display = "inline-block";
-
-document.getElementById("nextSurpriseBtn").addEventListener("click", () => {
-  openSurpriseBox();
- 
-});
-
+  // Düğmeye sadece **bir kere** event ekle
+  nextBtn.onclick = () => openSurpriseBox();
 }
 
-
+// 🎞️ Yazı yazma efekti
 function typeWriterEffect(container, text, speed = 40, callback = null) {
   container.innerHTML = "";
   container.style.display = "block";
-
-  const segments = text.split(/(<br>)/g); // <br> ile ayır
   let index = 0;
 
-  function write() {
-    if (index < segments.length) {
-      if (segments[index] === "<br>") {
-        container.innerHTML += "<br>";
-      } else {
-        let subIndex = 0;
-        const segment = segments[index];
-        const typeChar = () => {
-          if (subIndex < segment.length) {
-            container.innerHTML += segment.charAt(subIndex);
-            subIndex++;
-            setTimeout(typeChar, speed);
-          } else {
-            index++;
-            write(); // sonraki segmente geç
-          }
-        };
-        typeChar();
-        return;
-      }
-      index++;
-      write();
-    } else if (callback) {
-      callback(); // yazı bittiğinde callback çalışsın (opsiyonel)
+  typingInterval = setInterval(() => {
+    container.innerHTML += text.charAt(index);
+    index++;
+    if (index >= text.length) {
+      clearInterval(typingInterval);
+      if (callback) callback();
     }
-  }
-
-  write();
+  }, speed);
 }
 
-
-
+// 💜 Kalpler fırlatma animasyonu
 function launchGiftHearts(container) {
   let heartInterval = setInterval(() => {
     const giftHeart = document.createElement("div");
@@ -1877,8 +1844,6 @@ function launchGiftHearts(container) {
 
   setTimeout(() => clearInterval(heartInterval), 5000);
 }
-
-
 
 
 
