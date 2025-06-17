@@ -13,19 +13,9 @@ document.getElementById("startsBtn").addEventListener("click", () => {
 
 
 const message = `
- Bitanecik knkeytomun bugün  doğum günü...  yanii dünyanın en önemli tarihi 
-hemen hemen  her gün seni ne kadar çok sevdiğimi söylüyorum biliyosun ama bugün sana sadece "seni çok seviyorum" değil, "iyi ki doğdun" da demek istiyorum.
-Çünkü sen 06/06/2002 tarihinde doğmamış olsaydın, ben bu kadar mükemmel birisiyle tanışamamış olurdum.
-
-Seninle her şey daha anlamlı, her an daha renkli, eğlenceli, romantik, duygu dolu, heyecanlı ve ponçik.
-Bu küçük siteyi sana olan sevgimi kelimelere dökmek ve birlikte yaşadığımız  özel anları bir hatıra olarak saklamak için hazırladım. Umarım beğenirsin (başka şansın olmayacak sanırım 😄)
-
-İyi ki doğdun.
-İyi ki varsın.
-İyi ki yollarımız kesişti.
-İyi ki seninle tanıştım.
-İyi ki Pınar’sın.
-İyi ki... 🎂💖
+Hoş geldinnn.
+Bizim ponçik sitemiz, doğum günün için hazırlanan ama sadece doğum gününde değil her açtığında seni mutlu edebilecek bir sayfa
+Güzel anılar yaşadıkça güncellenecek biir sayfa inşallah yeni halini beğeinrsin diyelim hadi bakalım keyifli dakikalarr🤍💜...
 
 Seni çok çok seven,
 Halil`;
