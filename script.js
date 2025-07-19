@@ -1836,6 +1836,73 @@ function launchGiftHearts(container) {
 }
 
 
+function goToRandomUselessSite() {
+  const uselessSites = [
+    "https://heeeeeeeey.com/",
+    "https://thatsthefinger.com/",
+    "https://cant-not-tweet-this.com/",
+    "https://eelslap.com/",
+    "https://www.staggeringbeauty.com/",
+    "https://smashthewalls.com/",
+    "https://corndog.io/",
+    "https://koalastothemax.com/",
+    "https://www.patience-is-a-virtue.org/",
+    "https://burymewithmymoney.com/",
+    "https://www.fallingfalling.com/",
+    "https://ducksarethebest.com/",
+    "https://iamawesome.com/",
+    "https://chrismckenzie.com/",
+    "https://beesbeesbees.com/",
+    "https://zoomquilt.org/",
+    "https://endless.horse/",
+    "https://www.trypap.com/",
+    "https://checkboxrace.com/",
+    "https://cat-bounce.com/",
+    "https://weirdorconfusing.com/",
+    "https://mondrianandme.com/",
+    "https://www.rrrgggbbb.com/",
+    "https://www.ismycomputeron.com/",
+    "https://www.nouptime.com/",
+    "https://pleasewaitfor.com/",
+    "https://www.fishjs.dev/",
+    "https://leekspin.com/",
+    "https://corgiorgy.com/",
+    "https://longdogechallenge.com/",
+    "https://binarypiano.com/",
+    "https://everydayim.com/",
+    "https://www.hackertyper.net/",
+    "https://pointerpointer.com/",
+    "https://muchbetterthanthis.com/",
+    "https://www.republiquedesmangues.fr/",
+    "https://thezen.zone/",
+    "https://onesquareminesweeper.com/",
+    "https://buzzybuzz.biz/",
+    "https://tencents.info/",
+    "https://zombo.com/",
+    "https://window-swap.com/",
+    "https://radiooooo.com/",
+    "https://ffffidget.com/",
+    "https://findtheinvisiblecow.com/",
+    "https://nyan.cat/",
+    "https://screamintothevoid.com/",
+    "https://paper-toilet.com/",
+    "https://isitchristmas.com/",
+    "https://electric-boogie-woogie.com/",
+    "https://procatinator.com/",
+    "https://boredbutton.com/",
+    "https://everdreamthisman.com/",
+    "https://passweird.com/",
+    "https://youthatemannowdog.com/",
+    "https://one-million-checkboxes.com/",
+    "https://netdisaster.com/",
+    "https://superbad.com/",
+    "https://facesinplaces.blogspot.com/",
+    "https://mackerelmediafish.com/"
+  ];
+
+  const idx = Math.floor(Math.random() * uselessSites.length);
+  window.open(uselessSites[idx], "_blank");
+}
 
 
 
