@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pınar'ın Rulet Oyunu 💜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #e9d5ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7e22ce;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .game-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1024px) {
+            .game-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .wheel-container {
+            text-align: center;
+        }
+
+        .wheel-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            aspect-ratio: 1;
+        }
+
+        .wheel-glow {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.3), transparent);
+            filter: blur(40px);
+        }
+
+        .wheel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 8px solid #9333ea;
+            box-shadow: 0 25px 50px rgba(147, 51, 234, 0.4);
+            transition: transform 4s cubic-bezier(0.2, 0, 0.1, 1);
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            border: 4px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            color: white;
+            font-size: 1.3rem;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.5);
+        }
+
+        .wheel-arrow {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 20px solid #9333ea;
+            z-index: 20;
+            filter: drop-shadow(0 2px 4px rgba(147, 51, 234, 0.5));
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-spin {
+            background: linear-gradient(135deg, #9333ea, #7e22ce);
+            color: white;
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4);
+        }
+
+        .btn-spin:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.5);
+        }
+
+        .btn-clear {
+            background: white;
+            color: #7e22ce;
+            border: 2px solid #e9d5ff;
+        }
+
+        .btn-clear:hover:not(:disabled) {
+            background: #faf5ff;
+            border-color: #c084fc;
+        }
+
+        .btn-reset {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-reset:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5);
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.4);
+        }
+
+        .btn-back:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.5);
+        }
+
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.1);
+            border: 1px solid #f3e8ff;
+        }
+
+        .balance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .balance-item {
+            text-align: center;
+        }
+
+        .balance-label {
+            color: #9333ea;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .balance-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        .balance-value.purple {
+            color: #9333ea;
+        }
+
+        .chip-selector h3 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #7e22ce;
+        }
+
+        .chips {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .chip {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(147, 51, 234, 0.3);
+        }
+
+        .chip:hover {
+            transform: scale(1.05);
+        }
+
+        .chip.selected {
+            transform: scale(1.15);
+            box-shadow: 0 0 0 4px #9333ea;
+        }
+
+        .chip-10 { background: linear-gradient(135deg, #e9d5ff, #d8b4fe); color: #6b21a8; }
+        .chip-50 { background: linear-gradient(135deg, #c084fc, #a855f7); color: white; }
+        .chip-100 { background: linear-gradient(135deg, #9333ea, #7e22ce); color: white; }
+        .chip-500 { background: linear-gradient(135deg, #7e22ce, #6b21a8); color: white; }
+
+        .custom-chip {
+            display: flex;
+            gap: 10px;
+        }
+
+        .custom-chip input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e9d5ff;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .custom-chip input:focus {
+            border-color: #9333ea;
+        }
+
+        .custom-chip button {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            background: #9333ea;
+            color: white;
+        }
+
+        .selected-chip {
+            text-align: center;
+            margin-top: 10px;
+            color: #666;
+        }
+
+        .selected-chip strong {
+            color: #9333ea;
+        }
+
+        .betting-board {
+            background: linear-gradient(135deg, #7e22ce, #9333ea);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(147, 51, 234, 0.3);
+            border: 3px solid #c084fc;
+        }
+
+        .bet-zero {
+            margin-bottom: 15px;
+        }
+
+        .bet-button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: white;
+            border: 2px solid #16a34a;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .bet-button:hover:not(:disabled) {
+            filter: brightness(1.1);
+            transform: scale(1.02);
+        }
+
+        .bet-button.red {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            border-color: #dc2626;
+        }
+
+        .bet-button.black {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border-color: #1a1a1a;
+        }
+
+        .bet-button.neutral {
+            background: white;
+            color: #7e22ce;
+            border: 2px solid #e9d5ff;
+        }
+
+        .bet-button.neutral:hover:not(:disabled) {
+            background: #faf5ff;
+            border-color: #9333ea;
+        }
+
+        .bet-multiplier {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-left: 5px;
+        }
+
+        .bet-amount {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: white;
+            color: #7e22ce;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .number-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .number-grid {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 5px;
+            }
+        }
+
+        .number-button {
+            aspect-ratio: 1;
+            padding: 0;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .outside-bets {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .outside-bets {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(126, 34, 206, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(147, 51, 234, 0.4);
+            border: 2px solid #e9d5ff;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .result-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            border: 8px solid #9333ea;
+            box-shadow: 0 8px 20px rgba(147, 51, 234, 0.4);
+        }
+
+        .result-circle.red { background: #dc2626; }
+        .result-circle.black { background: #1a1a1a; }
+        .result-circle.green { background: #16a34a; }
+
+        .win-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #9333ea;
+            margin: 20px 0;
+        }
+
+        .loss-message {
+            color: #dc2626;
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        .modal-button {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(126, 34, 206, 0.95);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 100;
+            margin-bottom: 5px;
+        }
+
+        .dedication {
+            text-align: center;
+            margin-top: 30px;
+            color: #9333ea;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .start-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(126, 34, 206, 0.6);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .start-screen.show {
+            display: flex;
+        }
+
+        .start-content {
+            background: white;
+            border-radius: 24px;
+            padding: 50px;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            box-shadow: 0 25px 70px rgba(147, 51, 234, 0.5);
+            border: 3px solid #9333ea;
+        }
+
+        .start-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .start-content .welcome-text {
+            color: #7e22ce;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .rules-section {
+            text-align: left;
+            margin: 30px 0;
+            padding: 25px;
+            background: #faf5ff;
+            border-radius: 16px;
+            border: 2px solid #e9d5ff;
+        }
+
+        .rules-section h3 {
+            color: #9333ea;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .rules-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .rules-section li {
+            color: #6b21a8;
+            margin: 12px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .rules-section li:before {
+            content: "💜";
+            position: absolute;
+            left: 0;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #9333ea, #7e22ce);
+            color: white;
+            padding: 18px 60px;
+            font-size: 1.3rem;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            box-shadow: 0 6px 25px rgba(147, 51, 234, 0.5);
+            transition: all 0.3s;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(147, 51, 234, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .subtitle { font-size: 0.9rem; }
+            button { padding: 12px 25px; font-size: 1rem; }
+            .balance-value { font-size: 1.5rem; }
+            .chip { width: 50px; height: 50px; }
+            
+            .start-content {
+                padding: 30px 20px;
+                max-width: 95%;
+            }
+            
+            .start-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn-start {
+                padding: 15px 40px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💜 Pınar'ın Rulet Oyunu 💜</h1>
+            <p class="subtitle">Senin için özel hazırlandı ✨</p>
+        </header>
+
+        <div class="game-layout">
+            <div>
+                <div class="wheel-container">
+                    <div class="wheel-wrapper">
+                        <div class="wheel-glow"></div>
+                        <div class="wheel-arrow"></div>
+                        <div class="wheel" id="wheel">
+                            <svg viewBox="0 0 200 200" style="width: 100%; height: 100%;"></svg>
+                            <div class="wheel-center">P</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn-spin" id="spinBtn">Çarkı Çevir</button>
+                    <button class="btn-clear" id="clearBtn">Bahisleri Temizle</button>
+                    <button class="btn-reset" id="resetBtn">Sıfırla</button>
+                    <button class="btn-back" onclick="window.location.href='index.html#menuSection'">🔙 Ana Menü</button>
+                </div>
+            </div>
+
+            <div class="side-panel">
+                <div class="card">
+                    <div class="balance-grid">
+                        <div class="balance-item">
+                            <div class="balance-label">Bakiye</div>
+                            <div class="balance-value" id="balance">1000₺</div>
+                        </div>
+                        <div class="balance-item">
+                            <div class="balance-label">Toplam Bahis</div>
+                            <div class="balance-value purple" id="totalBet">0₺</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card chip-selector">
+                    <h3>Bahis Miktarı</h3>
+                    <div class="chips">
+                        <button class="chip chip-10 selected" data-value="10">10₺</button>
+                        <button class="chip chip-50" data-value="50">50₺</button>
+                        <button class="chip chip-100" data-value="100">100₺</button>
+                        <button class="chip chip-500" data-value="500">500₺</button>
+                    </div>
+                    <div class="custom-chip">
+                        <input type="number" id="customChip" placeholder="Özel miktar..." min="1">
+                        <button id="setCustomChip">Ayarla</button>
+                    </div>
+                    <div class="selected-chip">Seçili: <strong id="selectedChip">10₺</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="betting-board">
+            <div class="bet-zero">
+                <button class="bet-button tooltip" data-bet-type="number" data-bet-value="0" data-tooltip="36x kazanç">
+                    <span style="font-size: 2rem;">0</span>
+                    <span class="bet-multiplier">(36x)</span>
+                </button>
+            </div>
+
+            <div class="number-grid" id="numberGrid"></div>
+
+            <div class="outside-bets">
+                <button class="bet-button red tooltip" data-bet-type="color" data-bet-value="red" data-tooltip="2x kazanç">
+                    KIRMIZI <span class="bet-multiplier">(2x)</span>
+                </button>
+                <button class="bet-button black tooltip" data-bet-type="color" data-bet-value="black" data-tooltip="2x kazanç">
+                    SİYAH <span class="bet-multiplier">(2x)</span>
+                </button>
+            </div>
+
+            <div class="outside-bets">
+                <button class="bet-button neutral tooltip" data-bet-type="parity" data-bet-value="even" data-tooltip="2x kazanç">
+                    ÇİFT <span class="bet-multiplier">(2x)</span>
+                </button>
+                <button class="bet-button neutral tooltip" data-bet-type="parity" data-bet-value="odd" data-tooltip="2x kazanç">
+                    TEK <span class="bet-multiplier">(2x)</span>
+                </button>
+            </div>
+        </div>
+
+        <p class="dedication">Pınar'a sevgilerle 💜</p>
+    </div>
+
+    <div class="modal" id="resultModal">
+        <div class="modal-content">
+            <h2 class="modal-title" id="modalTitle">Tebrikler Bitanemmm</h2>
+            <div class="result-circle" id="resultCircle">7</div>
+            <div id="resultMessage"></div>
+            <button class="btn-spin modal-button" id="closeModal">Tamam</button>
+        </div>
+    </div>
+
+    <div class="start-screen show" id="startScreen">
+        <div class="start-content">
+            <h2>💜 Hoş Geldin Pınar! 💜</h2>
+            <p class="welcome-text">Senin için özel hazırladığım  rulet oyununa hoş geldin Aşkımm! ✨</p>
+            
+            <div class="rules-section">
+                <h3>🎮 Nasıl Oynanır?</h3>
+                <ul>
+                    <li>Başlangıç bakiyen <strong>1000₺</strong></li>
+                    <li>Bahis miktarını seç (10₺, 50₺, 100₺, 500₺ veya özel miktar)</li>
+                    <li>Sayılara, renklere (Kırmızı/Siyah) veya tek/çift sayılara bahis yap</li>
+                    <li>"Çarkı Çevir" butonuna tıkla</li>
+                    <li>Çark durduktan sonra kazancın hesaplanır</li>
+                </ul>
+            </div>
+
+            <div class="rules-section">
+                <h3>💰 Kazanç Oranları</h3>
+                <ul>
+                    <li><strong>Tek sayı:</strong> 36x kazanç</li>
+                    <li><strong>Renk (Kırmızı/Siyah):</strong> 2x kazanç</li>
+                    <li><strong>Tek/Çift:</strong> 2x kazanç</li>
+                </ul>
+            </div>
+
+            <div class="rules-section">
+                <h3>🎯 İpuçları</h3>
+                <ul>
+                    <li>Bahisleri temizlemek için "Bahisleri Temizle" butonunu kullan</li>
+                    <li>Oyunu sıfırlamak için "Sıfırla" butonuna bas</li>
+                    <li>Ana menüye dönmek için "Ana Menü" butonunu kullan</li>
+                    <li>Bahisler bir sonraki spinde otomatik devam eder</li>
+                </ul>
+            </div>
+
+            <button class="btn-start" id="startBtn">🎰 Oyuna Başla</button>
+        </div>
+    </div>
+
+    <script>
+        const gameState = {
+            balance: 1000,
+            bets: [],
+            selectedChip: 10,
+            spinning: false,
+            winningNumber: null,
+            currentRotation: 0
+        };
+
+        const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
+        const blackNumbers = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35];
+        
+        const wheelNumbers = [
+            { num: 0, color: 'green' }, { num: 32, color: 'red' }, { num: 15, color: 'black' },
+            { num: 19, color: 'red' }, { num: 4, color: 'black' }, { num: 21, color: 'red' },
+            { num: 2, color: 'black' }, { num: 25, color: 'red' }, { num: 17, color: 'black' },
+            { num: 34, color: 'red' }, { num: 6, color: 'black' }, { num: 27, color: 'red' },
+            { num: 13, color: 'black' }, { num: 36, color: 'red' }, { num: 11, color: 'black' },
+            { num: 30, color: 'red' }, { num: 8, color: 'black' }, { num: 23, color: 'red' },
+            { num: 10, color: 'black' }, { num: 5, color: 'red' }, { num: 24, color: 'black' },
+            { num: 16, color: 'red' }, { num: 33, color: 'black' }, { num: 1, color: 'red' },
+            { num: 20, color: 'black' }, { num: 14, color: 'red' }, { num: 31, color: 'black' },
+            { num: 9, color: 'red' }, { num: 22, color: 'black' }, { num: 18, color: 'red' },
+            { num: 29, color: 'black' }, { num: 7, color: 'red' }, { num: 28, color: 'black' },
+            { num: 12, color: 'red' }, { num: 35, color: 'black' }, { num: 3, color: 'red' },
+            { num: 26, color: 'black' }
+        ];
+
+        function getNumberColor(num) {
+            if (num === 0) return 'green';
+            return redNumbers.includes(num) ? 'red' : 'black';
+        }
+
+        function updateDisplay() {
+            document.getElementById('balance').textContent = gameState.balance + '₺';
+            const totalBet = gameState.bets.reduce((sum, bet) => sum + bet.amount, 0);
+            document.getElementById('totalBet').textContent = totalBet + '₺';
+            
+            document.querySelectorAll('.bet-button').forEach(btn => {
+                const existing = btn.querySelector('.bet-amount');
+                if (existing) existing.remove();
+                
+                const type = btn.dataset.betType;
+                const value = btn.dataset.betValue;
+                const bet = gameState.bets.find(b => b.type === type && b.value == value);
+                
+                if (bet && bet.amount > 0) {
+                    const span = document.createElement('span');
+                    span.className = 'bet-amount';
+                    span.textContent = bet.amount + '₺';
+                    btn.appendChild(span);
+                }
+            });
+        }
+
+        function createWheel() {
+            const svg = document.querySelector('#wheel svg');
+            const segmentAngle = 360 / wheelNumbers.length;
+            
+            wheelNumbers.forEach((item, index) => {
+                const startAngle = (index * segmentAngle - 90) * (Math.PI / 180);
+                const endAngle = ((index + 1) * segmentAngle - 90) * (Math.PI / 180);
+                const x1 = 100 + 95 * Math.cos(startAngle);
+                const y1 = 100 + 95 * Math.sin(startAngle);
+                const x2 = 100 + 95 * Math.cos(endAngle);
+                const y2 = 100 + 95 * Math.sin(endAngle);
+                
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M 100 100 L ${x1} ${y1} A 95 95 0 0 1 ${x2} ${y2} Z`);
+                path.setAttribute('fill', item.color === 'red' ? '#dc2626' : item.color === 'black' ? '#1a1a1a' : '#16a34a');
+                path.setAttribute('stroke', '#9333ea');
+                path.setAttribute('stroke-width', '0.5');
+                svg.appendChild(path);
+                
+                const textAngle = index * segmentAngle + segmentAngle / 2;
+                const textRadius = 75;
+                const textX = 100 + textRadius * Math.cos((textAngle - 90) * (Math.PI / 180));
+                const textY = 100 + textRadius * Math.sin((textAngle - 90) * (Math.PI / 180));
+                
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', textX);
+                text.setAttribute('y', textY);
+                text.setAttribute('fill', 'white');
+                text.setAttribute('font-size', '7');
+                text.setAttribute('font-weight', 'bold');
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('dominant-baseline', 'middle');
+                text.setAttribute('transform', `rotate(${textAngle}, ${textX}, ${textY})`);
+                text.textContent = item.num;
+                svg.appendChild(text);
+            });
+        }
+
+        function createNumberGrid() {
+            const grid = document.getElementById('numberGrid');
+            for (let i = 1; i <= 36; i++) {
+                const btn = document.createElement('button');
+                btn.className = `bet-button number-button ${getNumberColor(i)} tooltip`;
+                btn.dataset.betType = 'number';
+                btn.dataset.betValue = i;
+                btn.dataset.tooltip = '36x kazanç';
+                btn.textContent = i;
+                grid.appendChild(btn);
+            }
+        }
+
+        document.querySelectorAll('.chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                if (gameState.spinning) return;
+                document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+                chip.classList.add('selected');
+                gameState.selectedChip = parseInt(chip.dataset.value);
+                document.getElementById('selectedChip').textContent = gameState.selectedChip + '₺';
+            });
+        });
+
+        document.getElementById('setCustomChip').addEventListener('click', () => {
+            if (gameState.spinning) return;
+            const value = parseInt(document.getElementById('customChip').value);
+            if (value > 0) {
+                gameState.selectedChip = value;
+                document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+                document.getElementById('selectedChip').textContent = value + '₺';
+                document.getElementById('customChip').value = '';
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.bet-button');
+            if (!btn || gameState.spinning || !btn.dataset.betType) return;
+            
+            const type = btn.dataset.betType;
+            const value = btn.dataset.betValue;
+            
+            if (gameState.balance < gameState.selectedChip) {
+                alert('Yetersiz bakiye!');
+                return;
+            }
+            
+            gameState.balance -= gameState.selectedChip;
+            
+            const existing = gameState.bets.find(b => b.type === type && b.value == value);
+            if (existing) {
+                existing.amount += gameState.selectedChip;
+            } else {
+                gameState.bets.push({ type, value, amount: gameState.selectedChip });
+            }
+            
+            updateDisplay();
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            if (gameState.spinning) return;
+            const totalBet = gameState.bets.reduce((sum, bet) => sum + bet.amount, 0);
+            gameState.balance += totalBet;
+            gameState.bets = [];
+            updateDisplay();
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            if (gameState.spinning) return;
+            if (confirm('Oyunu sıfırlamak istediğinizden emin misiniz? Bakiye 1000₺\'ye dönecek.')) {
+                gameState.balance = 1000;
+                gameState.bets = [];
+                gameState.selectedChip = 10;
+                gameState.currentRotation = 0;
+                
+                const wheel = document.getElementById('wheel');
+                wheel.style.transition = 'none';
+                wheel.style.transform = 'rotate(0deg)';
+                
+                setTimeout(() => {
+                    wheel.style.transition = 'transform 4s cubic-bezier(0.2, 0, 0.1, 1)';
+                }, 50);
+                
+                document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+                document.querySelector('.chip-10').classList.add('selected');
+                document.getElementById('selectedChip').textContent = '10₺';
+                
+                updateDisplay();
+            }
+        });
+
+        document.getElementById('spinBtn').addEventListener('click', () => {
+            if (gameState.spinning || gameState.bets.length === 0) {
+                if (gameState.bets.length === 0) alert('Lütfen önce bahis yapın!');
+                return;
+            }
+            
+            gameState.spinning = true;
+            gameState.winningNumber = Math.floor(Math.random() * 37);
+            
+            const winningIndex = wheelNumbers.findIndex(n => n.num === gameState.winningNumber);
+            const segmentAngle = 360 / wheelNumbers.length;
+            const targetAngle = winningIndex * segmentAngle + segmentAngle / 2;
+            const extraSpins = 360 * 5;
+            const finalRotation = gameState.currentRotation + extraSpins + (360 - targetAngle);
+            
+            const wheel = document.getElementById('wheel');
+            wheel.style.transition = 'none';
+            wheel.style.transform = `rotate(${gameState.currentRotation}deg)`;
+            
+            setTimeout(() => {
+                wheel.style.transition = 'transform 4s cubic-bezier(0.2, 0, 0.1, 1)';
+                wheel.style.transform = `rotate(${finalRotation}deg)`;
+                gameState.currentRotation = finalRotation % 360;
+            }, 50);
+            
+            setTimeout(() => {
+                calculateWinnings();
+                gameState.spinning = false;
+            }, 4000);
+        });
+
+        function calculateWinnings() {
+            let totalWin = 0;
+            
+            gameState.bets.forEach(bet => {
+                if (bet.type === 'number' && bet.value == gameState.winningNumber) {
+                    totalWin += bet.amount * 36;
+                } else if (bet.type === 'color') {
+                    if (bet.value === 'red' && redNumbers.includes(gameState.winningNumber)) {
+                        totalWin += bet.amount * 2;
+                    } else if (bet.value === 'black' && blackNumbers.includes(gameState.winningNumber)) {
+                        totalWin += bet.amount * 2;
+                    }
+                } else if (bet.type === 'parity' && gameState.winningNumber !== 0) {
+                    if (bet.value === 'even' && gameState.winningNumber % 2 === 0) {
+                        totalWin += bet.amount * 2;
+                    } else if (bet.value === 'odd' && gameState.winningNumber % 2 === 1) {
+                        totalWin += bet.amount * 2;
+                    }
+                }
+            });
+            
+            gameState.balance += totalWin;
+            showResult(totalWin);
+            updateDisplay();
+        }
+
+        function showResult(winAmount) {
+            const modal = document.getElementById('resultModal');
+            const circle = document.getElementById('resultCircle');
+            const title = document.getElementById('modalTitle');
+            const message = document.getElementById('resultMessage');
+            
+            circle.textContent = gameState.winningNumber;
+            circle.className = 'result-circle ' + getNumberColor(gameState.winningNumber);
+            
+            if (winAmount > 0) {
+                title.textContent = 'Tebrikler Pınar! 💜';
+                message.innerHTML = `<p style="color: #9333ea; margin-bottom: 10px; font-weight: 500;">Kazancın</p><div class="win-amount">+${winAmount}₺</div>`;
+            } else {
+                title.textContent = 'Bu Sefer Olmadı';
+                message.innerHTML = '<p class="loss-message">Tekrar dene! 💜</p>';
+            }
+            
+            modal.classList.add('show');
+        }
+
+        document.getElementById('closeModal').addEventListener('click', () => {
+            document.getElementById('resultModal').classList.remove('show');
+        });
+
+        document.getElementById('startBtn').addEventListener('click', () => {
+            document.getElementById('startScreen').classList.remove('show');
+        });
+
+        createWheel();
+        createNumberGrid();
+        updateDisplay();
+    </script>
+</body>
+</html>
