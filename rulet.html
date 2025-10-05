@@ -650,7 +650,7 @@
     <div class="container">
         <header>
             <h1>💜 Pınar'ın Rulet Oyunu 💜</h1>
-            <p class="subtitle">Senin için özel hazırlandı ✨</p>
+            <p class="subtitle">Pınar  için özel hazırlandı ✨</p>
         </header>
 
         <div class="game-layout">
@@ -734,12 +734,12 @@
             </div>
         </div>
 
-        <p class="dedication">Pınar'a sevgilerle 💜</p>
+        <p class="dedication">Sevgiyle hazırlandı 💜</p>
     </div>
 
     <div class="modal" id="resultModal">
         <div class="modal-content">
-            <h2 class="modal-title" id="modalTitle">Tebrikler Bitanemmm</h2>
+            <h2 class="modal-title" id="modalTitle">Tebrikler!</h2>
             <div class="result-circle" id="resultCircle">7</div>
             <div id="resultMessage"></div>
             <button class="btn-spin modal-button" id="closeModal">Tamam</button>
@@ -749,10 +749,10 @@
     <div class="start-screen show" id="startScreen">
         <div class="start-content">
             <h2>💜 Hoş Geldin Pınar! 💜</h2>
-            <p class="welcome-text">Senin için özel hazırladığım  rulet oyununa hoş geldin Aşkımm! ✨</p>
+            <p class="welcome-text">Senin için özel hazırladığım  rulet oyununa hoş geldin Bitanemm! ✨</p>
             
             <div class="rules-section">
-                <h3>🎮 Nasıl Oynanır?</h3>
+                <h3>🎮 Nasıl Oynicaksın?</h3>
                 <ul>
                     <li>Başlangıç bakiyen <strong>1000₺</strong></li>
                     <li>Bahis miktarını seç (10₺, 50₺, 100₺, 500₺ veya özel miktar)</li>
@@ -968,37 +968,37 @@
                 updateDisplay();
             }
         });
+document.getElementById('spinBtn').addEventListener('click', () => {
+    if (gameState.spinning || gameState.bets.length === 0) {
+        if (gameState.bets.length === 0) alert('Lütfen önce bahis yap bitanemm!');
+        return;
+    }
 
-        document.getElementById('spinBtn').addEventListener('click', () => {
-            if (gameState.spinning || gameState.bets.length === 0) {
-                if (gameState.bets.length === 0) alert('Lütfen önce bahis yapın!');
-                return;
-            }
-            
-            gameState.spinning = true;
-            gameState.winningNumber = Math.floor(Math.random() * 37);
-            
-            const winningIndex = wheelNumbers.findIndex(n => n.num === gameState.winningNumber);
-            const segmentAngle = 360 / wheelNumbers.length;
-            const targetAngle = winningIndex * segmentAngle + segmentAngle / 2;
-            const extraSpins = 360 * 5;
-            const finalRotation = gameState.currentRotation + extraSpins + (360 - targetAngle);
-            
-            const wheel = document.getElementById('wheel');
-            wheel.style.transition = 'none';
-            wheel.style.transform = `rotate(${gameState.currentRotation}deg)`;
-            
-            setTimeout(() => {
-                wheel.style.transition = 'transform 4s cubic-bezier(0.2, 0, 0.1, 1)';
-                wheel.style.transform = `rotate(${finalRotation}deg)`;
-                gameState.currentRotation = finalRotation % 360;
-            }, 50);
-            
-            setTimeout(() => {
-                calculateWinnings();
-                gameState.spinning = false;
-            }, 4000);
-        });
+    gameState.spinning = true;
+    gameState.winningNumber = Math.floor(Math.random() * 37);
+
+    const wheel = document.getElementById('wheel');
+    const segmentAngle = 360 / wheelNumbers.length;
+    const winningIndex = wheelNumbers.findIndex(n => n.num === gameState.winningNumber);
+
+    const spins = 5; // Çarkın kaç tur döneceği
+    const targetRotation = spins * 360 + (360 - (winningIndex * segmentAngle + segmentAngle / 2));
+
+    // Animasyonu sıfırdan başlat
+    wheel.style.transition = 'none';
+    wheel.style.transform = 'rotate(0deg)';
+
+    setTimeout(() => {
+        wheel.style.transition = 'transform 4s cubic-bezier(0.2, 0, 0.1, 1)';
+        wheel.style.transform = `rotate(${targetRotation}deg)`;
+    }, 50);
+
+    setTimeout(() => {
+        calculateWinnings();
+        gameState.spinning = false;
+    }, 4000);
+});
+
 
         function calculateWinnings() {
             let totalWin = 0;
