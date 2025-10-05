@@ -5,268 +5,417 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Pınar'a Mektuplarım💜🤍</title>
 <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   body {
-    margin: 0; padding: 40px 20px;
-    background: linear-gradient(135deg, #f8eaf9, #f0dff7);
+    margin: 0;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #4a2a63 100%);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #4a2a63;
+    color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
   }
-  .page {
-  overflow-y: auto;
-  max-height: 80vh; /* mobilde taşmayı önlemek için */
-}
+
+  /* Yıldızlar animasyonu */
+  .stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* Kalp yağmuru */
+  .heart-rain {
+    position: fixed;
+    top: -50px;
+    font-size: 20px;
+    color: #ff69b4;
+    pointer-events: none;
+    animation: fall linear infinite;
+    z-index: 1;
+    opacity: 0.7;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(100vh) rotate(360deg);
+    }
+  }
 
   h1 {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    margin-top: 20px;
     font-weight: 700;
-    font-size: 2.5rem;
-    text-shadow: 1px 1px 3px rgba(102, 50, 100, 0.4);
+    font-size: 2.8rem;
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 0 0 40px rgba(255, 105, 180, 0.4);
+    animation: glow 2s ease-in-out infinite alternate;
+    z-index: 10;
+    position: relative;
+  }
+
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 0 0 40px rgba(255, 105, 180, 0.4);
+    }
+    to {
+      text-shadow: 0 0 30px rgba(255, 105, 180, 1), 0 0 60px rgba(255, 105, 180, 0.6);
+    }
   }
 
   .zarf-container {
-     gap: 20px;    
     display: flex;
     gap: 40px;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 900px;
+    max-width: 1000px;
     width: 100%;
+    z-index: 10;
+    position: relative;
   }
 
   .zarf-wrapper {
-    perspective: 800px;
+    perspective: 1000px;
     cursor: pointer;
-    width: 140px;
-    height: 100px;
+    width: 160px;
+    height: 120px;
     position: relative;
-    transition: transform 0.5s ease, left 0.5s ease, top 0.5s ease;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     z-index: 1;
+    filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.3));
   }
 
-  /* Zoom efekti: büyüklük ve ekrana ortalanma */
+  .zarf-wrapper:hover {
+    transform: translateY(-10px) scale(1.05);
+    filter: drop-shadow(0 0 25px rgba(255, 105, 180, 0.8));
+  }
+
   .zarf-wrapper.zoom {
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 420px;  /* 3x normal genişlik */
-    height: 300px; /* 3x normal yükseklik */
-    transform: translate(-50%, -50%) !important; /* Ekran ortası */
-    transition: all 0.5s ease;
+    width: 450px;
+    height: 350px;
+    transform: translate(-50%, -50%) !important;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     cursor: default;
     z-index: 9999;
+    filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.9));
   }
 
-  /* Zarf gövdesi (kare/dikdörtgen) */
   .zarf {
     position: relative;
-    width: 140px;
-    height: 80px;
-    background: linear-gradient(135deg, #7b4b9a, #5a3470);
-    border-radius: 10px;
+    width: 160px;
+    height: 100px;
+    background: linear-gradient(135deg, #b186d9 0%, #8b5cf6 50%, #a855f7 100%);
+    border-radius: 12px;
     box-shadow:
-      0 6px 15px rgba(0,0,0,0.25),
-      inset 0 0 12px rgba(255, 255, 255, 0.2);
+      0 8px 25px rgba(168, 85, 247, 0.4),
+      inset 0 2px 15px rgba(255, 255, 255, 0.3);
     transform-style: preserve-3d;
-    transition: width 0.5s ease, height 0.5s ease;
+    transition: all 0.5s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
   }
 
-  /* Zoom olunca zarf boyutları büyür */
+  .zarf::before {
+    content: '💜';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    opacity: 0.3;
+  }
+
   .zarf-wrapper.zoom .zarf {
-    width: 420px;
-    height: 260px;
+    width: 450px;
+    height: 300px;
   }
 
-  /* Üçgen kapak (doğru yönlü): yukarı bakıyor */
+  .zarf-wrapper.zoom .zarf::before {
+    font-size: 4rem;
+  }
+
   .flap {
     position: absolute;
     top: 0;
     left: 0;
-    width: 0; 
+    width: 0;
     height: 0;
-    border-left: 70px solid transparent;
-    border-right: 70px solid transparent;
-    border-top: 60px solid #b186d9;
-    border-radius: 10px 10px 0 0;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-top: 70px solid #d8b4fe;
+    border-radius: 12px 12px 0 0;
     transform-origin: top center;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), border-width 0.5s ease;
+    box-shadow: 0 4px 15px rgba(216, 180, 254, 0.5);
+    transition: all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     z-index: 5;
   }
 
-  /* Kapak açılınca yukarı doğru kalkar */
   .zarf-wrapper.open .flap {
     transform: rotateX(150deg);
     box-shadow: none;
-    border-left-width: 210px; /* 3x büyüdü */
-    border-right-width: 210px;
-    border-top-width: 180px;
+    border-left-width: 225px;
+    border-right-width: 225px;
+    border-top-width: 200px;
   }
 
-  /* İç sayfa - beyaz kağıt */
   .page {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 100px;
-    height: 70px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    padding: 20px 25px;
+    top: 25px;
+    left: 25px;
+    width: 110px;
+    height: 80px;
+    background: linear-gradient(135deg, #fff 0%, #fef3ff 100%);
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    padding: 20px;
     box-sizing: border-box;
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: #4a2a56;
-    line-height: 1.5;
+    line-height: 1.6;
     opacity: 0;
-    transform: translateZ(20px);
-    transition: opacity 0.5s ease 0.6s, width 0.5s ease, height 0.5s ease, top 0.5s ease, left 0.5s ease;
+    transform: translateZ(30px);
+    transition: all 0.6s ease 0.7s;
     user-select: text;
     overflow-y: auto;
+    border: 2px solid rgba(168, 85, 247, 0.2);
   }
 
-  /* Zoom olunca beyaz kağıt da büyür ve konumu değişir */
+  .page::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .page::-webkit-scrollbar-track {
+    background: rgba(168, 85, 247, 0.1);
+    border-radius: 10px;
+  }
+
+  .page::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #a855f7, #d8b4fe);
+    border-radius: 10px;
+  }
+
   .zarf-wrapper.zoom .page {
-    width: 380px;
-    height: 220px;
-    top: 40px;
-    left: 40px;
-    font-size: 1.25rem;
+    width: 400px;
+    height: 250px;
+    top: 50px;
+    left: 25px;
+    font-size: 1.2rem;
     opacity: 1;
+    padding: 30px;
   }
 
-  /* İç sayfa görünür */
   .zarf-wrapper.open .page {
     opacity: 1;
   }
 
-  /* Zarf etiketi */
   .label {
-    margin-top: 12px;
-    font-weight: 600;
-    color: #593673;
+    margin-top: 15px;
+    font-weight: 700;
+    color: #fef3ff;
     user-select: none;
     font-size: 1.1rem;
     text-align: center;
+    text-shadow: 0 2px 10px rgba(168, 85, 247, 0.8);
+    letter-spacing: 0.5px;
   }
 
-  /* Responsive küçültme */
+  .giris-kutusu {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding: 30px;
+    color: #fff;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(216, 180, 254, 0.2));
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    box-shadow: 0 8px 32px rgba(168, 85, 247, 0.4);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Segoe UI', sans-serif;
+    animation: fadeInScale 1s ease-out;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    z-index: 10;
+    position: relative;
+  }
+
+  .giris-kutusu strong {
+    display: block;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+  }
+
+  .giris-kutusu .kapat {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+  }
+
+  .giris-kutusu .kapat:hover {
+    transform: scale(1.2) rotate(90deg);
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.8) translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .back-button {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 14px 28px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 10;
+    position: relative;
+    text-decoration: none;
+  }
+
+  .back-button:hover {
+    transform: scale(1.08) translateY(-3px);
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.6);
+  }
+
+  .back-button:active {
+    transform: scale(0.95);
+  }
+
+  /* Overlay arka plan için */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 9998;
+  }
+
+  .overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
   @media (max-width: 600px) {
+    h1 {
+      font-size: 2rem;
+    }
+    
     .zarf-wrapper {
-          margin: 15px;  
-      width: 110px;
+      width: 130px;
+      height: 100px;
+      margin: 10px;
+    }
+    
+    .zarf-wrapper.zoom {
+      width: 90%;
+      max-width: 350px;
+      height: 280px;
+    }
+    
+    .zarf {
+      width: 130px;
       height: 80px;
     }
-    .zarf-wrapper.zoom {
-      width: 300px;
+    
+    .zarf-wrapper.zoom .zarf {
+      width: 100%;
       height: 220px;
     }
-    .zarf {
-      width: 110px;
-      height: 65px;
-    }
-    .zarf-wrapper.zoom .zarf {
-      width: 300px;
-      height: 180px;
-    }
+    
     .flap {
-      border-left: 55px solid transparent;
-      border-right: 55px solid transparent;
-      border-top: 45px solid #b186d9;
+      border-left: 65px solid transparent;
+      border-right: 65px solid transparent;
+      border-top: 55px solid #d8b4fe;
     }
+    
     .zarf-wrapper.open .flap {
-      border-left-width: 150px;
-      border-right-width: 150px;
-      border-top-width: 120px;
+      border-left-width: 175px;
+      border-right-width: 175px;
+      border-top-width: 140px;
     }
+    
     .page {
-      width: 85px;
-      height: 55px;
-      padding: 12px 15px;
-      font-size: 0.9rem;
-      top: 15px;
-      left: 15px;
+      width: 95px;
+      height: 65px;
+      padding: 15px;
+      font-size: 0.85rem;
+      top: 20px;
+      left: 18px;
     }
+    
     .zarf-wrapper.zoom .page {
-      width: 260px;
-      height: 160px;
+      width: 90%;
+      height: 180px;
       font-size: 1rem;
-      top: 30px;
-      left: 20px;
+      top: 35px;
+      left: 5%;
+      padding: 20px;
     }
+    
     .label {
-      font-size: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .giris-kutusu {
+      padding: 20px;
+    }
+
+    .giris-kutusu strong {
+      font-size: 1.6rem;
     }
   }
-
-
-.giris-kutusu {
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  padding: 20px;
-  color: #5a3470;
-  background: linear-gradient(to right, #f3e6ff, #fff);
-  border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: 'Segoe UI', sans-serif;
-  animation: fadeIn 1.5s ease-out;
-}
-
-.giris-kutusu strong {
-  display: block;
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.giris-kutusu .kapat {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 1.2rem;
-  color: #5a3470;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-
-
-.back-button {
-  display: inline-block;
-  margin-top: 40px;
-  padding: 12px 24px;
-  font-size: 18px;
-  font-weight: bold;
-  color: white;
-  background: linear-gradient(135deg, #a64ca6, #843baf);
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.back-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
-}
-
-.back-button:active {
-  transform: scale(0.98);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
 </style>
 </head>
 <body>
@@ -276,12 +425,23 @@
 
 <div class="giris-kutusu" id="girisKutusu">
   <span class="kapat" onclick="kapatGiris()">×</span>
-  <strong>🎉 Hoş geldin!</strong>
+  <strong>🎉 Hoş geldin! Bitanemm</strong>
   <p>Bu  sayfamızda sana mektuplar yazdım hepsinin içeriği farklı eğer ... hissediyosan onu aç oku</p>
   <p>Ama dikkatli ol hepsini bir anda açma gerçekten hissediyosan aç </p>
 </div>
 
 <div class="zarf-container">
+
+
+   <div class="zarf-wrapper" data-message="Aşkımm mektuplarımı hazırladığımda biz birlikte değildik ama şimdi dönüp baktığmda bizim her zaman ne kadar mükemmel bir ilişkimiz varmış diyorum.Ben seni her zaman çok seviyormuşum her zaman senile vakit geçirmek istiyormuşum senin için çabalamak bişeyler paylaşmak istiyormuşum bu kada güzel bir birlikteliğimiz olduğu için kendimi çok şanslı hissediyorum.Benim için her zaman çok özeldin ve öyle kalacaksın seni her şeyden çok seviyorum bitanem iyi ki varsın.">
+    <div class="zarf">
+      <div class="flap"></div>
+      <div class="page"></div>
+    </div>
+    <div class="label">Aşk'ım ❤️</div>
+  </div>
+
+
 
 
    <div class="zarf-wrapper" data-message="Off sonundaaa bu mektubu açtıysan  şu bi türlü gelmek bilmeyen doğum günün gelmiş demektir öncelikle klasikk iyi ki doğdun iyi ki varsın demek istiyorum ama öylece diyip bırakmicam birazcık açayım İyi ki doğdun çünkü sen 6 haziran 2002 tarihinde doğmamış olsan ben ne yapardım hayatım nasıl giderdi bilmiyorum muhtemelen depresyonnn şekli olurdu ama sen varken bişeyler için uğraşıyorum ucunda senin mutluluğun olacağı için heyecanlanıyorumm hediyemi seninle buluşturmak için sabırsızlanıyorum doğum gününü bildiğin iple çekiyorum yani sizinkilere çokk teşekkür ediyorum senin gibi mükemmel bir varlığı dünyaya getirdiği için...İyi ki varsınn çünkü 364 gün boyunca  merakla beklediğim bir gün varsa o da bugüün acaba seninle bugünümüz nasıl geçecek inşallah her şey yolunda gider doğum senin dışında benim için pek de anlamı olmayan bişey ama söz konusu sen olunca bugünümüzü aylar öncesinden planlamaya çalışıyorumm sen anlamsız şeylerden bile anlam çıkarabilecek birisin bu yüzden ben seni çoook seviyorumm hadi bakalım ponçik yeni yaşın kutlu olsun seni çok çok çok seviyorumm💜🤍">
@@ -294,7 +454,7 @@
 
 
 
-  <div class="zarf-wrapper" data-message="Bitanecik knkeytom beni özlemiş, kendimi özletmeyi nasıl başardım bilmiyorum ama beni özlediğini düşünüyosan demek ki biraz uzak kalmışız benim senden uzak kalmam mümkün değil biz birlikte olmasak bile konuşmasak bile ben senin hep yanındayım pandacıklarım yanında eğer fiziksel olarak yanında olmamı isterssen nerede oluran ol Halil gel de ben nolursa olsun yanına gelirim biliyosun beni özlediysen birlikte çektiğimiz videolara resimlere bak bu websitemizi aç çünkü ben öyle yapıyorum emin ol beni özlediğini düşünüyosan  ben seni daha fazla özlemişimdir ve sen bu mektubu okumadan yanına gelmişimdir ama bu mektubu açtıysan yapman gereken tek şey bana sadece özledim yazmak.Seni seviyorumm ponçikk">
+  <div class="zarf-wrapper" data-message="Bitanecik Aşkımm beni özlemiş, kendimi özletmeyi nasıl başardım bilmiyorum ama beni özlediğini düşünüyosan demek ki biraz uzak kalmışız benim senden uzak kalmam mümkün değil biz birlikte olmasak bile konuşmasak bile ben senin hep yanındayım pandacıklarım yanında eğer fiziksel olarak yanında olmamı isterssen nerede oluran ol Halil gel de ben nolursa olsun yanına gelirim biliyosun beni özlediysen birlikte çektiğimiz videolara resimlere bak bu websitemizi aç çünkü ben öyle yapıyorum emin ol beni özlediğini düşünüyosan  ben seni daha fazla özlemişimdir ve sen bu mektubu okumadan yanına gelmişimdir ama bu mektubu açtıysan yapman gereken tek şey bana sadece özledim yazmak.Seni seviyorumm ponçikk">
     <div class="zarf">
       <div class="flap"></div>
       <div class="page"></div>
