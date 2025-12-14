@@ -467,24 +467,24 @@
     }
 
        
-  .back-button {
-    display: inline-block;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 14px 28px;
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(135deg, #a855f7, #ec4899);
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    z-index: 10;
-    position: relative;
-    text-decoration: none;
-  }
+.back-button {
+  display: inline-block;
+  padding: 2px 1px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 10;
+  position: fixed;  /* Sabitlemek için */
+  top: 20px;        /* Üstten mesafe */
+  left: 20px;       /* Soldan mesafe */
+  text-decoration: none;
+}
     
   </style>
 </head>
@@ -734,3 +734,4 @@
 </body>
 
 </html>
+
