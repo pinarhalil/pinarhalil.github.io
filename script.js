@@ -102,7 +102,7 @@ if (sectionId === "surpriseSection") {
   const message = document.getElementById("message");
   if (message) message.style.display = "block";
 
-  const startScreenCornhole = document.getElementById("startScreenCornhole");
+  const startScreenCornhole = document.getElementById("startScreen");
   if (startScreenCornhole) startScreenCornhole.style.display = "flex";
 
   const videoContainerCornhole = document.getElementById("videoContainerCornhole");
@@ -122,7 +122,7 @@ else {
   const message = document.getElementById("message");
   if (message) message.style.display = "none";
 
-  const startScreenCornhole = document.getElementById("startScreenCornhole");
+  const startScreenCornhole = document.getElementById("startScreen");
   if (startScreenCornhole) startScreenCornhole.style.display = "none";
 
   const videoContainerCornhole = document.getElementById("videoContainerCornhole");

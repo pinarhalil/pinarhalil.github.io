@@ -619,20 +619,10 @@ function closeAllLetters() {
     });
   });
 function kapatGiris() {
-  const kutu = document.getElementById('girisMetni');
-  kutu.style.display = 'none';
+  const kutu = document.getElementById('girisKutusu');
+  if (kutu) kutu.style.display = 'none';
 }
 
-
-document.addEventListener('DOMContentLoaded', () => {
-    window.kapatGiris = function() {
-      const giris = document.getElementById('girisKutusu');
-      if (giris) {
-        giris.style.display = 'none';
-      }
-    }
-  });
-  
 </script>
 
 </body>
