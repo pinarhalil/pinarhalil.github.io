@@ -968,55 +968,6 @@ function createHeart() {
     const swayX = Math.sin(swayAngle) * swayAmplitude;
     heart.style.bottom = posY + 'px';
     heart.style.left = posX + swayX + 'px';
-    heart.style.opacity -= 0.002;
-
-    if (posY > window.innerHeight + 30 || parseFloat(heart.style.opacity) <= 0) {
-      heart.remove();
-    } else {
-      animationId = requestAnimationFrame(animate);
-    }
-  }
-
-  animate();
-
-  // Kalp 15 saniye sonra otomatik olarak silinsin
-  setTimeout(() => {
-    heart.remove();
-    cancelAnimationFrame(animationId);
-  }, 15000);
-}
-
-// 💖 Zarif 3D Kalpler
-function createHeart() {
-  const heart = document.createElement('div');
-  heart.classList.add('heart');
-  const colors = ['heart-purple', 'heart-white'];
-  const colorClass = colors[Math.floor(Math.random() * colors.length)];
-  heart.classList.add(colorClass);
-
-  const size = Math.random() * 15 + 20;
-  heart.style.width = size + 'px';
-  heart.style.height = size + 'px';
-  heart.style.left = Math.random() * window.innerWidth + 'px';
-  heart.style.bottom = '-30px';
-  heart.style.opacity = (Math.random() * 0.5 + 0.5).toFixed(2);
-  document.body.appendChild(heart);
-
-  let posY = -30;
-  let posX = parseFloat(heart.style.left);
-  const speed = Math.random() * 0.5 + 0.3;
-  const swayAmplitude = Math.random() * 10 + 5;
-  let swayAngle = Math.random() * Math.PI * 2;
-  const swaySpeed = 0.02 + Math.random() * 0.02;
-
-  let animationId;
-
-  function animate() {
-    posY += speed;
-    swayAngle += swaySpeed;
-    const swayX = Math.sin(swayAngle) * swayAmplitude;
-    heart.style.bottom = posY + 'px';
-    heart.style.left = posX + swayX + 'px';
     heart.style.opacity = parseFloat(heart.style.opacity) - 0.002;
 
     if (posY > window.innerHeight + 30 || parseFloat(heart.style.opacity) <= 0) {
@@ -1043,8 +994,12 @@ setTimeout(() => {
 
 
   let useAlternateSound = false;
+  let flappyInitialized = false;
 function initFlappyPinar() {
- 
+  if (flappyInitialized) return; // Bölüme her girişte yeniden başlatmayı önle (aksi halde eski oyun döngüleri ve tıklama/klavye dinleyicileri birikip oyunu bozuyordu)
+  flappyInitialized = true;
+
+  let animationFrameId;
 
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
@@ -1308,7 +1263,11 @@ function drawGameOver() {
     loop();
   }
 }
+let cornholeInitialized = false;
 function initCornholeGame() {
+  if (cornholeInitialized) return; // Bölüme her girişte yeniden başlatmayı önle (aksi halde mouse/touch dinleyicileri birikip her atışta çoklu tetiklenme oluyordu)
+  cornholeInitialized = true;
+
   const canvas = document.getElementById('gameCanvas');
   const ctx = canvas.getContext('2d');
   const powerBarLeft = document.getElementById('powerBarLeft');
@@ -1879,6 +1838,10 @@ function startSixthSenseGame() {
     timerElem.style.color = '#6f42c1';
     body.style.background = "linear-gradient(to bottom right, #f5e1ff, #d0f0ff)";
 
+    // Ekrandaki puanı da (bölüme her giriste puan sifirlandigi icin) senkronla
+    scoreCorrectElem.textContent = scoreCorrect;
+    scoreWrongElem.textContent = scoreWrong;
+
     // Sesleri sıfırla
     correctSound.pause();
     correctSound.currentTime = 0;
@@ -2005,7 +1968,13 @@ function startSixthSenseGame() {
     }
   }
 
-  restartButton.addEventListener("click", createGame);
+  // Bölüme her girişte bu fonksiyon tekrar çalışıyor; "Yeniden Başla"
+  // dinleyicisini yalnızca bir kez ekleyelim, yoksa her girişte bir tane
+  // daha birikir ve butona basınca birden fazla zamanlayıcı aynı anda çalışır.
+  if (!restartButton.dataset.listenerAdded) {
+    restartButton.addEventListener("click", createGame);
+    restartButton.dataset.listenerAdded = "true";
+  }
 
   createGame();
 }
