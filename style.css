@@ -275,14 +275,11 @@ button:hover {
   box-shadow: 0 20px 60px rgba(255, 105, 180, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.8);
   background: linear-gradient(135deg, rgba(255, 105, 180, 0.6), rgba(218, 112, 214, 0.6));
+  animation: buttonShine 1s ease infinite;
 }
 
 button:active {
   transform: translateY(-5px) scale(1.05);
-}
-
-button:hover {
-  animation: buttonShine 1s ease infinite;
 }
 
 @keyframes buttonShine {
@@ -456,7 +453,7 @@ button:hover {
   margin: auto;
 }
 
-#gamesMenuSection h2, #menuSection h2, #surpriseSection h2 {
+#gamesMenuSection h2, #menuSection h2, #surpriseSection h2, #sixthSenseGameSection h2 {
   text-align: center;
   font-family: 'Dancing Script', cursive;
   font-size: 3.5rem;
@@ -954,7 +951,7 @@ canvas:active {
     height: 200px;
   }
 
-  #gamesMenuSection h2, #menuSection h2, #surpriseSection h2 {
+  #gamesMenuSection h2, #menuSection h2, #surpriseSection h2, #sixthSenseGameSection h2 {
     font-size: 2.5em;
   }
 

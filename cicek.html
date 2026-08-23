@@ -469,8 +469,8 @@
        
 .back-button {
   display: inline-block;
-  padding: 2px 1px;
-  font-size: 12px;
+  padding: 10px 20px;
+  font-size: 15px;
   font-weight: bold;
   color: white;
   background: linear-gradient(135deg, #a855f7, #ec4899);
@@ -479,11 +479,20 @@
   cursor: pointer;
   box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  z-index: 10;
+  z-index: 1000;
   position: fixed;  /* Sabitlemek için */
-  top: 28px;        /* Üstten mesafe */
-  right: 10px;       /* Soldan mesafe */
+  top: 16px;        /* Üstten mesafe */
+  right: 12px;       /* Soldan mesafe */
   text-decoration: none;
+}
+
+.back-button:hover {
+  transform: scale(1.08) translateY(-3px);
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.6);
+}
+
+.back-button:active {
+  transform: scale(0.95);
 }
     
   </style>
@@ -708,7 +717,7 @@
     </div>
 
   </div>
-  <a href="index.html?menu=true" class="back-button"  onclick="window.location.href='index.html#menuSection'" style="margin-top: 30px;" >🔙 Ana Menü</a>
+  <a href="index.html?menu=true" class="back-button" style="margin-top: 30px;">🔙 Ana Menü</a>
 
   <script>
     const starsContainer = document.getElementById('stars');
