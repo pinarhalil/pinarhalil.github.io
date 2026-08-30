@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -24,7 +25,7 @@
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; margin: 0; padding: 0; touch-action: manipulation; }
-html, body { width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Manrope', sans-serif; color: var(--text-light); }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Manrope', sans-serif; color: var(--text-light); touch-action: none; overscroll-behavior: none; -ms-touch-action: none; }
 
 /* iOS Safari / Android Chrome adres çubuğu nedeniyle 100vh yanılmasını önlemek için
    dinamik viewport yüksekliği (JS ile --app-height değişkeni set edilir) */
@@ -214,8 +215,8 @@ body.is-paused *, body.is-paused { animation-play-state: paused !important; }
 .top-bar { display: flex; justify-content: space-between; align-items: flex-start; }
 .game-info { background: rgba(0,0,0,0.7); padding: 12px 24px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; backdrop-filter: blur(8px); }
 .controls { display: flex; gap: 10px; }
-.controls button { background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.3); color: #fff; width: 50px; height: 50px; border-radius: 50%; font-size: 20px; cursor: pointer; pointer-events: auto; backdrop-filter: blur(8px); transition: all 0.2s; display: flex; justify-content: center; align-items: center;}
-.controls button:hover { background: var(--accent-gold); color: #000; border-color: var(--accent-gold); }
+.controls button, .controls a { background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.3); color: #fff; width: 50px; height: 50px; border-radius: 50%; font-size: 20px; cursor: pointer; pointer-events: auto; backdrop-filter: blur(8px); transition: all 0.2s; display: flex; justify-content: center; align-items: center; text-decoration: none; }
+.controls button:hover, .controls a:hover { background: var(--accent-gold); color: #000; border-color: var(--accent-gold); }
 
 .message-box { align-self: center; background: rgba(10, 15, 25, 0.95); padding: 18px 40px; border-radius: 50px; border: 2px solid var(--accent-gold); font-size: 20px; font-weight: 800; box-shadow: 0 15px 40px rgba(0,0,0,0.9); opacity: 0; transform: translateY(20px); transition: all 0.4s; pointer-events: none; max-width: 90vw; text-align: center; }
 .message-box.show { opacity: 1; transform: translateY(0); }
@@ -275,7 +276,7 @@ body.is-paused *, body.is-paused { animation-play-state: paused !important; }
 </style>
 </head>
 <body>
-<a href="index.html?menu=true" class="back-button" style="margin-top: 30px;">🔙 Ana Menü</a>
+
 <div id="cinematic-intro">
     <div class="intro-word" id="iw-1">VAR</div>
     <div class="intro-word" id="iw-2">MISIN</div>
@@ -347,6 +348,7 @@ body.is-paused *, body.is-paused { animation-play-state: paused !important; }
     <div class="top-bar">
         <div class="game-info" id="round-info" style="opacity:0;">YÜKLENİYOR</div>
         <div class="controls">
+            <a href="index.html?menu=true" title="Ana Menüye Dön">🏠</a>
             <button id="btn-mute" onclick="AudioSystem.toggleMute()">🔊</button>
             <button id="btn-menu" onclick="Game.toggleMenu()">☰</button>
         </div>
@@ -421,6 +423,7 @@ body.is-paused *, body.is-paused { animation-play-state: paused !important; }
     <h2 style="font-size: 26px; margin-bottom: 10px;" id="res-subtitle"></h2>
     <div class="stats-text" id="res-stats"></div>
     <button class="btn btn-gold" onclick="location.reload()">YENİDEN OYNA</button>
+    <a href="index.html?menu=true" class="btn btn-nodeal" style="margin-top: 15px; text-decoration: none; display: inline-block;">🔙 ANA MENÜ</a>
 </div>
 
 <script>
@@ -435,6 +438,27 @@ function setAppHeight() {
     document.documentElement.style.setProperty('--app-height', `${h}px`);
 }
 setAppHeight();
+
+/* ==========================================================================
+   TARAYICI ZOOM/GESTURE ENGELLEYİCİ
+   iOS Safari'de "user-scalable=no" ve "touch-action" bazı durumlarda tek başına
+   yeterli olmuyor; pinch-zoom veya çift dokunma zoom'u yine tetiklenebiliyor.
+   Bu engel, olayı en erken aşamada (gesturestart / çoklu dokunma) yakalayıp
+   varsayılan tarayıcı davranışını iptal ediyor, böylece kendi pan/zoom
+   sistemimizle çakışmıyor.
+   ========================================================================== */
+['gesturestart', 'gesturechange', 'gestureend'].forEach(evt => {
+    document.addEventListener(evt, e => e.preventDefault());
+});
+document.addEventListener('touchmove', e => {
+    if (e.touches && e.touches.length > 1) e.preventDefault();
+}, { passive: false });
+let __lastTouchEnd = 0;
+document.addEventListener('touchend', e => {
+    const now = Date.now();
+    if (now - __lastTouchEnd <= 350) e.preventDefault(); // çift dokunma zoom'unu engelle
+    __lastTouchEnd = now;
+}, { passive: false });
 
 /* ==========================================================================
    DİNAMİK ÖLÇEKLEME (fitPlayfield)
@@ -588,10 +612,11 @@ const ViewControl = {
         const DRAG_THRESHOLD = 6;
         let startX = 0, startY = 0;
 
-        this.rig.addEventListener('pointerdown', (e) => {
-            if (e.pointerType === 'mouse') return; // mouse zaten yukarıda ele alınıyor
+        const onPointerDown = (e) => {
+            if (e.pointerType === 'mouse') return;
+            e.preventDefault();
             pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-            this.rig.setPointerCapture(e.pointerId);
+            try { this.rig.setPointerCapture(e.pointerId); } catch (err) {}
 
             if (pointers.size === 1) {
                 moved = false;
@@ -602,9 +627,9 @@ const ViewControl = {
                 pinchStartDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
                 pinchStartZoom = this.zoom;
             }
-        });
+        };
 
-        this.rig.addEventListener('pointermove', (e) => {
+        const onPointerMove = (e) => {
             if (!pointers.has(e.pointerId)) return;
             pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
@@ -626,15 +651,29 @@ const ViewControl = {
                     this.setZoom(pinchStartZoom * factor);
                 }
             }
-        });
+        };
 
+        // Parmak kalkınca (veya iptal olunca) haritadan temizle. Bazı tarayıcılarda
+        // native zoom/gesture devreye girdiğinde bu olay rig'e ulaşmayabiliyor;
+        // bu yüzden aynı temizliği aşağıda window seviyesinde de tekrar bağlıyoruz.
         const endPointer = (e) => {
+            if (!pointers.has(e.pointerId)) return;
             pointers.delete(e.pointerId);
             if (pointers.size === 0 && moved) this._swallowNextClick();
             if (pointers.size < 2) pinchStartDist = 0;
+            if (pointers.size === 0) moved = false;
         };
+
+        this.rig.addEventListener('pointerdown', onPointerDown, { passive: false });
+        this.rig.addEventListener('pointermove', onPointerMove, { passive: false });
         this.rig.addEventListener('pointerup', endPointer);
         this.rig.addEventListener('pointercancel', endPointer);
+        this.rig.addEventListener('lostpointercapture', endPointer);
+
+        // GÜVENLİK AĞI: takip haritasında "takılı" parmak kaydı kalmasın diye
+        // pointerup/cancel'ı window seviyesinde de dinliyoruz (capture: true).
+        window.addEventListener('pointerup', endPointer, true);
+        window.addEventListener('pointercancel', endPointer, true);
     },
 
     /* --- Mouse tekerleği ile zoom (masaüstü) --- */
@@ -1089,11 +1128,7 @@ const Game = {
         AudioSystem.click();
         if (this.confirmAction === 'restart') location.reload();
         else if (this.confirmAction === 'mainmenu') {
-            this.resumeGame(); this.resetInternal();
-            document.getElementById('intro-screen').classList.add('show');
-            document.getElementById('board-left').style.opacity = '0';
-            document.getElementById('board-right').style.opacity = '0';
-            document.getElementById('round-info').style.opacity = '0';
+            window.location.href = 'index.html?menu=true';
         }
     },
 
